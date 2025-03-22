@@ -1,5 +1,1 @@
-:9999 {
-	handle_path /* {
-		reverse_proxy hp-pihole:80
-	}
-}
+
