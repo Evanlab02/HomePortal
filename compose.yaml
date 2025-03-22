@@ -10,7 +10,7 @@ services:
     volumes:
       - ./web/Caddyfile:/etc/caddy/Caddyfile
     ports:
-      - 80:80
+      - 9999:9999
     networks:
       - hp-network
 
@@ -31,8 +31,6 @@ services:
     image: yooooomi/your_spotify_client:1.12.0
     container_name: hp-your-spotify-client
     restart: unless-stopped
-    ports:
-      - "9999:3000"
     env_file:
       - .env
     networks:
@@ -40,21 +38,19 @@ services:
     labels:
       - flame.type=application
       - flame.name=Your Spotify
-      - flame.url=http://localhost:9999
+      - flame.url=https://localhost:9999
       - flame.icon=spotify
 
   excalidraw:
     image: excalidraw/excalidraw:latest
     container_name: hp-excalidraw
     restart: unless-stopped
-    ports:
-      - "9998:80"
     networks:
       - hp-network
     labels:
       - flame.type=application
       - flame.name=Excalidraw
-      - flame.url=http://localhost:9998
+      - flame.url=https://localhost:9998
       - flame.icon=draw
 
   ### APIs
@@ -70,8 +66,6 @@ services:
   actual-server:
     image: docker.io/actualbudget/actual-server:latest
     container_name: hp-actual-server
-    ports:
-      - '9997:5006'
     volumes:
       - hp-actual-data:/data
     healthcheck:
@@ -84,7 +78,7 @@ services:
     labels:
       - flame.type=application
       - flame.name=Actual Budget
-      - flame.url=http://localhost:9997
+      - flame.url=https://budget.localhost
       - flame.icon=cash-multiple
 
   immich-server:
@@ -99,8 +93,6 @@ services:
       - DB_PASSWORD=${IMMICH_DB_PASSWORD}
       - DB_USERNAME=${IMMICH_DB_USERNAME}
       - DB_DATABASE_NAME=${IMMICH_DB_DATABASE_NAME}
-    ports:
-      - '9996:2283'
     depends_on:
       - redis-immich
       - postgres-immich
@@ -112,7 +104,7 @@ services:
     labels:
       - flame.type=application
       - flame.name=Immich
-      - flame.url=http://localhost:9996
+      - flame.url=https://localhost:9997
       - flame.icon=camera
 
   immich-ml:
@@ -127,6 +119,27 @@ services:
       disable: false
     networks:
       - hp-network
+
+  pihole:
+    container_name: hp-pihole
+    image: pihole/pihole:latest
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    environment:
+      TZ: 'Africa/Johannesburg'
+      FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD}
+      FTLCONF_dns_listeningMode: 'all'
+    volumes:
+      - 'hp-pihole-data:/etc/pihole'
+    restart: unless-stopped
+    networks:
+      - hp-network
+    labels:
+      - flame.type=application
+      - flame.name=Pihole
+      - flame.url=http://localhost:9999
+      - flame.icon=network
 
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:latest
@@ -199,6 +212,8 @@ volumes:
   hp-immich-database-data:
     external: false
   immich-ml-cache:
+    external: false
+  hp-pihole-data:
     external: false
 
 networks:
