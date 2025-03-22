@@ -1,4 +1,5 @@
-:80 {
+:80,
+:8000 {
 	handle_path /* {
 		reverse_proxy hp-flame:5005
 	}
