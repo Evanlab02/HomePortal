@@ -9,7 +9,6 @@ services:
       dockerfile: web/Dockerfile
     volumes:
       - ./web/Caddyfile:/etc/caddy/Caddyfile
-      - ./certs:/data/caddy/pki/authorities/local/
     ports:
       - 80:80
     networks:

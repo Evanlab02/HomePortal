@@ -36,8 +36,5 @@ images:
 .env:
 	cp .env.template .env
 
-certs:
-	mkdir -p certs
-
 .PHONY: init
-init: certs images .env 
+init: images .env 
