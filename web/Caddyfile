@@ -1,1 +1,6 @@
-
+portal.tech:80,
+portal.tech:443 {
+	handle_path /* {
+		reverse_proxy hp-flame:5005
+	}
+}
