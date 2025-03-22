@@ -1,4 +1,4 @@
-:443 {
+192.168.0.2:80 {
 	tls internal
 
 	handle_path /* {
