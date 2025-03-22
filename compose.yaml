@@ -32,6 +32,8 @@ services:
     image: yooooomi/your_spotify_client:1.12.0
     container_name: hp-your-spotify-client
     restart: unless-stopped
+    ports:
+      - 8001:8001
     env_file:
       - .env
     networks:
@@ -39,7 +41,7 @@ services:
     labels:
       - flame.type=application
       - flame.name=Your Spotify
-      - flame.url=https://localhost:9999
+      - flame.url=https://192.168.0.2:8001
       - flame.icon=spotify
 
   excalidraw:
