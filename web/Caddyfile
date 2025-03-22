@@ -1,5 +1,5 @@
 192.168.0.2:9999 {
 	handle_path /* {
-		reverse_proxy hp-pihole:443
+		reverse_proxy hp-pihole:80
 	}
 }
