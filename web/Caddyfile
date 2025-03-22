@@ -1,6 +1,6 @@
 :80,
 :443 {
-	tls self_signed
+	tls internal
 
 	handle_path /* {
 		reverse_proxy hp-flame:5005
