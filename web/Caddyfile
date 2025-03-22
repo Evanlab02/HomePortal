@@ -8,27 +8,3 @@
 		reverse_proxy hp-your-spotify-server:8080
 	}
 }
-
-:8001 {
-	handle_path /* {
-		reverse_proxy hp-your-spotify-client:3000
-	}
-}
-
-:8002 {
-	handle_path /* {
-		reverse_proxy hp-excalidraw:80
-	}
-}
-
-:8003 {
-	handle_path /* {
-		reverse_proxy hp-actual-server:5006
-	}
-}
-
-:8004 {
-	handle_path /* {
-		reverse_proxy hp-immich-server:2283
-	}
-}
