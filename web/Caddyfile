@@ -1,0 +1,9 @@
+:80 {
+	handle_path /* {
+		reverse_proxy hp-flame:5005
+	}
+
+	handle_path /apis/spotify/* {
+		reverse_proxy hp-your-spotify-server:8080
+	}
+}
