@@ -1,5 +1,7 @@
-portal.tech:80,
-portal.tech:443 {
+:80,
+:443 {
+	tls self_signed
+
 	handle_path /* {
 		reverse_proxy hp-flame:5005
 	}
