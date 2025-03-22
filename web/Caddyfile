@@ -1,4 +1,7 @@
-192.168.0.2:80 {
+192.168.0.2:80,
+portal.tech:80 {
+	tls internal
+
 	handle_path /* {
 		reverse_proxy hp-flame:5005
 	}
