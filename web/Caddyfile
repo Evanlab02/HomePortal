@@ -1,6 +1,16 @@
 localhost,
 192.168.0.2:80,
-192.168.0.2:8000,
+192.168.0.2:8000 {
+	handle_path /* {
+		reverse_proxy hp-flame:5005
+	}
+
+	handle_path /apis/spotify/* {
+		reverse_proxy hp-your-spotify-server:8080
+	}
+}
+
+
 portal.tech {
 	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
 
