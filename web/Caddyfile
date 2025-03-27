@@ -8,6 +8,11 @@ localhost,
 	handle_path /apis/spotify/* {
 		reverse_proxy hp-your-spotify-server:8080
 	}
+
+	handle_path /download/certs/* {
+		root var/www/public/certs
+		file_server
+	}
 }
 
 

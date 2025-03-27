@@ -1,3 +1,4 @@
 .env
 images/
 certs/
+public/certs/
