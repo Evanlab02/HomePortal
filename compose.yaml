@@ -129,7 +129,7 @@ services:
     labels:
       - flame.type=application
       - flame.name=Pihole
-      - flame.url=http://portal.tech:9999
+      - flame.url=https://dns.portal.tech
       - flame.icon=network
 
   flaresolverr:

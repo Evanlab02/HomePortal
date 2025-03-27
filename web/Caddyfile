@@ -67,3 +67,11 @@ torrent.portal.tech {
 		reverse_proxy http://192.168.0.2:8080
 	}
 }
+
+dns.portal.tech {
+	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
+
+	handle_path /* {
+		reverse_proxy hp-pihole:80
+	}
+}
