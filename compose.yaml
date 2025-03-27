@@ -56,6 +56,26 @@ services:
       - flame.icon=draw
 
   ### APIs
+  actual-server:
+    image: docker.io/actualbudget/actual-server:latest
+    container_name: hp-actual-server
+    volumes:
+      - hp-actual-data:/data
+    healthcheck:
+      test: ['CMD-SHELL', 'node src/scripts/health-check.js']
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    restart: unless-stopped
+    networks:
+      - hp-network
+    labels:
+      - flame.type=application
+      - flame.name=Actual Budget
+      - flame.url=https://budget.portal.tech
+      - flame.icon=cash-multiple
+
   your-spotify-server:
     image: yooooomi/your_spotify_server:1.12.0
     container_name: hp-your-spotify-server

@@ -99,3 +99,11 @@ spotify.portal.tech {
 		reverse_proxy hp-your-spotify-server:8080
 	}
 }
+
+budget.portal.tech {
+	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
+
+	handle_path /* {
+		reverse_proxy hp-actual-server:5006
+	}
+}
