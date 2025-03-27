@@ -27,3 +27,11 @@ portal.tech {
 		reverse_proxy hp-your-spotify-server:8080
 	}
 }
+
+plex.portal.tech {
+	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
+
+	handle_path /* {
+		reverse_proxy https://portal.tech:32400
+	}
+}
