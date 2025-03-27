@@ -32,6 +32,6 @@ plex.portal.tech {
 	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
 
 	handle_path /* {
-		reverse_proxy http://host.docker.internal:32400
+		reverse_proxy http://192.168.0.2:32400
 	}
 }
