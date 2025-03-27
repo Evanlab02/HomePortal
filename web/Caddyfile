@@ -1,5 +1,9 @@
-:80,
-:8000 {
+localhost,
+192.168.0.2:80,
+192.168.0.2:8000,
+portal.tech {
+	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
+
 	handle_path /* {
 		reverse_proxy hp-flame:5005
 	}

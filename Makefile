@@ -36,5 +36,15 @@ images:
 .env:
 	cp .env.template .env
 
+certs:
+	mkdir -p certs
+
+certs/homeportal.key.pem:
+	cd certs && mkcert -key-file homeportal.key.pem --cert-file homeportal.pem *.portal.tech portal.tech 192.168.0.2 localhost
+
+.PHONY: where-is-root
+where-is-root:
+	mkcert -CAROOT
+
 .PHONY: init
-init: images .env 
+init: images .env certs certs/homeportal.key.pem
