@@ -75,3 +75,11 @@ dns.portal.tech {
 		reverse_proxy hp-pihole:80
 	}
 }
+
+images.portal.tech {
+	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
+
+	handle_path /* {
+		reverse_proxy hp-immich:2283
+	}
+}

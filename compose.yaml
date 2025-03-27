@@ -89,12 +89,10 @@ services:
       disable: false
     networks:
       - hp-network
-    ports:
-      - 8004:2283
     labels:
       - flame.type=application
       - flame.name=Immich
-      - flame.url=http://portal.tech:8004	
+      - flame.url=https://images.portal.tech
       - flame.icon=camera
 
   immich-ml:
@@ -129,7 +127,7 @@ services:
     labels:
       - flame.type=application
       - flame.name=Pihole
-      - flame.url=https://dns.portal.tech
+      - flame.url=https://dns.portal.tech/admin/
       - flame.icon=network
 
   flaresolverr:
