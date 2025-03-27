@@ -55,6 +55,23 @@ services:
       - flame.url=https://draw.portal.tech
       - flame.icon=draw
 
+  yacht:
+    image: selfhostedpro/yacht:latest
+    container_name: hp-yacht
+    restart: unless-stopped
+    networks:
+      - hp-network
+    ports:
+      - 8000:8000
+    volumes:
+      - hp-yacht-data:/config
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - flame.type=application
+      - flame.name=Yacht
+      - flame.url=https://manage.portal.tech
+      - flame.icon=yacht
+
   ### APIs
   actual-server:
     image: docker.io/actualbudget/actual-server:latest
@@ -219,6 +236,8 @@ volumes:
   immich-ml-cache:
     external: false
   hp-pihole-data:
+    external: false
+  hp-yacht-data:
     external: false
 
 networks:
