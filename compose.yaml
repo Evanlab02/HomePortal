@@ -68,7 +68,7 @@ services:
       - flame.type=application
       - flame.name=Yacht
       - flame.url=https://manage.portal.tech
-      - flame.icon=yacht
+      - flame.icon=docker
 
   ### APIs
   actual-server:
