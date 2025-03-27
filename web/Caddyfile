@@ -35,3 +35,35 @@ plex.portal.tech {
 		reverse_proxy http://192.168.0.2:32400
 	}
 }
+
+prowlarr.portal.tech {
+	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
+
+	handle_path /* {
+		reverse_proxy http://192.168.0.2:9696
+	}
+}
+
+sonarr.portal.tech {
+	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
+
+	handle_path /* {
+		reverse_proxy http://192.168.0.2:8989
+	}
+}
+
+radarr.portal.tech {
+	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
+
+	handle_path /* {
+		reverse_proxy http://192.168.0.2:7878
+	}
+}
+
+torrent.portal.tech {
+	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
+
+	handle_path /* {
+		reverse_proxy http://192.168.0.2:8080
+	}
+}
