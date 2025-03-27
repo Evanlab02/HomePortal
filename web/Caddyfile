@@ -10,7 +10,7 @@ localhost,
 	}
 
 	handle_path /download/certs/* {
-		root var/www/public/certs
+		root /var/www/public/certs
 		file_server
 	}
 }
