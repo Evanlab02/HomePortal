@@ -5,10 +5,6 @@ localhost,
 		reverse_proxy hp-flame:5005
 	}
 
-	handle_path /apis/spotify/* {
-		reverse_proxy hp-your-spotify-server:8080
-	}
-
 	handle_path /download/certs/* {
 		root * /var/www/public/certs
 		file_server
@@ -80,6 +76,26 @@ images.portal.tech {
 	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
 
 	handle_path /* {
-		reverse_proxy hp-immich:2283
+		reverse_proxy hp-immich-server:2283
+	}
+}
+
+draw.portal.tech {
+	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
+
+	handle_path /* {
+		reverse_proxy hp-excalidraw:80
+	}
+}
+
+spotify.portal.tech {
+	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
+
+	handle_path /* {
+		reverse_proxy hp-your-spotify-client:3000
+	}
+
+	handle_path /apis/spotify/* {
+		reverse_proxy hp-your-spotify-server:8080
 	}
 }

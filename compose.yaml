@@ -37,12 +37,10 @@ services:
       - .env
     networks:
       - hp-network
-    ports:
-      - 8001:3000
     labels:
       - flame.type=application
       - flame.name=Your Spotify
-      - flame.url=http://portal.tech:8001
+      - flame.url=https://spotify.portal.tech
       - flame.icon=spotify
 
   excalidraw:
@@ -51,12 +49,10 @@ services:
     restart: unless-stopped
     networks:
       - hp-network
-    ports:
-      - 8002:80
     labels:
       - flame.type=application
       - flame.name=Excalidraw
-      - flame.url=http://portal.tech:8002
+      - flame.url=https://draw.portal.tech
       - flame.icon=draw
 
   ### APIs
