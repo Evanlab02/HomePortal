@@ -15,6 +15,7 @@ services:
       - 8000:8000
     networks:
       - hp-network
+    restart: unless-stopped
 
   ### Front-ends
   flame:
@@ -218,6 +219,15 @@ services:
     container_name: hp-mongo-6
     volumes:
       - hp-mongo-6-data:/data/db
+    restart: unless-stopped
+    networks:
+      - hp-network
+
+  fromcord:
+    image: ghcr.io/evanlab02/fromcord:0.1.1
+    container_name: hp-fromcord
+    volumes:
+      - ./data/fromcord:/app/data
     restart: unless-stopped
     networks:
       - hp-network

@@ -51,8 +51,14 @@ public/certs:
 public/certs/rootCA.crt:
 	cp $(shell mkcert -CAROOT)/rootCA.pem public/certs/rootCA.crt
 
+data:
+	mkdir -p data
+
+data/fromcord:
+	mkdir -p data/fromcord
+
 .PHONY: init
-init: images .env certs certs/homeportal.key.pem public public/certs public/certs/rootCA.crt
+init: images .env certs certs/homeportal.key.pem public public/certs public/certs/rootCA.crt data data/fromcord
 
 .PHONY: where-is-root
 where-is-root:
