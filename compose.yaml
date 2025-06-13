@@ -224,7 +224,7 @@ services:
       - hp-network
 
   fromcord:
-    image: ghcr.io/evanlab02/fromcord:0.1.1
+    image: ghcr.io/evanlab02/fromcord:0.2.0
     container_name: hp-fromcord
     volumes:
       - ./data/fromcord:/app/data
