@@ -231,6 +231,8 @@ services:
     restart: unless-stopped
     networks:
       - hp-network
+    env_file:
+      - .env
 
 volumes:
   hp-flame-data:
