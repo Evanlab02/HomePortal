@@ -223,17 +223,6 @@ services:
     networks:
       - hp-network
 
-  fromcord:
-    image: ghcr.io/evanlab02/fromcord:0.2.0
-    container_name: hp-fromcord
-    volumes:
-      - ./data/fromcord:/app/data
-    restart: unless-stopped
-    networks:
-      - hp-network
-    env_file:
-      - .env
-
 volumes:
   hp-flame-data:
     external: false
