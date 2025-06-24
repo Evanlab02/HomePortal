@@ -63,3 +63,7 @@ init: images .env certs certs/homeportal.key.pem public public/certs public/cert
 .PHONY: where-is-root
 where-is-root:
 	mkcert -CAROOT
+
+.PHONY: shopping-superuser
+shopping-superuser:
+	docker exec -it hp-shopping-admin python3 manage.py createsuperuser
