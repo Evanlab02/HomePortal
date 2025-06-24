@@ -116,7 +116,7 @@ services:
       - flame.type=application
       - flame.name=Shopping App
       - flame.url=https://shopping.portal.tech
-      - flame.icon=shopping-bag
+      - flame.icon=cart
 
   actual-server:
     image: docker.io/actualbudget/actual-server:latest
