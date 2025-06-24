@@ -67,3 +67,7 @@ where-is-root:
 .PHONY: shopping-superuser
 shopping-superuser:
 	docker exec -it hp-shopping-admin python3 manage.py createsuperuser
+
+.PHONY: shopping-settings
+	docker exec -it hp-shopping-app cat /backend/shoppingapp/core/settings.py
+	docker exec -it hp-shopping-admin cat /backend/shoppingapp/admin/settings.py
