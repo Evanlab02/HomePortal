@@ -181,6 +181,20 @@ services:
     networks:
       - hp-network
 
+  redis-8:
+    image: redis:8.0.2-alpine3.21
+    container_name: hp-redis-8
+    volumes:
+      - hp-redis-8-data:/data
+    networks:
+      - hp-network
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1024M
+
   ### DBs
   postgres-immich:
     container_name: hp-postgres-immich
@@ -223,6 +237,29 @@ services:
     networks:
       - hp-network
 
+  postgres-17:
+    container_name: hp-postgres-17
+    image: postgres:17.5-alpine3.22
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+    env_file:
+      - .env
+    networks:
+      - hp-network
+    volumes:
+      - hp-postgres-17-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1024M
+
   ### DB Management
   pgadmin:
     container_name: hp-pgadmin
@@ -261,6 +298,10 @@ volumes:
   hp-yacht-data:
     external: false
   hp-pgadmin-data:
+    external: false
+  hp-redis-8-data:
+    external: false
+  hp-postgres-17-data:
     external: false
 
 networks:
