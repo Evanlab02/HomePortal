@@ -134,6 +134,7 @@ shopping.portal.tech {
 
 	handle_path /admin/* {
 		reverse_proxy hp-shopping-admin:80
+		rewrite * /admin{uri}
 	}
 
 	handle_path /docs/* {
