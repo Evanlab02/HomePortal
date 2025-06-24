@@ -230,8 +230,6 @@ services:
     restart: unless-stopped
     env_file:
       - .env
-    environment:
-      SCRIPT_NAME: /pgadmin
     networks:
       - hp-network
     volumes:

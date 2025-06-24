@@ -115,3 +115,11 @@ manage.portal.tech {
 		reverse_proxy hp-yacht:8000
 	}
 }
+
+pgadmin.portal.tech {
+	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
+
+	handle_path /* {
+		reverse_proxy hp-pgadmin:80
+	}
+}
