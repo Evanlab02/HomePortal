@@ -123,3 +123,26 @@ pgadmin.portal.tech {
 		reverse_proxy hp-pgadmin:80
 	}
 }
+
+
+shopping.portal.tech {
+	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
+
+	handle_path /* {
+		reverse_proxy hp-shopping-app:80
+	}
+
+	handle_path /admin/* {
+		reverse_proxy hp-shopping-admin:80
+	}
+
+	handle_path /docs/* {
+		root * /var/www/html/shopping/docs
+		file_server
+	}
+
+	handle_path /static/* {
+		root * /var/www/html/shopping/static
+		file_server
+	}
+}

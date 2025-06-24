@@ -72,6 +72,52 @@ services:
       - flame.icon=docker
 
   ### APIs
+  shopping-admin:
+    container_name: hp-shopping-admin
+    image: ghcr.io/evanlab02/shopping-admin:0.18.1
+    env_file:
+      - .env
+    networks:
+      - hp-network
+    depends_on:
+      postgres-17:
+        condition: service_healthy
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1024M
+    labels:
+      - flame.type=application
+      - flame.name=Shopping Admin
+      - flame.url=https://shopping.portal.tech/admin/
+      - flame.icon=account-group
+
+  shopping-app:
+    container_name: hp-shopping-app
+    image: ghcr.io/evanlab02/shopping-app:0.18.1
+    env_file:
+      - .env
+    environment:
+      - GUNICORN_WORKERS=1
+    networks:
+      - hp-network
+    depends_on:
+      postgres-17:
+        condition: service_healthy
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1024M
+    labels:
+      - flame.type=application
+      - flame.name=Shopping App
+      - flame.url=https://shopping.portal.tech
+      - flame.icon=shopping-bag
+
   actual-server:
     image: docker.io/actualbudget/actual-server:latest
     container_name: hp-actual-server
