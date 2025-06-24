@@ -223,6 +223,25 @@ services:
     networks:
       - hp-network
 
+  ### DB Management
+  pgadmin:
+    container_name: hp-pgadmin
+    image: dpage/pgadmin4:9.4.0
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      SCRIPT_NAME: /pgadmin
+    networks:
+      - hp-network
+    volumes:
+      - hp-pgadmin-data:/var/lib/pgadmin
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+
 volumes:
   hp-flame-data:
     external: false
@@ -237,6 +256,8 @@ volumes:
   hp-pihole-data:
     external: false
   hp-yacht-data:
+    external: false
+  hp-pgadmin-data:
     external: false
 
 networks:
