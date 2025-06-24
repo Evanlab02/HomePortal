@@ -239,6 +239,11 @@ services:
         limits:
           cpus: '1.0'
           memory: 512M
+    labels:
+      - flame.type=application
+      - flame.name=Postgres Admin
+      - flame.url=https://pgadmin.portal.tech
+      - flame.icon=database-cog
 
 volumes:
   hp-flame-data:
