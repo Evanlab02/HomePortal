@@ -1,16 +1,19 @@
 localhost,
-192.168.0.2:80,
-192.168.0.2:8000 {
+192.168.50.154:80,
+192.168.50.154:8000,
+192.168.50.2:80,
+192.168.50.2:8000 {
 	handle_path /* {
 		reverse_proxy hp-flame:5005
 	}
 
 	handle_path /download/certs/* {
 		root * /var/www/public/certs
-		file_server
+		@crt path *.crt
+		header @crt Content-Disposition attachment
+		file_server browse
 	}
 }
-
 
 portal.tech {
 	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
@@ -28,7 +31,7 @@ plex.portal.tech {
 	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
 
 	handle_path /* {
-		reverse_proxy http://192.168.0.2:32400
+		reverse_proxy http://192.168.50.2:32400
 	}
 }
 
@@ -36,7 +39,7 @@ prowlarr.portal.tech {
 	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
 
 	handle_path /* {
-		reverse_proxy http://192.168.0.2:9696
+		reverse_proxy http://192.168.50.2:9696
 	}
 }
 
@@ -44,7 +47,7 @@ sonarr.portal.tech {
 	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
 
 	handle_path /* {
-		reverse_proxy http://192.168.0.2:8989
+		reverse_proxy http://192.168.50.2:8989
 	}
 }
 
@@ -52,7 +55,7 @@ radarr.portal.tech {
 	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
 
 	handle_path /* {
-		reverse_proxy http://192.168.0.2:7878
+		reverse_proxy http://192.168.50.2:7878
 	}
 }
 
@@ -60,7 +63,7 @@ torrent.portal.tech {
 	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
 
 	handle_path /* {
-		reverse_proxy http://192.168.0.2:8080
+		reverse_proxy http://192.168.50.2:8080
 	}
 }
 
@@ -123,7 +126,6 @@ pgadmin.portal.tech {
 		reverse_proxy hp-pgadmin:80
 	}
 }
-
 
 shopping.portal.tech {
 	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
