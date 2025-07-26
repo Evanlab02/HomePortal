@@ -16,6 +16,11 @@ services:
     networks:
       - hp-network
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
 
   ### Front-ends
   flame:
@@ -29,6 +34,11 @@ services:
     restart: unless-stopped
     networks:
       - hp-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
 
   your-spotify-client:
     image: yooooomi/your_spotify_client:1.12.0
@@ -43,6 +53,11 @@ services:
       - flame.name=Your Spotify
       - flame.url=https://spotify.portal.tech
       - flame.icon=spotify
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
 
   excalidraw:
     image: excalidraw/excalidraw:latest
@@ -55,6 +70,11 @@ services:
       - flame.name=Excalidraw
       - flame.url=https://draw.portal.tech
       - flame.icon=draw
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
 
   yacht:
     image: selfhostedpro/yacht:latest
@@ -70,6 +90,11 @@ services:
       - flame.name=Yacht
       - flame.url=https://manage.portal.tech
       - flame.icon=docker
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
 
   ### APIs
   shopping-admin:
@@ -89,7 +114,7 @@ services:
       resources:
         limits:
           cpus: '1.0'
-          memory: 1024M
+          memory: 512M
     labels:
       - flame.type=application
       - flame.name=Shopping Admin
@@ -115,7 +140,7 @@ services:
       resources:
         limits:
           cpus: '1.0'
-          memory: 1024M
+          memory: 512M
     labels:
       - flame.type=application
       - flame.name=Shopping App
@@ -141,6 +166,11 @@ services:
       - flame.name=Actual Budget
       - flame.url=https://budget.portal.tech
       - flame.icon=cash-multiple
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
 
   your-spotify-server:
     image: yooooomi/your_spotify_server:1.12.0
@@ -150,6 +180,11 @@ services:
     restart: unless-stopped
     networks:
       - hp-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
 
   immich-server:
     container_name: hp-immich-server
@@ -211,6 +246,11 @@ services:
       - flame.name=Pihole
       - flame.url=https://dns.portal.tech/admin/
       - flame.icon=network
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 2048M
 
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:latest
@@ -220,6 +260,11 @@ services:
     restart: unless-stopped
     networks:
       - hp-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
 
   ### Caches
   redis-immich:
@@ -230,6 +275,11 @@ services:
       test: redis-cli ping || exit 1
     networks:
       - hp-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
 
   redis-8:
     image: redis:8.0.2-alpine3.21
@@ -243,7 +293,7 @@ services:
       resources:
         limits:
           cpus: '1.0'
-          memory: 1024M
+          memory: 512M
 
   ### DBs
   postgres-immich:
@@ -277,6 +327,11 @@ services:
     restart: always
     networks:
       - hp-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
 
   mongo-6:
     image: mongo:6.0.21-jammy
@@ -286,6 +341,11 @@ services:
     restart: unless-stopped
     networks:
       - hp-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
 
   postgres-17:
     container_name: hp-postgres-17
@@ -308,7 +368,7 @@ services:
       resources:
         limits:
           cpus: '1.0'
-          memory: 1024M
+          memory: 512M
 
   ### DB Management
   pgadmin:
