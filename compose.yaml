@@ -99,7 +99,8 @@ services:
   ### APIs
   shopping-admin:
     container_name: hp-shopping-admin
-    build: # Temporary fix for CSRF_TRUSTED_ORIGINS
+    build:
+      # Temporary fix for CSRF_TRUSTED_ORIGINS
       context: .
       dockerfile: temp/admin/Dockerfile
     env_file:
@@ -123,7 +124,8 @@ services:
 
   shopping-app:
     container_name: hp-shopping-app
-    build: # Temporary fix for CSRF_TRUSTED_ORIGINS
+    build:
+      # Temporary fix for CSRF_TRUSTED_ORIGINS
       context: .
       dockerfile: temp/app/Dockerfile
     env_file:
@@ -153,7 +155,7 @@ services:
     volumes:
       - hp-actual-data:/data
     healthcheck:
-      test: ['CMD-SHELL', 'node src/scripts/health-check.js']
+      test: [ 'CMD-SHELL', 'node src/scripts/health-check.js' ]
       interval: 60s
       timeout: 10s
       retries: 3
@@ -308,22 +310,12 @@ services:
       - hp-immich-database-data:/var/lib/postgresql/data
     healthcheck:
       test: >-
-        pg_isready --dbname="$${POSTGRES_DB}" --username="$${POSTGRES_USER}" || exit 1;
-        Chksum="$$(psql --dbname="$${POSTGRES_DB}" --username="$${POSTGRES_USER}" --tuples-only --no-align
-        --command='SELECT COALESCE(SUM(checksum_failures), 0) FROM pg_stat_database')";
-        echo "checksum failure count is $$Chksum";
-        [ "$$Chksum" = '0' ] || exit 1
+        pg_isready --dbname="$${POSTGRES_DB}" --username="$${POSTGRES_USER}" || exit 1; Chksum="$$(psql --dbname="$${POSTGRES_DB}" --username="$${POSTGRES_USER}" --tuples-only --no-align --command='SELECT COALESCE(SUM(checksum_failures), 0) FROM pg_stat_database')"; echo "checksum failure count is $$Chksum"; [ "$$Chksum" = '0' ] || exit 1
       interval: 5m
       start_interval: 30s
       start_period: 5m
     command: >-
-      postgres
-      -c shared_preload_libraries=vectors.so
-      -c 'search_path="$$user", public, vectors'
-      -c logging_collector=on
-      -c max_wal_size=2GB
-      -c shared_buffers=512MB
-      -c wal_compression=on
+      postgres -c shared_preload_libraries=vectors.so -c 'search_path="$$user", public, vectors' -c logging_collector=on -c max_wal_size=2GB -c shared_buffers=512MB -c wal_compression=on
     restart: always
     networks:
       - hp-network
@@ -392,6 +384,17 @@ services:
       - flame.url=https://pgadmin.portal.tech
       - flame.icon=database-cog
 
+  cks:
+    image: escaping/core-keeper-dedicated:latest
+    container_name: corekeeper-dedicated
+    restart: unless-stopped
+    stop_grace_period: 2m
+    volumes:
+      - hp-core-keeper-core:/home/steam/core-keeper-dedicated
+      - hp-core-keeper-data:/home/steam/core-keeper-data
+    env_file:
+      - .env
+
 volumes:
   hp-flame-data:
     external: false
@@ -412,6 +415,10 @@ volumes:
   hp-redis-8-data:
     external: false
   hp-postgres-17-data:
+    external: false
+  hp-core-keeper-core:
+    external: false
+  hp-core-keeper-data:
     external: false
 
 networks:

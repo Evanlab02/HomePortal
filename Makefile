@@ -72,3 +72,9 @@ shopping-superuser:
 shopping-settings:
 	docker exec -it hp-shopping-app cat /backend/shoppingapp/core/settings.py
 	docker exec -it hp-shopping-admin cat /backend/shoppingapp/admin/settings.py
+
+
+.PHONY: core-keeper-game-id
+core-keeper-game-id:
+	docker exec -it corekeeper-dedicated cat /home/steam/core-keeper-dedicated/GameID.txt
+
