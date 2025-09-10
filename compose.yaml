@@ -41,7 +41,7 @@ services:
           memory: 512M
 
   your-spotify-client:
-    image: yooooomi/your_spotify_client:1.12.0
+    image: yooooomi/your_spotify_client:1.14.0
     container_name: hp-your-spotify-client
     restart: unless-stopped
     env_file:
@@ -175,7 +175,7 @@ services:
           memory: 512M
 
   your-spotify-server:
-    image: yooooomi/your_spotify_server:1.12.0
+    image: yooooomi/your_spotify_server:1.14.0
     container_name: hp-your-spotify-server
     env_file:
       - .env
@@ -384,17 +384,6 @@ services:
       - flame.url=https://pgadmin.portal.tech
       - flame.icon=database-cog
 
-  cks:
-    image: escaping/core-keeper-dedicated:latest
-    container_name: corekeeper-dedicated
-    restart: unless-stopped
-    stop_grace_period: 2m
-    volumes:
-      - hp-core-keeper-core:/home/steam/core-keeper-dedicated
-      - hp-core-keeper-data:/home/steam/core-keeper-data
-    env_file:
-      - .env
-
 volumes:
   hp-flame-data:
     external: false
@@ -417,8 +406,6 @@ volumes:
   hp-postgres-17-data:
     external: false
   hp-core-keeper-core:
-    external: false
-  hp-core-keeper-data:
     external: false
 
 networks:

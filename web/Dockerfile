@@ -1,4 +1,4 @@
-FROM caddy:2.9.1-alpine
+FROM caddy:2.10.2-alpine
 
 COPY web/Caddyfile /etc/caddy/Caddyfile
 COPY certs/homeportal.pem /etc/caddy/certs/homeportal.pem
