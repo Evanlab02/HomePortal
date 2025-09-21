@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: temp/admin/Dockerfile
     env_file:
-      - .env
+      - environment/.env
     networks:
       - hp-network
     depends_on:
@@ -31,7 +31,7 @@ services:
       context: .
       dockerfile: temp/app/Dockerfile
     env_file:
-      - .env
+      - environment/.env
     environment:
       - GUNICORN_WORKERS=1
     networks:

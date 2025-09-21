@@ -31,7 +31,7 @@ services:
     volumes:
       - immich-ml-cache:/cache
     env_file:
-      - .env
+      - environment/.env
     restart: always
     healthcheck:
       disable: false
