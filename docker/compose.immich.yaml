@@ -12,7 +12,7 @@ services:
       - DB_USERNAME=${IMMICH_DB_USERNAME}
       - DB_DATABASE_NAME=${IMMICH_DB_DATABASE_NAME}
     env_file:
-      - environment/.env
+      - .env
     depends_on:
       - redis-immich
       - postgres-immich
@@ -33,7 +33,7 @@ services:
     volumes:
       - immich-ml-cache:/cache
     env_file:
-      - environment/.env
+      - .env
     restart: always
     healthcheck:
       disable: false

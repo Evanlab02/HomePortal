@@ -6,7 +6,7 @@ services:
       - hp-flame-data:/app/data
       - /var/run/docker.sock:/var/run/docker.sock
     env_file:
-      - environment/.env
+      - .env
     restart: unless-stopped
     networks:
       - hp-network

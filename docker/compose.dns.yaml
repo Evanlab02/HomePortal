@@ -11,7 +11,7 @@ services:
       FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD}
       FTLCONF_dns_listeningMode: 'all'
     env_file:
-      - environment/.env
+      - .env
     volumes:
       - 'hp-pihole-data:/etc/pihole'
     restart: unless-stopped
