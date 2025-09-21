@@ -1,0 +1,27 @@
+services:
+  pihole:
+    container_name: hp-pihole
+    image: pihole/pihole:latest
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "9999:80"
+    environment:
+      TZ: 'Africa/Johannesburg'
+      FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD}
+      FTLCONF_dns_listeningMode: 'all'
+    volumes:
+      - 'hp-pihole-data:/etc/pihole'
+    restart: unless-stopped
+    networks:
+      - hp-network
+    labels:
+      - flame.type=application
+      - flame.name=Pihole
+      - flame.url=https://dns.portal.tech/admin/
+      - flame.icon=network
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 2048M

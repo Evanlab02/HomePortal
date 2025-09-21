@@ -1,0 +1,17 @@
+services:
+  flame:
+    image: pawelmalak/flame:2.3.1
+    container_name: hp-flame
+    volumes:
+      - hp-flame-data:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    env_file:
+      - .env
+    restart: unless-stopped
+    networks:
+      - hp-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M

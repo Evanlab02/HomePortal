@@ -1,0 +1,20 @@
+services:
+  yacht:
+    image: selfhostedpro/yacht:latest
+    container_name: hp-yacht
+    restart: unless-stopped
+    networks:
+      - hp-network
+    volumes:
+      - hp-yacht-data:/config
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - flame.type=application
+      - flame.name=Yacht
+      - flame.url=https://manage.portal.tech
+      - flame.icon=docker
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M

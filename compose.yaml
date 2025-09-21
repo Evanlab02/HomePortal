@@ -1,12 +1,23 @@
 name: home-portal
 
+include:
+  - docker/compose.actual.yaml
+  - docker/compose.cache.yaml
+  - docker/compose.db.yaml
+  - docker/compose.dns.yaml
+  - docker/compose.draw.yaml
+  - docker/compose.flame.yaml
+  - docker/compose.flaresolverr.yaml
+  - docker/compose.immich.yaml
+  - docker/compose.pgadmin.yaml
+  - docker/compose.shopping.yaml
+  - docker/compose.spotify.yaml
+  - docker/compose.yacht.yaml
+
 services:
-  ### Reverse Proxy
   web:
     container_name: hp-web
-    build:
-      context: .
-      dockerfile: web/Dockerfile
+    build: .
     volumes:
       - ./web/Caddyfile:/etc/caddy/Caddyfile
     ports:
@@ -22,372 +33,12 @@ services:
           cpus: '1.0'
           memory: 512M
 
-  ### Front-ends
-  flame:
-    image: pawelmalak/flame:2.3.1
-    container_name: hp-flame
-    volumes:
-      - hp-flame-data:/app/data
-      - /var/run/docker.sock:/var/run/docker.sock
-    env_file:
-      - .env
-    restart: unless-stopped
-    networks:
-      - hp-network
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 512M
-
-  your-spotify-client:
-    image: yooooomi/your_spotify_client:1.14.0
-    container_name: hp-your-spotify-client
-    restart: unless-stopped
-    env_file:
-      - .env
-    networks:
-      - hp-network
-    labels:
-      - flame.type=application
-      - flame.name=Your Spotify
-      - flame.url=https://spotify.portal.tech
-      - flame.icon=spotify
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 512M
-
-  excalidraw:
-    image: excalidraw/excalidraw:latest
-    container_name: hp-excalidraw
-    restart: unless-stopped
-    networks:
-      - hp-network
-    labels:
-      - flame.type=application
-      - flame.name=Excalidraw
-      - flame.url=https://draw.portal.tech
-      - flame.icon=draw
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 512M
-
-  yacht:
-    image: selfhostedpro/yacht:latest
-    container_name: hp-yacht
-    restart: unless-stopped
-    networks:
-      - hp-network
-    volumes:
-      - hp-yacht-data:/config
-      - /var/run/docker.sock:/var/run/docker.sock
-    labels:
-      - flame.type=application
-      - flame.name=Yacht
-      - flame.url=https://manage.portal.tech
-      - flame.icon=docker
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 512M
-
-  ### APIs
-  shopping-admin:
-    container_name: hp-shopping-admin
-    build:
-      # Temporary fix for CSRF_TRUSTED_ORIGINS
-      context: .
-      dockerfile: temp/admin/Dockerfile
-    env_file:
-      - .env
-    networks:
-      - hp-network
-    depends_on:
-      postgres-17:
-        condition: service_healthy
-    restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 512M
-    labels:
-      - flame.type=application
-      - flame.name=Shopping Admin
-      - flame.url=https://shopping.portal.tech/admin/
-      - flame.icon=account-group
-
-  shopping-app:
-    container_name: hp-shopping-app
-    build:
-      # Temporary fix for CSRF_TRUSTED_ORIGINS
-      context: .
-      dockerfile: temp/app/Dockerfile
-    env_file:
-      - .env
-    environment:
-      - GUNICORN_WORKERS=1
-    networks:
-      - hp-network
-    depends_on:
-      postgres-17:
-        condition: service_healthy
-    restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 512M
-    labels:
-      - flame.type=application
-      - flame.name=Shopping App
-      - flame.url=https://shopping.portal.tech
-      - flame.icon=cart
-
-  actual-server:
-    image: docker.io/actualbudget/actual-server:latest
-    container_name: hp-actual-server
-    volumes:
-      - hp-actual-data:/data
-    healthcheck:
-      test: [ 'CMD-SHELL', 'node src/scripts/health-check.js' ]
-      interval: 60s
-      timeout: 10s
-      retries: 3
-      start_period: 20s
-    restart: unless-stopped
-    networks:
-      - hp-network
-    labels:
-      - flame.type=application
-      - flame.name=Actual Budget
-      - flame.url=https://budget.portal.tech
-      - flame.icon=cash-multiple
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 512M
-
-  your-spotify-server:
-    image: yooooomi/your_spotify_server:1.14.0
-    container_name: hp-your-spotify-server
-    env_file:
-      - .env
-    restart: unless-stopped
-    networks:
-      - hp-network
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 512M
-
-  immich-server:
-    container_name: hp-immich-server
-    image: ghcr.io/immich-app/immich-server:v1.129.0
-    volumes:
-      - ${IMMICH_UPLOAD_LOCATION}:/usr/src/app/upload
-      - /etc/localtime:/etc/localtime:ro
-    environment:
-      - REDIS_HOSTNAME=redis-immich
-      - DB_HOSTNAME=postgres-immich
-      - DB_PASSWORD=${IMMICH_DB_PASSWORD}
-      - DB_USERNAME=${IMMICH_DB_USERNAME}
-      - DB_DATABASE_NAME=${IMMICH_DB_DATABASE_NAME}
-    depends_on:
-      - redis-immich
-      - postgres-immich
-    restart: always
-    healthcheck:
-      disable: false
-    networks:
-      - hp-network
-    labels:
-      - flame.type=application
-      - flame.name=Immich
-      - flame.url=https://images.portal.tech
-      - flame.icon=camera
-
-  immich-ml:
-    container_name: hp-immich-ml
-    image: ghcr.io/immich-app/immich-machine-learning:v1.129.0
-    volumes:
-      - immich-ml-cache:/cache
-    env_file:
-      - .env
-    restart: always
-    healthcheck:
-      disable: false
-    networks:
-      - hp-network
-
-  pihole:
-    container_name: hp-pihole
-    image: pihole/pihole:latest
-    ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "9999:80"
-    environment:
-      TZ: 'Africa/Johannesburg'
-      FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD}
-      FTLCONF_dns_listeningMode: 'all'
-    volumes:
-      - 'hp-pihole-data:/etc/pihole'
-    restart: unless-stopped
-    networks:
-      - hp-network
-    labels:
-      - flame.type=application
-      - flame.name=Pihole
-      - flame.url=https://dns.portal.tech/admin/
-      - flame.icon=network
-    deploy:
-      resources:
-        limits:
-          cpus: '4.0'
-          memory: 2048M
-
-  flaresolverr:
-    image: ghcr.io/flaresolverr/flaresolverr:latest
-    container_name: hp-flaresolverr
-    ports:
-      - 8191:8191
-    restart: unless-stopped
-    networks:
-      - hp-network
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 512M
-
-  ### Caches
-  redis-immich:
-    image: docker.io/redis:6.2-alpine@sha256:148bb5411c184abd288d9aaed139c98123eeb8824c5d3fce03cf721db58066d8
-    container_name: hp-redis-immich
-    restart: unless-stopped
-    healthcheck:
-      test: redis-cli ping || exit 1
-    networks:
-      - hp-network
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 512M
-
-  redis-8:
-    image: redis:8.0.2-alpine3.21
-    container_name: hp-redis-8
-    volumes:
-      - hp-redis-8-data:/data
-    networks:
-      - hp-network
-    restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 512M
-
-  ### DBs
-  postgres-immich:
-    container_name: hp-postgres-immich
-    image: docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:739cdd626151ff1f796dc95a6591b55a714f341c737e27f045019ceabf8e8c52
-    environment:
-      POSTGRES_PASSWORD: ${IMMICH_DB_PASSWORD}
-      POSTGRES_USER: ${IMMICH_DB_USERNAME}
-      POSTGRES_DB: ${IMMICH_DB_DATABASE_NAME}
-      POSTGRES_INITDB_ARGS: '--data-checksums'
-    volumes:
-      - hp-immich-database-data:/var/lib/postgresql/data
-    healthcheck:
-      test: >-
-        pg_isready --dbname="$${POSTGRES_DB}" --username="$${POSTGRES_USER}" || exit 1; Chksum="$$(psql --dbname="$${POSTGRES_DB}" --username="$${POSTGRES_USER}" --tuples-only --no-align --command='SELECT COALESCE(SUM(checksum_failures), 0) FROM pg_stat_database')"; echo "checksum failure count is $$Chksum"; [ "$$Chksum" = '0' ] || exit 1
-      interval: 5m
-      start_interval: 30s
-      start_period: 5m
-    command: >-
-      postgres -c shared_preload_libraries=vectors.so -c 'search_path="$$user", public, vectors' -c logging_collector=on -c max_wal_size=2GB -c shared_buffers=512MB -c wal_compression=on
-    restart: always
-    networks:
-      - hp-network
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 512M
-
-  mongo-6:
-    image: mongo:6.0.21-jammy
-    container_name: hp-mongo-6
-    volumes:
-      - hp-mongo-6-data:/data/db
-    restart: unless-stopped
-    networks:
-      - hp-network
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 512M
-
-  postgres-17:
-    container_name: hp-postgres-17
-    image: postgres:17.5-alpine3.22
-    restart: unless-stopped
-    environment:
-      POSTGRES_USER: postgres
-    env_file:
-      - .env
-    networks:
-      - hp-network
-    volumes:
-      - hp-postgres-17-data:/var/lib/postgresql/data
-    healthcheck:
-      test: [ "CMD", "pg_isready", "-U", "postgres" ]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 512M
-
-  ### DB Management
-  pgadmin:
-    container_name: hp-pgadmin
-    image: dpage/pgadmin4:9.4.0
-    restart: unless-stopped
-    env_file:
-      - .env
-    networks:
-      - hp-network
-    volumes:
-      - hp-pgadmin-data:/var/lib/pgadmin
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 512M
-    labels:
-      - flame.type=application
-      - flame.name=Postgres Admin
-      - flame.url=https://pgadmin.portal.tech
-      - flame.icon=database-cog
-
 volumes:
-  hp-flame-data:
-    external: false
   hp-mongo-6-data:
+    external: false
+  hp-postgres-17-data:
+    external: false
+  hp-flame-data:
     external: false
   hp-actual-data:
     external: false
@@ -402,10 +53,6 @@ volumes:
   hp-pgadmin-data:
     external: false
   hp-redis-8-data:
-    external: false
-  hp-postgres-17-data:
-    external: false
-  hp-core-keeper-core:
     external: false
 
 networks:
