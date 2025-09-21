@@ -13,6 +13,11 @@ services:
       test: [ "CMD", "curl", "--fail", "http://localhost:8000/health-check/up" ]
     env_file:
       - env/app.env
+    labels:
+      - flame.type=application
+      - flame.name=Solid Time
+      - flame.url=https://time.portal.tech
+      - flame.icon=clock-fast
     depends_on:
       - postgres-15
     volumes:
