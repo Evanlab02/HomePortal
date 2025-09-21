@@ -7,14 +7,14 @@ include:
   - docker/compose.cache.yaml
   - docker/compose.db.yaml
   - docker/compose.dns.yaml
-  - docker/compose.draw.yaml
+  # - docker/compose.draw.yaml
   - docker/compose.flame.yaml
   - docker/compose.flaresolverr.yaml
-  - docker/compose.immich.yaml
+  # - docker/compose.immich.yaml
   - docker/compose.pgadmin.yaml
-  - docker/compose.shopping.yaml
-  - docker/compose.spotify.yaml
-  - docker/compose.yacht.yaml
+  # - docker/compose.shopping.yaml
+  # - docker/compose.spotify.yaml
+  # - docker/compose.yacht.yaml
 
 services:
   web:
