@@ -1,5 +1,5 @@
 env/app.env:
-	cp env/app.env.template env/app.env
+	cp env/app.template.env env/app.env
 
 .PHONY: generate-keys
 generate-keys:
