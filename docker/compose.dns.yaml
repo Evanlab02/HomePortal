@@ -10,6 +10,8 @@ services:
       TZ: 'Africa/Johannesburg'
       FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD}
       FTLCONF_dns_listeningMode: 'all'
+    env_file:
+      - environment/.env
     volumes:
       - 'hp-pihole-data:/etc/pihole'
     restart: unless-stopped
