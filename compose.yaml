@@ -1,6 +1,7 @@
 name: home-portal
 
 include:
+  - apps/pg15/compose.yaml
   - docker/compose.actual.yaml
   - docker/compose.cache.yaml
   - docker/compose.db.yaml

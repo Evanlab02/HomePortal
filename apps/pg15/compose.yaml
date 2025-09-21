@@ -1,0 +1,31 @@
+name: pg15
+
+services:
+  postgres-15:
+    image: postgres:15.14-alpine3.22
+    container_name: hp-postgres-15
+    restart: always
+    environment:
+      PGPASSWORD: '${DB_PASSWORD:-secret}'
+      POSTGRES_DB: '${DB_DATABASE}'
+      POSTGRES_USER: '${DB_USERNAME}'
+      POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
+    healthcheck:
+      test:
+        - CMD
+        - pg_isready
+        - '-q'
+        - '-d'
+        - '${DB_DATABASE}'
+        - '-U'
+        - '${DB_USERNAME}'
+      retries: 3
+      timeout: 5s
+    volumes:
+      - 'hp-postgres-15-data:/var/lib/postgresql/data'
+    networks:
+      - hp-network
+
+volumes:
+  hp-postgres-15-data:
+    external: false

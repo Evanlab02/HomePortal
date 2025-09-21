@@ -149,3 +149,11 @@ shopping.portal.tech {
 		file_server
 	}
 }
+
+time.portal.tech {
+	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
+
+	handle_path /* {
+		reverse_proxy hp-solidtime:8000
+	}
+}

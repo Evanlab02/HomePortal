@@ -1,0 +1,80 @@
+name: solidtime
+
+services:
+  app:
+    image: "solidtime/solidtime:0.9.0"
+    container_name: hp-solidtime-app
+    restart: always
+    user: "1000:1000"
+    environment:
+      - CONTAINER_MODE=http
+      - AUTO_DB_MIGRATE=true
+    healthcheck:
+      test: [ "CMD", "curl", "--fail", "http://localhost:8000/health-check/up" ]
+    env_file:
+      - env/app.env
+    depends_on:
+      - postgres-15
+    volumes:
+      - "st-storage:/var/www/html/storage"
+      - "st-logs:/var/www/html/storage/logs"
+      - "st-app-storage:/var/www/html/storage/app"
+    networks:
+      - hp-network
+
+  scheduler:
+    image: "solidtime/solidtime:0.9.0"
+    container_name: hp-solidtime-scheduler
+    restart: always
+    user: "1000:1000"
+    environment:
+      CONTAINER_MODE: scheduler
+    healthcheck:
+      test: [ "CMD", "healthcheck" ]
+    env_file:
+      - env/app.env
+    depends_on:
+      - postgres-15
+    networks:
+      - hp-network
+    volumes:
+      - "st-storage:/var/www/html/storage"
+      - "st-logs:/var/www/html/storage/logs"
+      - "st-app-storage:/var/www/html/storage/app"
+
+  queue:
+    image: "solidtime/solidtime:0.9.0"
+    container_name: hp-solidtime-queue
+    restart: always
+    user: "1000:1000"
+    environment:
+      CONTAINER_MODE: worker
+      WORKER_COMMAND: "php /var/www/html/artisan queue:work"
+    healthcheck:
+      test: [ "CMD", "healthcheck" ]
+    env_file:
+      - env/app.env
+    depends_on:
+      - postgres-15
+    networks:
+      - hp-network
+    volumes:
+      - "st-storage:/var/www/html/storage"
+      - "st-logs:/var/www/html/storage/logs"
+      - "st-app-storage:/var/www/html/storage/app"
+
+  gotenberg:
+    image: gotenberg/gotenberg:8
+    container_name: hp-st-gotenberg
+    networks:
+      - hp-network
+    healthcheck:
+      test: [ "CMD", "curl", "--silent", "--fail", "http://localhost:3000/health" ]
+
+volumes:
+  st-storage:
+    external: false
+  st-logs:
+    external: false
+  st-app-storage:
+    external: false
