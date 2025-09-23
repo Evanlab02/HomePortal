@@ -1,7 +1,6 @@
 name: home-portal
 
 include:
-  - apps/authentik/compose.yaml
   - apps/pg15/compose.yaml
   - apps/solidtime/compose.yaml
 
