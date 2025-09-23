@@ -1,7 +1,7 @@
 name: solidtime
 
 services:
-  app:
+  solidtime-app:
     image: "solidtime/solidtime:0.9.0"
     container_name: hp-solidtime-app
     restart: always
@@ -27,7 +27,7 @@ services:
     networks:
       - hp-network
 
-  scheduler:
+  solidtime-scheduler:
     image: "solidtime/solidtime:0.9.0"
     container_name: hp-solidtime-scheduler
     restart: always
@@ -47,7 +47,7 @@ services:
       - "st-logs:/var/www/html/storage/logs"
       - "st-app-storage:/var/www/html/storage/app"
 
-  queue:
+  solidtime-queue:
     image: "solidtime/solidtime:0.9.0"
     container_name: hp-solidtime-queue
     restart: always
@@ -68,7 +68,7 @@ services:
       - "st-logs:/var/www/html/storage/logs"
       - "st-app-storage:/var/www/html/storage/app"
 
-  gotenberg:
+  solidtime-gotenberg:
     image: gotenberg/gotenberg:8
     container_name: hp-st-gotenberg
     networks:
