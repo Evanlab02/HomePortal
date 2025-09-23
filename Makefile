@@ -30,11 +30,12 @@ logs:
 restart:
 	docker compose restart
 
-images:
-	mkdir -p images
+.PHONY: where-is-root
+where-is-root:
+	mkcert -CAROOT
 
-.env:
-	cp .env.template .env
+.PHONY: init
+init: certs certs/homeportal.key.pem public public/certs public/certs/rootCA.crt
 
 certs:
 	mkdir -p certs
@@ -50,31 +51,3 @@ public/certs:
 
 public/certs/rootCA.crt:
 	cp $(shell mkcert -CAROOT)/rootCA.pem public/certs/rootCA.crt
-
-data:
-	mkdir -p data
-
-data/fromcord:
-	mkdir -p data/fromcord
-
-.PHONY: init
-init: images .env certs certs/homeportal.key.pem public public/certs public/certs/rootCA.crt data data/fromcord
-
-.PHONY: where-is-root
-where-is-root:
-	mkcert -CAROOT
-
-.PHONY: shopping-superuser
-shopping-superuser:
-	docker exec -it hp-shopping-admin python3 manage.py createsuperuser
-
-.PHONY: shopping-settings
-shopping-settings:
-	docker exec -it hp-shopping-app cat /backend/shoppingapp/core/settings.py
-	docker exec -it hp-shopping-admin cat /backend/shoppingapp/admin/settings.py
-
-
-.PHONY: core-keeper-game-id
-core-keeper-game-id:
-	docker exec -it corekeeper-dedicated cat /home/steam/core-keeper-dedicated/GameID.txt
-
