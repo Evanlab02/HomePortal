@@ -9,6 +9,8 @@ services:
       postgres-15:
         condition: service_healthy
     restart: unless-stopped
+    networks:
+      - hp-network
     volumes:
       - ./media:/media
       - ./templates:/templates
@@ -24,6 +26,8 @@ services:
         condition: service_healthy
     restart: unless-stopped
     user: root
+    networks:
+      - hp-network
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./media:/media
