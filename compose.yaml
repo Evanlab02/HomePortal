@@ -1,64 +1,24 @@
 name: home-portal
 
 include:
-  - apps/authentik/compose.yml
+  - apps/actual/compose.yaml
+  - apps/authentik/compose.yaml
+  - apps/dns/compose.yaml
+  - apps/flame/compose.yaml
+  - apps/flaresolverr/compose.yaml
   - apps/pg15/compose.yaml
   - apps/redis7/compose.yaml
   - apps/solidtime/compose.yaml
+  - apps/web/compose.yaml
 
-  - docker/compose.actual.yaml
-  - docker/compose.cache.yaml
-  - docker/compose.db.yaml
-  - docker/compose.dns.yaml
+  # - docker/compose.cache.yaml
+  # - docker/compose.db.yaml
   # - docker/compose.draw.yaml
-  - docker/compose.flame.yaml
-  - docker/compose.flaresolverr.yaml
   # - docker/compose.immich.yaml
-  - docker/compose.pgadmin.yaml
+  # - docker/compose.pgadmin.yaml
   # - docker/compose.shopping.yaml
   # - docker/compose.spotify.yaml
   # - docker/compose.yacht.yaml
-
-services:
-  web:
-    container_name: hp-web
-    build: .
-    volumes:
-      - ./web/Caddyfile:/etc/caddy/Caddyfile
-    ports:
-      - 80:80
-      - 443:443
-      - 8000:8000
-    networks:
-      - hp-network
-    restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 512M
-
-volumes:
-  hp-mongo-6-data:
-    external: false
-  hp-postgres-17-data:
-    external: false
-  hp-flame-data:
-    external: false
-  hp-actual-data:
-    external: false
-  hp-immich-database-data:
-    external: false
-  immich-ml-cache:
-    external: false
-  hp-pihole-data:
-    external: false
-  hp-yacht-data:
-    external: false
-  hp-pgadmin-data:
-    external: false
-  hp-redis-8-data:
-    external: false
 
 networks:
   hp-network:

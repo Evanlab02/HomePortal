@@ -27,3 +27,7 @@ services:
         limits:
           cpus: '4.0'
           memory: 2048M
+
+volumes:
+  hp-pihole-data:
+    external: false

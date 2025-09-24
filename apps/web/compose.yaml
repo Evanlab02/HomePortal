@@ -1,0 +1,18 @@
+services:
+  web:
+    container_name: hp-web
+    build: .
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    ports:
+      - 80:80
+      - 443:443
+      - 8000:8000
+    networks:
+      - hp-network
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
