@@ -16,7 +16,7 @@ services:
     labels:
       - flame.type=application
       - flame.name=Actual Budget
-      - flame.url=https://budget.portal.tech
+      - flame.url=https://budget.labuschagne.xyz
       - flame.icon=cash-multiple
     deploy:
       resources:

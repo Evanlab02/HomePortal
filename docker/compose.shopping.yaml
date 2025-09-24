@@ -21,7 +21,7 @@ services:
     labels:
       - flame.type=application
       - flame.name=Shopping Admin
-      - flame.url=https://shopping.portal.tech/admin/
+      - flame.url=https://shopping.labuschagne.xyz/admin/
       - flame.icon=account-group
 
   shopping-app:
@@ -48,5 +48,5 @@ services:
     labels:
       - flame.type=application
       - flame.name=Shopping App
-      - flame.url=https://shopping.portal.tech
+      - flame.url=https://shopping.labuschagne.xyz
       - flame.icon=cart

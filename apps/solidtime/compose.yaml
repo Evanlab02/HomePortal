@@ -16,7 +16,7 @@ services:
     labels:
       - flame.type=application
       - flame.name=Solid Time
-      - flame.url=https://time.portal.tech
+      - flame.url=https://time.labuschagne.xyz
       - flame.icon=clock-fast
     depends_on:
       - postgres-15

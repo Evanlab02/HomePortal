@@ -20,7 +20,7 @@ services:
     labels:
       - flame.type=application
       - flame.name=Pihole
-      - flame.url=https://dns.portal.tech/admin/
+      - flame.url=https://dns.labuschagne.xyz/admin/
       - flame.icon=network
     deploy:
       resources:

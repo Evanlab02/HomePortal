@@ -17,5 +17,5 @@ services:
     labels:
       - flame.type=application
       - flame.name=Postgres Admin
-      - flame.url=https://pgadmin.portal.tech
+      - flame.url=https://pgadmin.labuschagne.xyz
       - flame.icon=database-cog

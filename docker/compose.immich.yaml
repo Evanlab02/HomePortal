@@ -24,7 +24,7 @@ services:
     labels:
       - flame.type=application
       - flame.name=Immich
-      - flame.url=https://images.portal.tech
+      - flame.url=https://images.labuschagne.xyz
       - flame.icon=camera
 
   immich-ml:

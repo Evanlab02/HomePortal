@@ -11,7 +11,7 @@ services:
     labels:
       - flame.type=application
       - flame.name=Yacht
-      - flame.url=https://manage.portal.tech
+      - flame.url=https://manage.labuschagne.xyz
       - flame.icon=docker
     deploy:
       resources:

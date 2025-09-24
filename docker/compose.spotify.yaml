@@ -10,7 +10,7 @@ services:
     labels:
       - flame.type=application
       - flame.name=Your Spotify
-      - flame.url=https://spotify.portal.tech
+      - flame.url=https://spotify.labuschagne.xyz
       - flame.icon=spotify
     deploy:
       resources:

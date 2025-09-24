@@ -17,7 +17,7 @@ services:
     labels:
       - flame.type=application
       - flame.name=Authentik
-      - flame.url=https://auth.portal.tech
+      - flame.url=https://auth.labuschagne.xyz
       - flame.icon=shield-lock
 
   authentik-worker:
