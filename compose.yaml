@@ -11,15 +11,6 @@ include:
   - apps/solidtime/compose.yaml
   - apps/web/compose.yaml
 
-  # - docker/compose.cache.yaml
-  # - docker/compose.db.yaml
-  # - docker/compose.draw.yaml
-  # - docker/compose.immich.yaml
-  # - docker/compose.pgadmin.yaml
-  # - docker/compose.shopping.yaml
-  # - docker/compose.spotify.yaml
-  # - docker/compose.yacht.yaml
-
 networks:
   hp-network:
     driver: bridge

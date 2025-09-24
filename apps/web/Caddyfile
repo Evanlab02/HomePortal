@@ -16,12 +16,16 @@ localhost,
 portal.tech {
 	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
 
-	handle_path /* {
-		reverse_proxy hp-flame:5005
+	forward_auth hp-authentik-server:9000 {
+		uri /outpost.goauthentik.io/auth/caddy
+		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
+		trusted_proxies private_ranges
 	}
 
-	handle_path /apis/spotify/* {
-		reverse_proxy hp-your-spotify-server:8080
+	handle_path /* {
+		reverse_proxy hp-flame:5005 {
+			header_up Host portal.tech
+		}
 	}
 }
 
@@ -73,78 +77,11 @@ dns.portal.tech {
 	}
 }
 
-images.portal.tech {
-	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
-
-	handle_path /* {
-		reverse_proxy hp-immich-server:2283
-	}
-}
-
-draw.portal.tech {
-	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
-
-	handle_path /* {
-		reverse_proxy hp-excalidraw:80
-	}
-}
-
-spotify.portal.tech {
-	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
-
-	handle_path /* {
-		reverse_proxy hp-your-spotify-client:3000
-	}
-
-	handle_path /apis/spotify/* {
-		reverse_proxy hp-your-spotify-server:8080
-	}
-}
-
 budget.portal.tech {
 	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
 
 	handle_path /* {
 		reverse_proxy hp-actual-server:5006
-	}
-}
-
-manage.portal.tech {
-	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
-
-	handle_path /* {
-		reverse_proxy hp-yacht:8000
-	}
-}
-
-pgadmin.portal.tech {
-	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
-
-	handle_path /* {
-		reverse_proxy hp-pgadmin:80
-	}
-}
-
-shopping.portal.tech {
-	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
-
-	handle_path /* {
-		reverse_proxy hp-shopping-app:80
-	}
-
-	handle_path /admin/* {
-		reverse_proxy hp-shopping-admin:80
-		rewrite * /admin{uri}
-	}
-
-	handle_path /docs/* {
-		root * /var/www/html/shopping/docs
-		file_server
-	}
-
-	handle_path /static/* {
-		root * /var/www/html/shopping/static
-		file_server
 	}
 }
 
