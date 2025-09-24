@@ -1,21 +1,4 @@
-localhost,
-192.168.50.2:80,
-192.168.50.2:8000 {
-	handle_path /* {
-		reverse_proxy hp-flame:5005
-	}
-
-	handle_path /download/certs/* {
-		root * /var/www/public/certs
-		@crt path *.crt
-		header @crt Content-Disposition attachment
-		file_server browse
-	}
-}
-
-portal.tech {
-	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
-
+portal.labuschagne.xyz {
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
 		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
@@ -24,14 +7,12 @@ portal.tech {
 
 	handle_path /* {
 		reverse_proxy hp-flame:5005 {
-			header_up Host portal.tech
+			header_up Host portal.labuschagne.xyz
 		}
 	}
 }
 
-plex.portal.tech {
-	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
-
+plex.labuschagne.xyz {
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
 		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
@@ -45,9 +26,7 @@ plex.portal.tech {
 	}
 }
 
-prowlarr.portal.tech {
-	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
-
+prowlarr.labuschagne.xyz {
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
 		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
@@ -61,9 +40,7 @@ prowlarr.portal.tech {
 	}
 }
 
-sonarr.portal.tech {
-	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
-
+sonarr.labuschagne.xyz {
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
 		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
@@ -77,9 +54,7 @@ sonarr.portal.tech {
 	}
 }
 
-radarr.portal.tech {
-	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
-
+radarr.labuschagne.xyz {
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
 		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
@@ -93,9 +68,7 @@ radarr.portal.tech {
 	}
 }
 
-torrent.portal.tech {
-	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
-
+torrent.labuschagne.xyz {
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
 		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
@@ -109,17 +82,13 @@ torrent.portal.tech {
 	}
 }
 
-dns.portal.tech {
-	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
-
+dns.labuschagne.xyz {
 	handle_path /* {
 		reverse_proxy hp-pihole:80
 	}
 }
 
-budget.portal.tech {
-	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
-
+budget.labuschagne.xyz {
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
 		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
@@ -133,9 +102,7 @@ budget.portal.tech {
 	}
 }
 
-time.portal.tech {
-	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
-
+time.labuschagne.xyz {
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
 		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
@@ -149,9 +116,7 @@ time.portal.tech {
 	}
 }
 
-auth.portal.tech {
-	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
-
+auth.labuschagne.xyz {
 	handle_path /* {
 		reverse_proxy hp-authentik-server:9000
 	}
