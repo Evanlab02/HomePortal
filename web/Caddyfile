@@ -162,6 +162,6 @@ auth.portal.tech {
 	tls /etc/caddy/certs/homeportal.pem /etc/caddy/certs/homeportal.key.pem
 
 	handle_path /* {
-		reverse_proxy hp-authentik-server:9443
+		reverse_proxy hp-authentik-server:9000
 	}
 }
