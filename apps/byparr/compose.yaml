@@ -1,7 +1,10 @@
 services:
   byparr:
     image: ghcr.io/thephaseless/byparr:2.0.1
+    container_name: hp-byparr
     restart: unless-stopped
     init: true
     ports:
       - "8191:8191"
+    networks:
+      - hp-network
