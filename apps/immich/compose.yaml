@@ -26,6 +26,9 @@ services:
       - flame.name=Immich
       - flame.url=https://images.labuschagne.xyz
       - flame.icon=camera
+    ports:
+      - 8906:2283
+
 
   immich-ml:
     container_name: hp-immich-ml
