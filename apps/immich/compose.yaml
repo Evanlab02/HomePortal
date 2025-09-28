@@ -80,3 +80,9 @@ services:
         limits:
           cpus: '1.0'
           memory: 512M
+
+volumes:
+  immich-ml-cache:
+    external: false
+  hp-immich-database-data:
+    external: false
