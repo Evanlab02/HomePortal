@@ -3,9 +3,10 @@ name: home-portal
 include:
   - apps/actual/compose.yaml
   - apps/authentik/compose.yaml
+  - apps/byparr/compose.yaml
   - apps/dns/compose.yaml
   - apps/flame/compose.yaml
-  - apps/flaresolverr/compose.yaml
+  # - apps/flaresolverr/compose.yaml
   - apps/pg15/compose.yaml
   - apps/redis7/compose.yaml
   - apps/solidtime/compose.yaml

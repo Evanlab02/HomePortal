@@ -1,0 +1,7 @@
+services:
+  byparr:
+    image: ghcr.io/thephaseless/byparr:2.0.1
+    restart: unless-stopped
+    init: true
+    ports:
+      - "8191:8191"
