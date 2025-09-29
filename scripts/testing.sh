@@ -29,7 +29,7 @@ fi
 
 # Send notification
 "${CURL_CMD[@]}" \
-  -H "Title: 🧪 Mad Science in Progress!" \
+  -H "Title: Mad Science in Progress!" \
   -H "Priority: default" \
   -H "Tags: test_tube,microscope,warning" \
   -H "Click: https://giphy.com/gifs/mrw-post-vote-YYfEjWVqZ6NDG" \

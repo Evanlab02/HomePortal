@@ -1,3 +1,10 @@
+include .env
+export
+
+.PHONY: init
+init:
+	cp .env.template .env
+
 .PHONY: caddy-fmt
 caddy-fmt:
 	docker exec -it hp-web caddy fmt /etc/caddy/Caddyfile --overwrite
@@ -38,3 +45,23 @@ where-is-root:
 migrate:
 	mv certs/* apps/web/certs/
 	mv public/* apps/web/public/
+
+.PHONY: reboot
+reboot:
+	./scripts/reboot.sh --auth $(NTFY_TOKEN)
+
+.PHONY: testing
+testing:
+	./scripts/testing.sh --auth $(NTFY_TOKEN)
+
+.PHONY: update
+update:
+	./scripts/update.sh --auth $(NTFY_TOKEN)
+
+.PHONY: shutdown
+shutdown:
+	./scripts/shutdown.sh --auth $(NTFY_TOKEN)
+
+.PHONY: upgrade
+upgrade:
+	./scripts/upgrade.sh --auth $(NTFY_TOKEN)

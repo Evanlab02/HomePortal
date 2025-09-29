@@ -29,7 +29,7 @@ fi
 
 # Send notification
 "${CURL_CMD[@]}" \
-  -H "Title: 📦 Package Therapy Session Starting!" \
+  -H "Title: Package Therapy Session Starting!" \
   -H "Priority: default" \
   -H "Tags: package,arrows_counterclockwise,sparkles" \
   -H "Click: https://xkcd.com/1197/" \

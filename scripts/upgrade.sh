@@ -29,7 +29,7 @@ fi
 
 # Send upgrade start notification
 "${CURL_CMD[@]}" \
-  -H "Title: 🚀 Server Glow-Up Transformation!" \
+  -H "Title: Server Glow-Up Transformation!" \
   -H "Priority: urgent" \
   -H "Tags: rocket,sparkles,hammer_and_wrench" \
   -H "Click: https://giphy.com/gifs/loading-computer-cat-JIX9t2j0ZTN9S" \
@@ -40,7 +40,7 @@ sudo nala upgrade
 
 # Send upgrade completion notification
 "${CURL_CMD[@]}" \
-  -H "Title: 🎉 Mission Accomplished (Probably)!" \
+  -H "Title: Mission Accomplished (Probably)!" \
   -H "Priority: urgent" \
   -H "Tags: partying_face,tada,checkered_flag" \
   -H "Click: https://www.youtube.com/watch?v=LDU_Txk06tM" \
