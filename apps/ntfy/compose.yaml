@@ -8,7 +8,7 @@ services:
     volumes:
       - hp-ntfy-data:/etc/ntfy
       - hp-ntfy-cache:/var/cache/ntfy
-      - server.yaml:/etc/ntfy/server.yaml
+      - ./server.yaml:/etc/ntfy/server.yaml
     command: "serve --cache-file /var/cache/ntfy/cache.db --TZ=UTC"
     healthcheck:
       test: ["CMD-SHELL", "wget -q --tries=1 http://localhost:80/v1/health -O - | grep -Eo '\"healthy\"\\s*:\\s*true' || exit 1"]
