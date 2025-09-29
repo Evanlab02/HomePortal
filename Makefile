@@ -1,10 +1,6 @@
 include .env
 export
 
-.PHONY: init
-init:
-	cp .env.template .env
-
 .PHONY: caddy-fmt
 caddy-fmt:
 	docker exec -it hp-web caddy fmt /etc/caddy/Caddyfile --overwrite
