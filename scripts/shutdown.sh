@@ -36,4 +36,4 @@ fi
   -d "Plot twist: The server is rage quitting! 😤 Time for its beauty sleep. Please don't panic - it's just having an existential crisis and needs some alone time 🧘‍♂️" \
   https://ntfy.labuschagne.xyz/hp-all
 echo "Sent shutdown notification"
-sudo shutdown
+sudo shutdown -r +1
