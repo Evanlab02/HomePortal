@@ -149,3 +149,9 @@ auth.labuschagne.xyz {
 		reverse_proxy hp-authentik-server:9000
 	}
 }
+
+ntfy.labuschagne.xyz {
+	handle_path /* {
+		reverse_proxy hp-ntfy:80
+	}
+}

@@ -1,0 +1,29 @@
+services:
+  ntfy:
+    image: binwiederhier/ntfy:v2.14.0
+    container_name: hp-ntfy
+    restart: unless-stopped
+    networks:
+      - hp-network
+    volumes:
+      - hp-ntfy-data:/etc/ntfy
+      - hp-ntfy-cache:/var/cache/ntfy
+      - server.yaml:/etc/ntfy/server.yaml
+    command: "serve --cache-file /var/cache/ntfy/cache.db --TZ=UTC"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --tries=1 http://localhost:80/v1/health -O - | grep -Eo '\"healthy\"\\s*:\\s*true' || exit 1"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+
+volumes:
+  hp-ntfy-data:
+    external: false
+  hp-ntfy-cache:
+    external: false

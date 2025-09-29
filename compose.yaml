@@ -8,6 +8,7 @@ include:
   - apps/flame/compose.yaml
   # - apps/flaresolverr/compose.yaml
   - apps/immich/compose.yaml
+  - apps/ntfy/compose.yaml
   - apps/pg15/compose.yaml
   - apps/redis7/compose.yaml
   - apps/solidtime/compose.yaml
