@@ -1,1 +1,3 @@
 base-url: https://ntfy.labuschagne.xyz
+auth-default-access: deny-all
+auth-file: /var/lib/ntfy/auth.db
