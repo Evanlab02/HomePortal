@@ -1,4 +1,3 @@
-blog.example.com,
 portal.labuschagne.xyz {
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
@@ -13,7 +12,6 @@ portal.labuschagne.xyz {
 	}
 }
 
-blog.example.com,
 plex.labuschagne.xyz {
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
@@ -28,7 +26,6 @@ plex.labuschagne.xyz {
 	}
 }
 
-blog.example.com,
 jelly.labuschagne.xyz {
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
@@ -43,7 +40,6 @@ jelly.labuschagne.xyz {
 	}
 }
 
-blog.example.com,
 prowlarr.labuschagne.xyz {
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
@@ -58,7 +54,6 @@ prowlarr.labuschagne.xyz {
 	}
 }
 
-blog.example.com,
 sonarr.labuschagne.xyz {
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
@@ -73,7 +68,6 @@ sonarr.labuschagne.xyz {
 	}
 }
 
-blog.example.com,
 radarr.labuschagne.xyz {
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
@@ -88,7 +82,6 @@ radarr.labuschagne.xyz {
 	}
 }
 
-blog.example.com,
 torrent.labuschagne.xyz {
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
@@ -103,7 +96,6 @@ torrent.labuschagne.xyz {
 	}
 }
 
-blog.example.com,
 budget.labuschagne.xyz {
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
@@ -118,7 +110,6 @@ budget.labuschagne.xyz {
 	}
 }
 
-blog.example.com,
 time.labuschagne.xyz {
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
@@ -133,7 +124,6 @@ time.labuschagne.xyz {
 	}
 }
 
-blog.example.com,
 images.labuschagne.xyz {
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
@@ -148,7 +138,6 @@ images.labuschagne.xyz {
 	}
 }
 
-blog.example.com,
 pgadmin.labuschagne.xyz {
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
@@ -163,7 +152,6 @@ pgadmin.labuschagne.xyz {
 	}
 }
 
-blog.example.com,
 manage.labuschagne.xyz {
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
@@ -178,21 +166,18 @@ manage.labuschagne.xyz {
 	}
 }
 
-blog.example.com,
 auth.labuschagne.xyz {
 	handle_path /* {
 		reverse_proxy hp-authentik-server:9000
 	}
 }
 
-blog.example.com,
 ntfy.labuschagne.xyz {
 	handle_path /* {
 		reverse_proxy hp-ntfy:80
 	}
 }
 
-blog.example.com,
 dns.labuschagne.xyz {
 	handle_path /* {
 		reverse_proxy hp-pihole:80
