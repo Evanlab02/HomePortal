@@ -3,6 +3,7 @@ services:
     image: sigoden/dufs:v0.45.0
     container_name: hp-dufs
     restart: unless-stopped
+    command: /data -A
     volumes:
       - ./data:/data
     networks:
