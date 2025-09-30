@@ -2,6 +2,8 @@ services:
   gluetun:
     image: qmcgaw/gluetun:latest
     container_name: hp-gluetun
+    ports:
+      - "8080:8080"
     cap_add:
       - NET_ADMIN
     devices:
