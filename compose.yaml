@@ -7,7 +7,6 @@ include:
   - apps/dns/compose.yaml
   - apps/flame/compose.yaml
   - apps/immich/compose.yaml
-  - apps/mongo6/compose.yaml
   - apps/ntfy/compose.yaml
   - apps/pg15/compose.yaml
   - apps/pgadmin/compose.yaml
