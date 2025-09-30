@@ -12,7 +12,7 @@ services:
       - VPN_TYPE=wireguard
       - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
       - HTTPPROXY=on
-      - HTTPPROXY_LOG=on
+      - HTTPPROXY_LOG=off
       - HTTP_CONTROL_SERVER_AUTH_CONFIG_FILEPATH=auth.toml
     ports:
       - 6107:8000 # Control Server
