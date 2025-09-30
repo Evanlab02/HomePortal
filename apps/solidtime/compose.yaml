@@ -19,7 +19,7 @@ services:
       - flame.url=https://time.labuschagne.xyz
       - flame.icon=clock-fast
     depends_on:
-      - postgres-15
+      - postgres-16
     volumes:
       - "st-storage:/var/www/html/storage"
       - "st-logs:/var/www/html/storage/logs"
@@ -44,7 +44,7 @@ services:
     env_file:
       - env/app.env
     depends_on:
-      - postgres-15
+      - postgres-16
     networks:
       - hp-network
     volumes:
@@ -70,7 +70,7 @@ services:
     env_file:
       - env/app.env
     depends_on:
-      - postgres-15
+      - postgres-16
     networks:
       - hp-network
     volumes:

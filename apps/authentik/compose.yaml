@@ -6,7 +6,7 @@ services:
     env_file:
       - .env
     depends_on:
-      postgres-15:
+      postgres-16:
         condition: service_healthy
     restart: unless-stopped
     networks:
@@ -32,7 +32,7 @@ services:
     env_file:
       - .env
     depends_on:
-      postgres-15:
+      postgres-16:
         condition: service_healthy
     restart: unless-stopped
     user: root
