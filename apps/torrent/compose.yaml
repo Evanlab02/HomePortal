@@ -16,6 +16,8 @@ services:
       - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
       - VPN_PORT_FORWARDING=on
       - PORT_FORWARD_ONLY=on
+      - DOT=off
+      - DNS_ADDRESS=1.1.1.1
     restart: unless-stopped
     networks:
       - hp-network
