@@ -144,6 +144,18 @@ images.labuschagne.xyz {
 }
 
 pgadmin.labuschagne.xyz {
+	# Bypass auth for static assets
+	handle_path /static/* {
+		reverse_proxy hp-pgadmin:80 {
+			header_up Host pgadmin.labuschagne.xyz
+			header_up X-Real-IP {remote_host}
+			header_up X-Forwarded-For {remote_host}
+			header_up X-Forwarded-Proto {scheme}
+			header_up X-Forwarded-Host {host}
+		}
+	}
+
+	# Auth required for everything else
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
 		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
