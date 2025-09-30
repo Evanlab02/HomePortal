@@ -160,7 +160,7 @@ manage.labuschagne.xyz {
 	}
 
 	handle_path /* {
-		reverse_proxy hp-yacht:80 {
+		reverse_proxy hp-yacht:8000 {
 			header_up Host manage.labuschagne.xyz
 		}
 	}
