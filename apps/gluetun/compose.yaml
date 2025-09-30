@@ -12,6 +12,8 @@ services:
       - VPN_TYPE=wireguard
       - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
       - HTTPPROXY=on
+      - HTTPPROXY_LOG=on
+      - HTTP_CONTROL_SERVER_AUTH_CONFIG_FILEPATH=auth.toml
     ports:
       - 6107:8000 # Control Server
       - 8888:8888/tcp # HTTP proxy
@@ -19,6 +21,7 @@ services:
       - 8388:8388/udp # Shadowsocks
     volumes:
       - hp-gluetun-data:/gluetun
+      - ./auth.toml:/gluetun/auth.toml
     networks:
       - hp-network
 
