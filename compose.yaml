@@ -11,6 +11,7 @@ include:
   - apps/pg15/compose.yaml
   - apps/pgadmin/compose.yaml
   - apps/redis7/compose.yaml
+  - apps/shopping/compose.yaml
   - apps/solidtime/compose.yaml
   - apps/web/compose.yaml
   - apps/yacht/compose.yaml
