@@ -10,6 +10,7 @@ include:
   - apps/immich/compose.yaml
   - apps/ntfy/compose.yaml
   - apps/pg15/compose.yaml
+  - apps/pg16/compose.yaml
   - apps/pgadmin/compose.yaml
   - apps/redis7/compose.yaml
   - apps/shopping/compose.yaml
