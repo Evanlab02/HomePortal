@@ -9,6 +9,7 @@ services:
       - PGADMIN_CONFIG_PROXY_X_FOR_COUNT=1
       - PGADMIN_CONFIG_PROXY_X_PROTO_COUNT=1
       - PGADMIN_CONFIG_PROXY_X_HOST_COUNT=1
+      - PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION=False
     networks:
       - hp-network
     volumes:
