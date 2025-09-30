@@ -38,6 +38,7 @@ services:
     volumes:
       - qbittorrent-config:/config
       - ${TORRENT_DOWNLOADS_PATH:-./downloads}:/downloads
+      - /tmp/gluetun/forwarded_port:/tmp/gluetun/forwarded_port:ro
     network_mode: "service:gluetun"
     depends_on:
       - gluetun
