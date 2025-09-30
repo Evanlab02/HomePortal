@@ -232,6 +232,21 @@ manage.labuschagne.xyz {
 	}
 }
 
+files.labuschagne.xyz {
+	forward_auth hp-authentik-server:9000 {
+		uri /outpost.goauthentik.io/auth/caddy
+		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
+		trusted_proxies private_ranges
+	}
+
+	handle_path /* {
+		reverse_proxy hp-dufs:8080 {
+			header_up Host files.labuschagne.xyz
+		}
+	}
+}
+
+
 auth.labuschagne.xyz {
 	handle_path /* {
 		reverse_proxy hp-authentik-server:9000
