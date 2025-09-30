@@ -1,0 +1,36 @@
+name: pg16
+
+services:
+  postgres-16:
+    image: postgres:16.10-alpine3.22
+    container_name: hp-postgres-16
+    restart: always
+    environment:
+      PGPASSWORD: '${DB_PASSWORD:-secret}'
+      POSTGRES_DB: '${DB_DATABASE}'
+      POSTGRES_USER: '${DB_USERNAME}'
+      POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
+    healthcheck:
+      test:
+        - CMD
+        - pg_isready
+        - '-q'
+        - '-d'
+        - '${DB_DATABASE}'
+        - '-U'
+        - '${DB_USERNAME}'
+      retries: 3
+      timeout: 5s
+    volumes:
+      - 'hp-postgres-16-data:/var/lib/postgresql/data'
+    networks:
+      - hp-network
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 1024M
+
+volumes:
+  hp-postgres-16-data:
+    external: false
