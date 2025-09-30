@@ -28,8 +28,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '2.0'
-          memory: 1024M
+          cpus: '1.0'
+          memory: 512M
 
 volumes:
   hp-postgres-16-data:

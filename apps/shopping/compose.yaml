@@ -10,7 +10,7 @@ services:
     networks:
       - hp-network
     depends_on:
-      postgres-16:
+      postgres-17:
         condition: service_healthy
     restart: unless-stopped
     deploy:
@@ -37,7 +37,7 @@ services:
     networks:
       - hp-network
     depends_on:
-      postgres-16:
+      postgres-17:
         condition: service_healthy
     restart: unless-stopped
     deploy:
