@@ -6,7 +6,6 @@ include:
   - apps/byparr/compose.yaml
   - apps/dns/compose.yaml
   - apps/flame/compose.yaml
-  # - apps/flaresolverr/compose.yaml
   - apps/immich/compose.yaml
   - apps/ntfy/compose.yaml
   - apps/pg15/compose.yaml
