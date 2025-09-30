@@ -3,7 +3,7 @@ export
 
 .PHONY: caddy-fmt
 caddy-fmt:
-	docker exec -it hp-web caddy fmt /etc/caddy/Caddyfile --overwrite
+	docker run --rm -v `pwd`/apps/web/Caddyfile:/etc/caddy/Caddyfile caddy:2.10.2-alpine caddy fmt /etc/caddy/Caddyfile --overwrite
 
 .PHONY: up
 up:
@@ -33,15 +33,6 @@ logs:
 restart:
 	docker compose restart
 
-.PHONY: where-is-root
-where-is-root:
-	mkcert -CAROOT
-
-.PHONY: migrate
-migrate:
-	mv certs/* apps/web/certs/
-	mv public/* apps/web/public/
-
 .PHONY: reboot
 reboot:
 	./scripts/reboot.sh --auth $(NTFY_TOKEN)
@@ -61,3 +52,7 @@ shutdown:
 .PHONY: upgrade
 upgrade:
 	./scripts/upgrade.sh --auth $(NTFY_TOKEN)
+
+.PHONY: ntfy
+ntfy:
+	docker compose exec ntfy ntfy ${ARGS}
