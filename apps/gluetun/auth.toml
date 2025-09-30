@@ -1,3 +1,0 @@
-[[roles]]
-routes = ["*"]
-auth = "none"
