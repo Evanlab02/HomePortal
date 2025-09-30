@@ -144,21 +144,17 @@ images.labuschagne.xyz {
 }
 
 shopping.labuschagne.xyz {
-	@admin path /admin/*
-	@docs path /docs/*
-	@static path /static/*
-
-	handle @docs {
+	handle_path /docs/* {
 		root * /var/www/html/shopping/docs
 		file_server
 	}
 
-	handle_path @static {
+	handle_path /static/* {
 		root * /var/www/html/shopping/static
 		file_server
 	}
 
-	handle_path @admin {
+	handle_path /admin/* {
 		forward_auth hp-authentik-server:9000 {
 			uri /outpost.goauthentik.io/auth/caddy
 			copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
