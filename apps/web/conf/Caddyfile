@@ -1,3 +1,7 @@
+{
+	acme_ca https://acme.zerossl.com/v2/DV90
+}
+
 portal.labuschagne.xyz {
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
