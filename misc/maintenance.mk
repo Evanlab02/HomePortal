@@ -5,7 +5,8 @@ back-to-normal:
 		-u $(NTFY_USER):$(NTFY_PW) \
 		--title "Server is back to normal and there is no more planned maintenance" \
 		--priority default \
-		--tags computer,dizzy_face,success\
+		--tags computer,dizzy_face,success \
+		--message "Uh... title?" \
 		https://ntfy.labuschagne.xyz/hp-all
 	@echo "Sent back to normal notification"
 	@echo "Done"
