@@ -3,7 +3,8 @@ services:
     container_name: hp-web
     build: .
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./conf:/etc/caddy/
+      - hp-web-data:/data
     ports:
       - 80:80
       - 443:443
@@ -16,3 +17,7 @@ services:
         limits:
           cpus: '1.0'
           memory: 512M
+
+volumes:
+  hp-web-data:
+    external: false
