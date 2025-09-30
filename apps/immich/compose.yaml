@@ -28,6 +28,11 @@ services:
       - flame.icon=camera
     ports:
       - 8906:2283
+    deploy:
+      resources:
+        limits:
+          cpus: '8.0'
+          memory: 4096M
 
 
   immich-ml:
@@ -42,6 +47,11 @@ services:
       disable: false
     networks:
       - hp-network
+    deploy:
+      resources:
+        limits:
+          cpus: '8.0'
+          memory: 2048M
 
   redis-immich:
     image: docker.io/redis:6.2-alpine@sha256:148bb5411c184abd288d9aaed139c98123eeb8824c5d3fce03cf721db58066d8

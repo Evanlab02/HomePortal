@@ -19,6 +19,11 @@ services:
       - flame.name=Authentik
       - flame.url=https://auth.labuschagne.xyz
       - flame.icon=shield-lock
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2048M
 
   authentik-worker:
     image: ghcr.io/goauthentik/server:2025.8.3
@@ -38,3 +43,8 @@ services:
       - ./media:/media
       - ./certs:/certs
       - ./templates:/templates
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2048M

@@ -13,3 +13,8 @@ services:
       - flame.name=DUFS
       - flame.url=https://files.labuschagne.xyz
       - flame.icon=folder-open
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M

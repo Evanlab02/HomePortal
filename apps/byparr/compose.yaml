@@ -8,3 +8,8 @@ services:
       - "8191:8191"
     networks:
       - hp-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M

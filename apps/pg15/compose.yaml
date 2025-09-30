@@ -25,6 +25,11 @@ services:
       - 'hp-postgres-15-data:/var/lib/postgresql/data'
     networks:
       - hp-network
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 1024M
 
 volumes:
   hp-postgres-15-data:
