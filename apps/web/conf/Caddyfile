@@ -240,7 +240,7 @@ files.labuschagne.xyz {
 	}
 
 	handle_path /* {
-		reverse_proxy hp-dufs:8080 {
+		reverse_proxy hp-dufs:5000 {
 			header_up Host files.labuschagne.xyz
 		}
 	}
