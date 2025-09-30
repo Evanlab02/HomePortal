@@ -153,6 +153,10 @@ pgadmin.labuschagne.xyz {
 	handle_path /* {
 		reverse_proxy hp-pgadmin:80 {
 			header_up Host pgadmin.labuschagne.xyz
+			header_up X-Real-IP {remote_host}
+			header_up X-Forwarded-For {remote_host}
+			header_up X-Forwarded-Proto {scheme}
+			header_up X-Forwarded-Host {host}
 		}
 	}
 }
