@@ -13,3 +13,10 @@ migrate-env-pg16-pg17:
 	@sed -i apps/authentik/.env -e 's/AUTHENTIK_POSTGRESQL__HOST=hp-postgres-16/AUTHENTIK_POSTGRESQL__HOST=hp-postgres-17/'
 	@sed -i apps/shopping/.env -e 's/SHOPPING_DB_HOST=hp-postgres-16/SHOPPING_DB_HOST=hp-postgres-17/'
 	@echo "Environment variables migrated successfully"
+
+.PHONY: migrate-env-redis7-valkey8
+migrate-env-redis7-valkey8:
+	@echo "Migrating environment variables for apps using Redis 7 to Valkey 8..."
+	@sed -i apps/authentik/.env -e 's/AUTHENTIK_REDIS__HOST=hp-redis-7/AUTHENTIK_REDIS__HOST=hp-valkey8/'
+	@sed -i apps/shopping/.env -e 's/SHOPPING_REDIS_HOST=hp-redis-7/SHOPPING_REDIS_HOST=hp-valkey8/'
+	@echo "Environment variables migrated successfully"
