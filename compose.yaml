@@ -7,11 +7,14 @@ include:
   - apps/dns/compose.yaml
   - apps/flame/compose.yaml
   - apps/immich/compose.yaml
+  - apps/mongo6/compose.yaml
   - apps/ntfy/compose.yaml
   - apps/pg15/compose.yaml
+  - apps/pgadmin/compose.yaml
   - apps/redis7/compose.yaml
   - apps/solidtime/compose.yaml
   - apps/web/compose.yaml
+  - apps/yacht/compose.yaml
 
 networks:
   hp-network:

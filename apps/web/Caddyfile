@@ -96,12 +96,6 @@ torrent.labuschagne.xyz {
 	}
 }
 
-dns.labuschagne.xyz {
-	handle_path /* {
-		reverse_proxy hp-pihole:80
-	}
-}
-
 budget.labuschagne.xyz {
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
@@ -144,6 +138,34 @@ images.labuschagne.xyz {
 	}
 }
 
+pgadmin.labuschagne.xyz {
+	forward_auth hp-authentik-server:9000 {
+		uri /outpost.goauthentik.io/auth/caddy
+		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
+		trusted_proxies private_ranges
+	}
+
+	handle_path /* {
+		reverse_proxy hp-pgadmin:80 {
+			header_up Host pgadmin.labuschagne.xyz
+		}
+	}
+}
+
+manage.labuschagne.xyz {
+	forward_auth hp-authentik-server:9000 {
+		uri /outpost.goauthentik.io/auth/caddy
+		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
+		trusted_proxies private_ranges
+	}
+
+	handle_path /* {
+		reverse_proxy hp-yacht:80 {
+			header_up Host manage.labuschagne.xyz
+		}
+	}
+}
+
 auth.labuschagne.xyz {
 	handle_path /* {
 		reverse_proxy hp-authentik-server:9000
@@ -153,5 +175,11 @@ auth.labuschagne.xyz {
 ntfy.labuschagne.xyz {
 	handle_path /* {
 		reverse_proxy hp-ntfy:80
+	}
+}
+
+dns.labuschagne.xyz {
+	handle_path /* {
+		reverse_proxy hp-pihole:80
 	}
 }
