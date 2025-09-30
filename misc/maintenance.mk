@@ -11,7 +11,7 @@ reboot:
 		https://ntfy.labuschagne.xyz/hp-all
 	@echo "Sent reboot notification"
 	@echo "Scheduling reboot"
-	@sudo shutdown -r+1
+	@sudo shutdown -r +1
 	@echo "Reboot scheduled"
 	@echo "Done"
 
