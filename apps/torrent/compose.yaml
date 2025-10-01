@@ -4,6 +4,7 @@ services:
     container_name: hp-gluetun
     ports:
       - "8080:8080"
+      - "8191:8191"
     cap_add:
       - NET_ADMIN
     devices:
@@ -53,6 +54,20 @@ services:
       - flame.name=qBittorrent
       - flame.url=http://torrent.labuschagne.xyz
       - flame.icon=download
+
+  byparr:
+    image: ghcr.io/thephaseless/byparr:2.0.1
+    container_name: hp-byparr
+    restart: unless-stopped
+    init: true
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2048M
 
 volumes:
   gluetun-data:
