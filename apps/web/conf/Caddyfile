@@ -260,7 +260,6 @@ kibana.labuschagne.xyz {
 	}
 }
 
-
 auth.labuschagne.xyz {
 	handle_path /* {
 		reverse_proxy hp-authentik-server:9000
