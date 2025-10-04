@@ -13,3 +13,12 @@ include misc/notify.mk
 .PHONY: port
 port:
 	docker compose exec gluetun cat /tmp/gluetun/forwarded_port
+
+
+.PHONY: start-1
+start-1:
+	docker compose up elasticsearch kibana logstash
+	docker compose logs -f
+
+.PHONY: start-2
+start-2: up
