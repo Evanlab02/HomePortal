@@ -36,6 +36,11 @@ services:
       - hp-network
     depends_on:
       - elasticsearch
+    labels:
+      - flame.type=application
+      - flame.name=Kibana
+      - flame.url=https://kibana.labuschagne.xyz
+      - flame.icon=database-search
 
 volumes:
   hp-elasticsearch-data:
