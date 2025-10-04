@@ -46,6 +46,7 @@ services:
     image: docker.elastic.co/beats/metricbeat:9.1.4
     container_name: hp-metricbeat
     restart: unless-stopped
+    user: root
     environment:
       - ELASTICSEARCH_HOSTS=http://hp-elasticsearch:9200
       - ELASTICSEARCH_USERNAME=metricbeat
@@ -53,6 +54,7 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "/var/lib/docker/containers:/var/lib/docker/containers:ro"
+      - ./metricbeat.yml:/usr/share/metricbeat/metricbeat.yml:ro
     networks:
       - hp-network
     depends_on:
