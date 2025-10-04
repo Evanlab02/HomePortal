@@ -14,6 +14,7 @@ services:
       - hp-network
     volumes:
       - hp-pgadmin-data:/var/lib/pgadmin
+    logging: *default-logging
     deploy:
       resources:
         limits:

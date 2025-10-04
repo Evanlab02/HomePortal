@@ -28,6 +28,7 @@ services:
       - flame.icon=camera
     ports:
       - 8906:2283
+    logging: *default-logging
     deploy:
       resources:
         limits:
@@ -47,6 +48,7 @@ services:
       disable: false
     networks:
       - hp-network
+    logging: *default-logging
     deploy:
       resources:
         limits:
@@ -61,6 +63,7 @@ services:
       test: redis-cli ping || exit 1
     networks:
       - hp-network
+    logging: *default-logging
     deploy:
       resources:
         limits:
@@ -88,6 +91,7 @@ services:
     restart: always
     networks:
       - hp-network
+    logging: *default-logging
     deploy:
       resources:
         limits:

@@ -7,6 +7,7 @@ services:
       - discovery.type=single-node
       - xpack.security.enabled=true
       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+    logging: *default-logging
     deploy:
       resources:
         limits:
@@ -16,8 +17,6 @@ services:
       - hp-elasticsearch-data:/usr/share/elasticsearch/data
     networks:
       - hp-network
-    ports:
-      - "9200:9200"
 
   kibana:
     image: docker.elastic.co/kibana/kibana:9.1.4
@@ -27,6 +26,7 @@ services:
       - ELASTICSEARCH_HOSTS=http://hp-elasticsearch:9200
       - ELASTICSEARCH_USERNAME=kibana_system
       - ELASTICSEARCH_PASSWORD=${KIBANA_PASSWORD}
+    logging: *default-logging
     deploy:
       resources:
         limits:
@@ -42,19 +42,24 @@ services:
       - flame.url=https://kibana.labuschagne.xyz
       - flame.icon=database-search
 
-  metricbeat:
-    image: docker.elastic.co/beats/metricbeat:9.1.4
-    container_name: hp-metricbeat
+  logstash:
+    image: docker.elastic.co/logstash/logstash:9.1.4
+    container_name: hp-logstash
     restart: unless-stopped
-    user: root
     environment:
       - ELASTICSEARCH_HOSTS=http://hp-elasticsearch:9200
-      - ELASTICSEARCH_USERNAME=metricbeat
-      - ELASTICSEARCH_PASSWORD=${METRICBEAT_PASSWORD}
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "/var/lib/docker/containers:/var/lib/docker/containers:ro"
-      - ./metricbeat.yml:/usr/share/metricbeat/metricbeat.yml:ro
+      - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - "12201:12201/udp"
+    logging: *default-logging
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
     networks:
       - hp-network
     depends_on:
@@ -63,3 +68,7 @@ services:
 volumes:
   hp-elasticsearch-data:
     external: false
+
+networks:
+  hp-network:
+    external: true

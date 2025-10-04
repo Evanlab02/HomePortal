@@ -25,6 +25,7 @@ services:
       - 'hp-postgres-17-data:/var/lib/postgresql/data'
     networks:
       - hp-network
+    logging: *default-logging
     deploy:
       resources:
         limits:

@@ -18,6 +18,7 @@ services:
       - flame.name=Actual Budget
       - flame.url=https://budget.labuschagne.xyz
       - flame.icon=cash-multiple
+    logging: *default-logging
     deploy:
       resources:
         limits:

@@ -19,6 +19,7 @@ services:
       - flame.name=Authentik
       - flame.url=https://auth.labuschagne.xyz
       - flame.icon=shield-lock
+    logging: *default-logging
     deploy:
       resources:
         limits:
@@ -43,6 +44,7 @@ services:
       - ./media:/media
       - ./certs:/certs
       - ./templates:/templates
+    logging: *default-logging
     deploy:
       resources:
         limits:

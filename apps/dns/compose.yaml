@@ -22,6 +22,7 @@ services:
       - flame.name=Pihole
       - flame.url=https://dns.labuschagne.xyz/admin/
       - flame.icon=network
+    logging: *default-logging
     deploy:
       resources:
         limits:

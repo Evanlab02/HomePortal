@@ -26,6 +26,7 @@ services:
       - "st-app-storage:/var/www/html/storage/app"
     networks:
       - hp-network
+    logging: *default-logging
     deploy:
       resources:
         limits:
@@ -51,6 +52,7 @@ services:
       - "st-storage:/var/www/html/storage"
       - "st-logs:/var/www/html/storage/logs"
       - "st-app-storage:/var/www/html/storage/app"
+    logging: *default-logging
     deploy:
       resources:
         limits:
@@ -77,6 +79,7 @@ services:
       - "st-storage:/var/www/html/storage"
       - "st-logs:/var/www/html/storage/logs"
       - "st-app-storage:/var/www/html/storage/app"
+    logging: *default-logging
     deploy:
       resources:
         limits:
@@ -90,6 +93,7 @@ services:
       - hp-network
     healthcheck:
       test: [ "CMD", "curl", "--silent", "--fail", "http://localhost:3000/health" ]
+    logging: *default-logging
     deploy:
       resources:
         limits:

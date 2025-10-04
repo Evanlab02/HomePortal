@@ -13,6 +13,7 @@ services:
       - flame.name=DUFS
       - flame.url=https://files.labuschagne.xyz
       - flame.icon=folder-open
+    logging: *default-logging
     deploy:
       resources:
         limits:

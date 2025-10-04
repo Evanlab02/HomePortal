@@ -12,6 +12,7 @@ services:
     networks:
       - hp-network
     restart: unless-stopped
+    logging: *default-logging
     deploy:
       resources:
         limits:

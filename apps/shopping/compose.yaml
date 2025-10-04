@@ -13,6 +13,7 @@ services:
       postgres-17:
         condition: service_healthy
     restart: unless-stopped
+    logging: *default-logging
     deploy:
       resources:
         limits:
@@ -40,6 +41,7 @@ services:
       postgres-17:
         condition: service_healthy
     restart: unless-stopped
+    logging: *default-logging
     deploy:
       resources:
         limits:

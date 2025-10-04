@@ -13,6 +13,7 @@ services:
       - flame.name=Yacht
       - flame.url=https://manage.labuschagne.xyz
       - flame.icon=docker
+    logging: *default-logging
     deploy:
       resources:
         limits:
