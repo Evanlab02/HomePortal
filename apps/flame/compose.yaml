@@ -10,7 +10,11 @@ services:
     restart: unless-stopped
     networks:
       - hp-network
-    logging: *default-logging
+    logging:
+      driver: gelf
+      options:
+        gelf-address: "udp://localhost:12201"
+        tag: "{{.Name}}"
     deploy:
       resources:
         limits:

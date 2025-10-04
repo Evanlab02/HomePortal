@@ -7,7 +7,11 @@ services:
       - discovery.type=single-node
       - xpack.security.enabled=true
       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
-    logging: *default-logging
+    logging:
+  driver: gelf
+  options:
+    gelf-address: "udp://localhost:12201"
+    tag: "{{.Name}}"
     deploy:
       resources:
         limits:
@@ -26,7 +30,11 @@ services:
       - ELASTICSEARCH_HOSTS=http://hp-elasticsearch:9200
       - ELASTICSEARCH_USERNAME=kibana_system
       - ELASTICSEARCH_PASSWORD=${KIBANA_PASSWORD}
-    logging: *default-logging
+    logging:
+      driver: gelf
+      options:
+        gelf-address: "udp://localhost:12201"
+        tag: "{{.Name}}"
     deploy:
       resources:
         limits:
@@ -54,7 +62,11 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     ports:
       - "12201:12201/udp"
-    logging: *default-logging
+    logging:
+      driver: gelf
+      options:
+        gelf-address: "udp://localhost:12201"
+        tag: "{{.Name}}"
     deploy:
       resources:
         limits:

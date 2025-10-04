@@ -3,7 +3,11 @@ services:
     image: valkey/valkey:8.1.3-alpine3.22
     container_name: hp-valkey8
     restart: unless-stopped
-    logging: *default-logging
+    logging:
+      driver: gelf
+      options:
+        gelf-address: "udp://localhost:12201"
+        tag: "{{.Name}}"
     deploy:
       resources:
         limits:

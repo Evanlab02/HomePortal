@@ -13,7 +13,11 @@ services:
       postgres-17:
         condition: service_healthy
     restart: unless-stopped
-    logging: *default-logging
+    logging:
+      driver: gelf
+      options:
+        gelf-address: "udp://localhost:12201"
+        tag: "{{.Name}}"
     deploy:
       resources:
         limits:
@@ -41,7 +45,11 @@ services:
       postgres-17:
         condition: service_healthy
     restart: unless-stopped
-    logging: *default-logging
+    logging:
+      driver: gelf
+      options:
+        gelf-address: "udp://localhost:12201"
+        tag: "{{.Name}}"
     deploy:
       resources:
         limits:

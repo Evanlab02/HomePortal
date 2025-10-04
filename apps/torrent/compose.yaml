@@ -22,7 +22,11 @@ services:
     restart: unless-stopped
     networks:
       - hp-network
-    logging: *default-logging
+    logging:
+      driver: gelf
+      options:
+        gelf-address: "udp://localhost:12201"
+        tag: "{{.Name}}"
     deploy:
       resources:
         limits:
@@ -50,6 +54,11 @@ services:
         limits:
           cpus: '8.0'
           memory: 4096M
+    logging:
+      driver: gelf
+      options:
+        gelf-address: "udp://localhost:12201"
+        tag: "{{.Name}}"
     labels:
       - flame.type=application
       - flame.name=qBittorrent
@@ -62,6 +71,11 @@ services:
     restart: unless-stopped
     init: true
     network_mode: "service:gluetun"
+    logging:
+      driver: gelf
+      options:
+        gelf-address: "udp://localhost:12201"
+        tag: "{{.Name}}"
     depends_on:
       - gluetun
     deploy:

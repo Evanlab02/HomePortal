@@ -13,7 +13,11 @@ services:
       - flame.name=Yacht
       - flame.url=https://manage.labuschagne.xyz
       - flame.icon=docker
-    logging: *default-logging
+    logging:
+      driver: gelf
+      options:
+        gelf-address: "udp://localhost:12201"
+        tag: "{{.Name}}"
     deploy:
       resources:
         limits:
