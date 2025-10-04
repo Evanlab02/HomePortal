@@ -42,6 +42,22 @@ services:
       - flame.url=https://kibana.labuschagne.xyz
       - flame.icon=database-search
 
+  metricbeat:
+    image: docker.elastic.co/beats/metricbeat:9.1.4
+    container_name: hp-metricbeat
+    restart: unless-stopped
+    environment:
+      - ELASTICSEARCH_HOSTS=http://hp-elasticsearch:9200
+      - ELASTICSEARCH_USERNAME=metricbeat
+      - ELASTICSEARCH_PASSWORD=${METRICBEAT_PASSWORD}
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "/var/lib/docker/containers:/var/lib/docker/containers:ro"
+    networks:
+      - hp-network
+    depends_on:
+      - elasticsearch
+
 volumes:
   hp-elasticsearch-data:
     external: false

@@ -4,3 +4,10 @@ elastic-create-kibana-user:
 		-H "Content-Type: application/json" \
 		-u "elastic:${ELASTIC_PASSWORD}" \
 		-d '{"password":"${KIBANA_PASSWORD}"}'
+
+.PHONY: elastic-create-metricbeat-user
+elastic-create-metricbeat-user:
+	docker compose exec elasticsearch curl -X POST "http://localhost:9200/_security/user/metricbeat/_password" \
+		-H "Content-Type: application/json" \
+		-u "elastic:${ELASTIC_PASSWORD}" \
+		-d '{"password":"${METRICBEAT_PASSWORD}"}'
