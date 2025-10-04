@@ -17,7 +17,7 @@ port:
 
 .PHONY: start-1
 start-1:
-	docker compose up elasticsearch kibana logstash
+	docker compose up -d elasticsearch kibana logstash
 	docker compose logs -f
 
 .PHONY: start-2
