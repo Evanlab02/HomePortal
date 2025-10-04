@@ -8,6 +8,7 @@ include:
   - apps/files/compose.yaml
   - apps/flame/compose.yaml
   - apps/immich/compose.yaml
+  - apps/mongo8/compose.yaml
   - apps/ntfy/compose.yaml
   - apps/pg17/compose.yaml
   - apps/pgadmin/compose.yaml

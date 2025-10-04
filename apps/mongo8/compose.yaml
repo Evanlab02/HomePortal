@@ -1,0 +1,12 @@
+services:
+  mongo8:
+    image: mongo:8.0.15-noble
+    container_name: hp-mongo-8
+    ports:
+      - 27017:27017
+    volumes:
+      - hp-mongo-8-data:/data/db
+
+volumes:
+  hp-mongo-8-data:
+    external: false
