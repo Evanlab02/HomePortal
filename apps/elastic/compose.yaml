@@ -81,6 +81,3 @@ volumes:
   hp-elasticsearch-data:
     external: false
 
-networks:
-  hp-network:
-    external: true
