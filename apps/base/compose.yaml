@@ -1,0 +1,22 @@
+name: dev
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+    container_name: dev_backend
+    ports:
+      - 8000:8000
+
+  mongo:
+    image: mongo:8.0.15-noble
+    container_name: dev_mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - dev_mongo_data:/data/db
+
+volumes:
+  dev_mongo_data:
+    external: false

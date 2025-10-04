@@ -1,0 +1,13 @@
+name: hp-base
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+    container_name: hp-api
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+    networks:
+      - hp-network

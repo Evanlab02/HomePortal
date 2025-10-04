@@ -1,0 +1,7 @@
+-r ../requirements.shared.txt
+fastapi[standard-no-fastapi-cloud-cli]
+pydantic-settings
+pydantic-extra-types
+orjson
+ujson
+uvicorn

@@ -6,6 +6,8 @@ services:
       - 27017:27017
     volumes:
       - hp-mongo-8-data:/data/db
+    networks:
+      - hp-network
 
 volumes:
   hp-mongo-8-data:

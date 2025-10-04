@@ -1,0 +1,3 @@
+-r ../requirements.shared.txt
+-r ../requirements.backend.txt
+-r ../requirements.cli.txt
