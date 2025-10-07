@@ -31,18 +31,31 @@ def sync_gluetun_port() -> None:
             "http://hp-gluetun:8080/api/v2/auth/login",
             data={"username": QBITTORRENT_USERNAME, "password": QBITTORRENT_PASSWORD},
         )
-        logger.info(f"Login Status: {login.status_code}")
+        login_status = login.status_code
+        if login_status != 200:
+            logger.error(f"Login Status: {login_status}")
+            raise Exception(f"Login Status: {login_status}")
+        else:
+            logger.info(f"Login Status: {login_status}")
 
         current_config = session.get(
             "http://hp-gluetun:8080/api/v2/app/preferences",
         )
-        logger.info(f"Current Config Status: {current_config.status_code}")
-        logger.info(f"Current Port: {current_config.json()['listen_port']}")
+        current_config_status = current_config.status_code
+        if current_config_status != 200:
+            logger.error(f"Current Config Status: {current_config_status}")
+            raise Exception(f"Current Config Status: {current_config_status}")
+        else:
+            logger.info(f"Current Config Status: {current_config_status}")
+            logger.info(f"Current Port: {current_config.json()['listen_port']}")
+
+        if port == int(current_config.json()["listen_port"]):
+            logger.info(f"Port is already set to {port}")
+            return
 
         response = session.post(
             "http://hp-gluetun:8080/api/v2/app/setPreferences",
-            headers={"content-type": "application/json"},
-            json={"listen_port": port},
+            data={"json": f"'listen_port': {port}"},
         )
         logger.info(f"Response Status: {response.status_code}")
 
@@ -52,7 +65,7 @@ def sync_gluetun_port() -> None:
     finally:
         logger.info("Closing session")
         session.close()
-        logger.info(f"Finishing with port: {port}")
+        logger.info(f"Port synced: {port}")
 
 
 @app.on_after_configure.connect  # type: ignore
