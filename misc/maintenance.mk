@@ -62,7 +62,7 @@ maintenance:
 	@docker compose exec ntfy ntfy pub \
 		-u $(NTFY_USER):$(NTFY_PW) \
 		--title "The server is undergoing maintenance." \
-		--priority high \
+		--priority default \
 		--tags maintenance,warning \
 		--message "The server is undergoing maintenance, will be back to full quality in a few minutes... (I hope)" \
-		https://ntfy.labuschagne.xyz/maintenance
+		https://ntfy.labuschagne.xyz/messages
