@@ -7,7 +7,7 @@ back-to-normal:
 		--priority default \
 		--tags computer,dizzy_face,success \
 		--message "..." \
-		https://ntfy.labuschagne.xyz/maintenance
+		https://ntfy.labuschagne.xyz/messages
 	@echo "Sent back to normal notification"
 	@echo "Done"
 
