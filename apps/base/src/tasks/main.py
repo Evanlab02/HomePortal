@@ -33,7 +33,7 @@ def sync_gluetun_port() -> None:
         "http://hp-gluetun:8080/api/v2/app/setPreferences",
         json={"port_forwarding": port},
     )
-    logger.info(f"QBittorrent response: {response.json()}")
+    logger.info(f"Response Status: {response.status_code}")
     session.close()
 
 
