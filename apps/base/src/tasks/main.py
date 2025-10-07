@@ -26,11 +26,11 @@ def sync_gluetun_port() -> None:
     logger.info(f"Gluetun port: {port}")
     session = requests.Session()
     session.post(
-        "http://hp-qbittorrent:8080/api/v2/auth/login",
+        "http://hp-gluetun:8080/api/v2/auth/login",
         data={"username": QBITTORRENT_USERNAME, "password": QBITTORRENT_PASSWORD},
     )
     response = session.post(
-        "http://hp-qbittorrent:8080/api/v2/app/setPreferences",
+        "http://hp-gluetun:8080/api/v2/app/setPreferences",
         json={"port_forwarding": port},
     )
     logger.info(f"QBittorrent response: {response.json()}")
