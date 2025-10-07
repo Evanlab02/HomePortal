@@ -40,6 +40,7 @@ def sync_gluetun_port() -> None:
 
     response = session.post(
         "http://hp-gluetun:8080/api/v2/app/setPreferences",
+        headers={"content-type": "application/json"},
         json={"listen_port": port},
     )
     logger.info(f"Response Status: {response.status_code}")
