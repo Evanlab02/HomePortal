@@ -11,7 +11,7 @@ services:
       - /dev/net/tun:/dev/net/tun
     volumes:
       - gluetun-data:/gluetun
-      - ../base/config/protonport:/tmp/gluetun/forwarded_port
+      - ../base/config/:/tmp/gluetun/
     environment:
       - VPN_SERVICE_PROVIDER=protonvpn
       - VPN_TYPE=wireguard
