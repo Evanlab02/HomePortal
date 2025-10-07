@@ -72,4 +72,4 @@ def sync_gluetun_port() -> None:
 @app.on_after_configure.connect  # type: ignore
 def setup_periodic_tasks(sender: Celery, **_: Any) -> None:
     """Periodic tasks setup."""
-    sender.add_periodic_task(10.0, sync_gluetun_port.s())
+    sender.add_periodic_task(600.0, sync_gluetun_port.s())
