@@ -11,6 +11,7 @@ services:
       - /dev/net/tun:/dev/net/tun
     volumes:
       - gluetun-data:/gluetun
+      - /tmp/gluetun/forwarded_port:../base/config/protonport
     environment:
       - VPN_SERVICE_PROVIDER=protonvpn
       - VPN_TYPE=wireguard
@@ -44,7 +45,6 @@ services:
     volumes:
       - qbittorrent-config:/config
       - ${TORRENT_DOWNLOADS_PATH:-./downloads}:/downloads
-      - /tmp/gluetun/forwarded_port:/tmp/gluetun/forwarded_port:ro
     network_mode: "service:gluetun"
     depends_on:
       - gluetun
