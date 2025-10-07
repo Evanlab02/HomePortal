@@ -25,15 +25,25 @@ def sync_gluetun_port() -> None:
 
     logger.info(f"Gluetun port: {port}")
     session = requests.Session()
-    session.post(
+
+    login = session.post(
         "http://hp-gluetun:8080/api/v2/auth/login",
         data={"username": QBITTORRENT_USERNAME, "password": QBITTORRENT_PASSWORD},
     )
+    logger.info(f"Login Status: {login.status_code}")
+
+    current_config = session.get(
+        "http://hp-gluetun:8080/api/v2/app/preferences",
+    )
+    logger.info(f"Current Config Status: {current_config.status_code}")
+    logger.info(f"Current Config: {current_config.json()}")
+
     response = session.post(
         "http://hp-gluetun:8080/api/v2/app/setPreferences",
-        json={"port_forwarding": port},
+        json={"listen_port": port},
     )
     logger.info(f"Response Status: {response.status_code}")
+
     session.close()
 
 
