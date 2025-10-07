@@ -10,3 +10,5 @@ pytest
 pytest-django
 pytest-cov
 pytest-sugar
+celery-stubs
+types-requests

@@ -13,3 +13,16 @@ services:
       - hp-network
     env_file:
       - src/.env
+
+  worker:
+    build:
+      context: .
+      dockerfile: docker/tasks/Dockerfile
+    container_name: hp-worker
+    volumes:
+      - ./config:/app/config
+    restart: unless-stopped
+    networks:
+      - hp-network
+    env_file:
+      - src/.env

@@ -8,4 +8,4 @@ COPY src/ /app/
 RUN rm -rf /app/.env.template
 RUN rm -rf /app/.env
 
-CMD ["python", "main.py", "server"]
+CMD ["celery", "-A", "tasks.main", "worker", "-B", "--loglevel=info"]
