@@ -1,5 +1,6 @@
 """Contains the main module for the task worker."""
 
+import json
 import logging
 from typing import Any
 
@@ -55,7 +56,7 @@ def sync_gluetun_port() -> None:
 
         response = session.post(
             "http://hp-gluetun:8080/api/v2/app/setPreferences",
-            data={"json": f"'listen_port': {port}"},
+            data={"json": json.dumps({"listen_port": port})},
         )
         logger.info(f"Response Status: {response.status_code}")
 
