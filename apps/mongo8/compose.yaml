@@ -8,6 +8,7 @@ services:
       - hp-mongo-8-data:/data/db
     networks:
       - hp-network
+    restart: unless-stopped
 
 volumes:
   hp-mongo-8-data:

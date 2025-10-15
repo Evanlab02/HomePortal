@@ -101,6 +101,7 @@ services:
   solidtime-gotenberg:
     image: gotenberg/gotenberg:8
     container_name: hp-st-gotenberg
+    restart: unless-stopped
     networks:
       - hp-network
     healthcheck:
