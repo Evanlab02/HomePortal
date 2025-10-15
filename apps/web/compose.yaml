@@ -6,9 +6,7 @@ services:
       - ./conf:/etc/caddy/
       - hp-web-data:/data
     ports:
-      - 80:80
       - 443:443
-      - 8000:8000
     networks:
       - hp-network
     restart: unless-stopped
@@ -20,8 +18,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '2.0'
-          memory: 1024M
+          cpus: '1.0'
+          memory: 512M
 
 volumes:
   hp-web-data:
