@@ -27,7 +27,7 @@ services:
       - flame.url=https://images.labuschagne.xyz
       - flame.icon=camera
     ports:
-      - 8906:2283
+      - 9998:2283
     logging:
       driver: gelf
       options:
