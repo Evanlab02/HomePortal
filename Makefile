@@ -5,7 +5,4 @@ include misc/backup.mk
 include misc/caddy.mk
 include misc/docker.mk
 include misc/elastic.mk
-include misc/env.mk
 include misc/maintenance.mk
-include misc/migrate.mk
-include misc/notify.mk
