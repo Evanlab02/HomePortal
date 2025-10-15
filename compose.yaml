@@ -5,7 +5,6 @@ include:
   - apps/authentik/compose.yaml
   - apps/base/compose.prod.yaml
   - apps/dns/compose.yaml
-  # - apps/elastic/compose.yaml
   - apps/files/compose.yaml
   - apps/flame/compose.yaml
   - apps/immich/compose.yaml

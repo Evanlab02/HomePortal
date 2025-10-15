@@ -20,7 +20,7 @@ reboot:
 		--priority high \
 		--tags computer,warning \
 		--message "The server is restarting in 1 minute..." \
-		https://ntfy.labuschagne.xyz/maintenance
+		https://ntfy.labuschagne.xyz/messages
 	@echo "Sent reboot notification"
 	@echo "Scheduling reboot"
 	@sudo shutdown -r +1
@@ -36,7 +36,7 @@ shutdown:
 		--priority high \
 		--tags sleeping,power,warning \
 		--message "The server is shutting down in 1 minute..." \
-		https://ntfy.labuschagne.xyz/maintenance
+		https://ntfy.labuschagne.xyz/messages
 	@echo "Sent shutdown notification"
 	@echo "Scheduling shutdown"
 	@sudo shutdown +1
@@ -52,7 +52,7 @@ unstable:
 		--priority high \
 		--tags warning \
 		--message "Server quality might be degraded during this period." \
-		https://ntfy.labuschagne.xyz/maintenance
+		https://ntfy.labuschagne.xyz/messages
 	@echo "Sent unstable notification"
 	@echo "Done"
 
