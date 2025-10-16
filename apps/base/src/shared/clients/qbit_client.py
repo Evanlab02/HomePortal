@@ -65,6 +65,7 @@ class QBitClient:
         if result:
             qbit_port = int(response.json()["listen_port"])
             self.log.info(f"QBITTORRENT CLIENT | CURRENT LISTENING PORT | {qbit_port}")
+        else:
             return False
 
         if qbit_port == gluetun_port:
