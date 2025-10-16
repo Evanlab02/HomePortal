@@ -9,6 +9,7 @@ from shared.tasks.helpers import read_forwarded_port
 
 logger = getLogger(__name__)
 
+
 @shared_task
 def sync_gluetun_port() -> None:
     """Sync the Gluetun port."""

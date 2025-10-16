@@ -5,12 +5,13 @@ from logging import getLogger
 
 from requests import Response, Session
 
-from shared.config import QBITTORRENT_PASSWORD, QBITTORRENT_USERNAME, QBITTORRENT_HOST
+from shared.config import QBITTORRENT_HOST, QBITTORRENT_PASSWORD, QBITTORRENT_USERNAME
+
 
 class QBitClient:
     """The QBitTorrent client."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize the client."""
         self.log = getLogger(__name__)
         self.session = Session()
@@ -54,7 +55,7 @@ class QBitClient:
 
     def set_qbit_port(self, gluetun_port: int) -> bool:
         """
-        Sets the QBitTorrent listening port.
+        Set the QBitTorrent listening port.
 
         Returns:
             bool: The result of the call.

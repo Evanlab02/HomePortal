@@ -23,6 +23,10 @@ class WHLogsRepository(Repository):
             collection="wh_logs",
         )
 
+    def clean(self) -> None:
+        """Clean the client."""
+        self._client.clean()
+
     def create(self, data: dict[str, Any]) -> None:
         """Create a new record in the database."""
         self._client.create(data)

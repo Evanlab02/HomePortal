@@ -6,7 +6,7 @@ from sys import argv
 from fastapi import FastAPI
 
 from backend.routers import health_router, webhook_router
-from shared.celery import app as _
+from shared.celery import app as _  # noqa
 
 ARGUMENTS = argv[1:]
 

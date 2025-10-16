@@ -12,5 +12,9 @@ class Repository(ABC):
     _client: DatabaseClient
 
     @abstractmethod
-    async def create(self, data: dict[str, Any]) -> None:
+    def clean(self) -> None:
+        """Clean the client."""
+
+    @abstractmethod
+    def create(self, data: dict[str, Any]) -> None:
         """Create a new record in the database."""

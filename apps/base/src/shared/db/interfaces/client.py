@@ -8,12 +8,12 @@ class DatabaseClient(ABC):
     """The base interface for the database clients."""
 
     @abstractmethod
-    async def clean(self) -> None:
+    def clean(self) -> None:
         """Clean the database client."""
         pass
 
     @abstractmethod
-    async def create(self, data: Any) -> None:
+    def create(self, data: Any) -> None:
         """
         Create a new record in the database.
 

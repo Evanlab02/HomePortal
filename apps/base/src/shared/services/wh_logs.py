@@ -15,6 +15,10 @@ class WHLogsService(Service):
         """Initialize the service."""
         self._repo = WHLogsRepository()
 
+    def clean(self) -> None:
+        """Clean the client."""
+        self._repo.clean()
+
     def create(self, data: dict[str, Any]) -> None:
         """Create a new record in the database."""
         self._repo.create(data)
