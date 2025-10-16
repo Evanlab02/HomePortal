@@ -6,6 +6,7 @@ from sys import argv
 from fastapi import FastAPI
 
 from backend.routers import health_router, webhook_router
+from tasks.main import app as _
 
 ARGUMENTS = argv[1:]
 
