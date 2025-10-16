@@ -2,7 +2,7 @@
 
 from typing import Any, TypeAlias
 
-from pymongo import AsyncMongoClient
+from pymongo import MongoClient
 
 from shared.db.interfaces import DatabaseClient
 
@@ -26,20 +26,20 @@ class MongoDBClient(DatabaseClient):
             collection: The name of the collection.
             schema: The schema of the data.
         """
-        self._client: AsyncMongoClient[schema] = AsyncMongoClient(connection_uri)
+        self._client: MongoClient[schema] = MongoClient(connection_uri)
         self._db = self._client[db]
         self._collection = self._db[collection]
         self.client = self._collection
 
-    async def clean(self) -> None:
+    def clean(self) -> None:
         """Clean the MongoDB client."""
-        await self._client.aclose()
+        self._client.close()
 
-    async def create(self, data: Any) -> None:
+    def create(self, data: Any) -> None:
         """
         Create a new record in the database.
 
         Args:
             data: The data to create the record with.
         """
-        await self.client.insert_one(data)
+        self.client.insert_one(data)

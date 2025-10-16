@@ -1,11 +1,11 @@
-"""Contains utilities tasks that do not fall into a specific category."""
+"""Contains tasks for qbittorrent."""
 
 from logging import getLogger
 
 from celery import shared_task
 
 from shared.clients.qbit_client import QBitClient
-from tasks.utils.helpers import read_forwarded_port
+from shared.tasks.helpers import read_forwarded_port
 
 logger = getLogger(__name__)
 

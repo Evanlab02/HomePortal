@@ -15,6 +15,6 @@ class WHLogsService(Service):
         """Initialize the service."""
         self._repo = WHLogsRepository()
 
-    async def create(self, data: dict[str, Any]) -> None:
+    def create(self, data: dict[str, Any]) -> None:
         """Create a new record in the database."""
-        await self._repo.create(data)
+        self._repo.create(data)

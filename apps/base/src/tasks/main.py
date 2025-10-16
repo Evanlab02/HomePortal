@@ -5,14 +5,17 @@ from typing import Any
 
 from celery import Celery
 
-from tasks.utils import sync_gluetun_port
+from shared.tasks.qbit import sync_gluetun_port
 
 logger = logging.getLogger(__name__)
 
 app = Celery("tasks.main", broker="redis://hp-valkey8:6379/", backend="redis://hp-valkey8:6379/")
 app.conf.timezone = "UTC"
 
-app.autodiscover_tasks(["tasks.utils"])
+app.autodiscover_tasks([
+    "shared.tasks.qbit",
+    "shared.tasks.wh_logs",
+])
 
 @app.on_after_configure.connect  # type: ignore
 def setup_periodic_tasks(sender: Celery, **_: Any) -> None:

@@ -23,6 +23,6 @@ class WHLogsRepository(Repository):
             collection="wh_logs",
         )
 
-    async def create(self, data: dict[str, Any]) -> None:
+    def create(self, data: dict[str, Any]) -> None:
         """Create a new record in the database."""
-        await self._client.create(data)
+        self._client.create(data)
