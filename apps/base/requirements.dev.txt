@@ -78,6 +78,10 @@ flake8==7.3.0
     #   flake8-docstrings
 flake8-docstrings==1.7.0
     # via -r dependencies/requirements.dev.in
+greenlet==3.2.4
+    # via
+    #   -r dependencies/../requirements.txt
+    #   sqlalchemy
 h11==0.16.0
     # via
     #   -r dependencies/../requirements.txt
@@ -162,6 +166,7 @@ pydantic==2.12.0
     #   fastapi
     #   pydantic-extra-types
     #   pydantic-settings
+    #   sqlmodel
 pydantic-core==2.41.1
     # via
     #   -r dependencies/../requirements.txt
@@ -239,6 +244,12 @@ sniffio==1.3.1
     #   anyio
 snowballstemmer==3.0.1
     # via pydocstyle
+sqlalchemy==2.0.44
+    # via
+    #   -r dependencies/../requirements.txt
+    #   sqlmodel
+sqlmodel==0.0.27
+    # via -r dependencies/../requirements.txt
 starlette==0.48.0
     # via
     #   -r dependencies/../requirements.txt
@@ -261,6 +272,7 @@ typing-extensions==4.15.0
     #   pydantic-core
     #   pydantic-extra-types
     #   rich-toolkit
+    #   sqlalchemy
     #   typer
     #   typing-inspection
 typing-inspection==0.4.2
