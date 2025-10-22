@@ -17,6 +17,7 @@ include:
   - apps/valkey8/compose.yaml
   - apps/web/compose.yaml
   - apps/yacht/compose.yaml
+  - apps/seerr/compose.yaml
 
 networks:
   hp-network:
