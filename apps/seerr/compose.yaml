@@ -18,3 +18,7 @@ services:
       interval: 15s
       retries: 3
     restart: unless-stopped
+
+volumes:
+  hp-seerr:
+    external: false
