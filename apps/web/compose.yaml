@@ -5,6 +5,7 @@ services:
     volumes:
       - ./conf:/etc/caddy/
       - hp-web-data:/data
+      - ./certs:/certs
     ports:
       - 443:443
     networks:

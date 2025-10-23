@@ -1,4 +1,10 @@
+(inttls) {
+    tls /certs/fullchain.cer /certs/labuschagne.xyz.key
+}
+
 portal.labuschagne.xyz {
+	import inttls
+
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
 		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
@@ -12,21 +18,9 @@ portal.labuschagne.xyz {
 	}
 }
 
-plex.labuschagne.xyz {
-	forward_auth hp-authentik-server:9000 {
-		uri /outpost.goauthentik.io/auth/caddy
-		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
-		trusted_proxies private_ranges
-	}
-
-	handle_path /* {
-		reverse_proxy http://192.168.50.2:32400 {
-			header_up Host plex.labuschagne.xyz
-		}
-	}
-}
-
 jelly.labuschagne.xyz {
+	import inttls
+
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
 		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
@@ -41,6 +35,8 @@ jelly.labuschagne.xyz {
 }
 
 prowlarr.labuschagne.xyz {
+	import inttls
+
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
 		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
@@ -55,6 +51,8 @@ prowlarr.labuschagne.xyz {
 }
 
 sonarr.labuschagne.xyz {
+	import inttls
+
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
 		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
@@ -69,6 +67,8 @@ sonarr.labuschagne.xyz {
 }
 
 radarr.labuschagne.xyz {
+	import inttls
+
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
 		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
@@ -83,6 +83,8 @@ radarr.labuschagne.xyz {
 }
 
 torrent.labuschagne.xyz {
+	import inttls
+
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
 		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
@@ -97,6 +99,8 @@ torrent.labuschagne.xyz {
 }
 
 budget.labuschagne.xyz {
+	import inttls
+
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
 		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
@@ -111,6 +115,8 @@ budget.labuschagne.xyz {
 }
 
 time.labuschagne.xyz {
+	import inttls
+
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
 		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
@@ -125,6 +131,8 @@ time.labuschagne.xyz {
 }
 
 images.labuschagne.xyz {
+	import inttls
+
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
 		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
@@ -139,6 +147,8 @@ images.labuschagne.xyz {
 }
 
 shopping.labuschagne.xyz {
+	import inttls
+
 	handle_path /docs/* {
 		root * /var/www/html/shopping/docs
 		file_server
@@ -183,6 +193,8 @@ shopping.labuschagne.xyz {
 }
 
 pgadmin.labuschagne.xyz {
+	import inttls
+
 	# Bypass auth for static assets
 	@static path /static/*
 	handle @static {
@@ -214,6 +226,8 @@ pgadmin.labuschagne.xyz {
 }
 
 manage.labuschagne.xyz {
+	import inttls
+
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
 		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
@@ -228,6 +242,8 @@ manage.labuschagne.xyz {
 }
 
 files.labuschagne.xyz {
+	import inttls
+
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
 		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
@@ -241,21 +257,9 @@ files.labuschagne.xyz {
 	}
 }
 
-kibana.labuschagne.xyz {
-	forward_auth hp-authentik-server:9000 {
-		uri /outpost.goauthentik.io/auth/caddy
-		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
-		trusted_proxies private_ranges
-	}
-
-	handle_path /* {
-		reverse_proxy hp-kibana:5601 {
-			header_up Host kibana.labuschagne.xyz
-		}
-	}
-}
-
 seerr.labuschagne.xyz {
+	import inttls
+
 	forward_auth hp-authentik-server:9000 {
 		uri /outpost.goauthentik.io/auth/caddy
 		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
@@ -270,19 +274,41 @@ seerr.labuschagne.xyz {
 }
 
 auth.labuschagne.xyz {
+	import inttls
+
 	handle_path /* {
 		reverse_proxy hp-authentik-server:9000
 	}
 }
 
 ntfy.labuschagne.xyz {
+	import inttls
+
 	handle_path /* {
 		reverse_proxy hp-ntfy:80
 	}
 }
 
 dns.labuschagne.xyz {
+	import inttls
+
 	handle_path /* {
 		reverse_proxy hp-pihole:80
 	}
 }
+
+// kibana.labuschagne.xyz {
+// 	import inttls
+
+// 	forward_auth hp-authentik-server:9000 {
+// 		uri /outpost.goauthentik.io/auth/caddy
+// 		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
+// 		trusted_proxies private_ranges
+// 	}
+
+// 	handle_path /* {
+// 		reverse_proxy hp-kibana:5601 {
+// 			header_up Host kibana.labuschagne.xyz
+// 		}
+// 	}
+// }
