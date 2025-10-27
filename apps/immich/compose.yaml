@@ -62,6 +62,11 @@ services:
         limits:
           cpus: '8.0'
           memory: 2048M
+    labels:
+      - flame.type=application
+      - flame.name=Immich Machine Learning
+      - flame.url=https://immichml.labuschagne.xyz
+      - flame.icon=camera
 
   redis-immich:
     image: docker.io/redis:6.2-alpine@sha256:148bb5411c184abd288d9aaed139c98123eeb8824c5d3fce03cf721db58066d8
