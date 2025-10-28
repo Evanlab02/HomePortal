@@ -250,7 +250,7 @@ sqlalchemy==2.0.44
     #   sqlmodel
 sqlmodel==0.0.27
     # via -r dependencies/../requirements.txt
-starlette==0.48.0
+starlette==0.49.1
     # via
     #   -r dependencies/../requirements.txt
     #   fastapi
