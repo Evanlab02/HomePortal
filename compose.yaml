@@ -75,7 +75,7 @@ services:
       retries: 3
       timeout: 5s
     volumes:
-      - hp2-valkey-data:/data
+      - hp-2-valkey-data:/data
     networks:
       - hp-network
 
