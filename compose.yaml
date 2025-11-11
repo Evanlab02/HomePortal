@@ -23,7 +23,7 @@ services:
   hp-2-app:
     container_name: hp-2-app
     restart: unless-stopped
-    image: ghcr.io/evanlab02/hp2-app:0.6.5
+    image: ghcr.io/evanlab02/hp2-app:0.6.6
     env_file:
       - .env
     volumes:
@@ -39,7 +39,7 @@ services:
   hp-2-queue:
     container_name: hp-2-queue
     restart: unless-stopped
-    image: ghcr.io/evanlab02/hp2-queue:0.6.5
+    image: ghcr.io/evanlab02/hp2-queue:0.6.6
     env_file:
       - .env
     volumes:
@@ -50,7 +50,7 @@ services:
   hp-2-admin:
     container_name: hp-2-admin
     restart: unless-stopped
-    image: ghcr.io/evanlab02/hp2-admin:0.6.5
+    image: ghcr.io/evanlab02/hp2-admin:0.6.6
     env_file:
       - .env
     volumes:
