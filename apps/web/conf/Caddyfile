@@ -312,3 +312,53 @@ dns.labuschagne.xyz {
 		reverse_proxy hp-pihole:80
 	}
 }
+
+
+app.labuschagne.xyz,
+api.labuschagne.xyz {
+	import inttls
+
+	handle_path /static/* {
+		root * /var/www/html/homeportal/static/
+		file_server
+	}
+
+	handle {
+		forward_auth hp-authentik-server:9000:9000 {
+			uri /outpost.goauthentik.io/auth/caddy
+			copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
+			trusted_proxies private_ranges
+		}
+
+		reverse_proxy reverse_proxy hp-2-app:80 {
+			header_up X-Real-IP {remote_host}
+			header_up X-Forwarded-For {remote_host}
+			header_up X-Forwarded-Proto {scheme}
+			header_up X-Forwarded-Host {host}
+		}
+	}
+}
+
+admin.labuschagne.xyz {
+	import inttls
+
+	handle_path /static/* {
+		root * /var/www/html/homeportal/static/
+		file_server
+	}
+
+	handle {
+		forward_auth hp-authentik-server:9000:9000 {
+			uri /outpost.goauthentik.io/auth/caddy
+			copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
+			trusted_proxies private_ranges
+		}
+
+		reverse_proxy reverse_proxy hp-2-admin:80 {
+			header_up X-Real-IP {remote_host}
+			header_up X-Forwarded-For {remote_host}
+			header_up X-Forwarded-Proto {scheme}
+			header_up X-Forwarded-Host {host}
+		}
+	}
+}

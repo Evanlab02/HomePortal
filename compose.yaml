@@ -19,6 +19,97 @@ include:
   - apps/yacht/compose.yaml
   - apps/seerr/compose.yaml
 
+services:
+  hp-2-app:
+    container_name: hp-2-app
+    restart: unless-stopped
+    image: ghcr.io/evanlab02/hp2-app:0.6.3
+    env_file:
+      - .env
+    volumes:
+      - ./apps/base/config/:/app/qbit/config
+    networks:
+      - hp-network
+    labels:
+      - flame.type=application
+      - flame.name=HomePortalV2 App/API
+      - flame.url=https://app.labuschagne.xyz/api/v1/docs
+      - flame.icon=folder-open
+
+  hp-2-queue:
+    container_name: hp-2-queue
+    restart: unless-stopped
+    image: ghcr.io/evanlab02/hp2-queue:0.6.3
+    env_file:
+      - .env
+    volumes:
+      - ./apps/base/config/:/app/qbit/config
+    networks:
+      - hp-network
+
+  hp-2-admin:
+    container_name: hp-2-admin
+    restart: unless-stopped
+    image: ghcr.io/evanlab02/hp2-admin:0.6.3
+    env_file:
+      - .env
+    volumes:
+      - ./apps/base/config/:/app/qbit/config
+    networks:
+      - hp-network
+    labels:
+      - flame.type=application
+      - flame.name=HomePortalV2 Administration
+      - flame.url=https://admin.labuschagne.xyz/admin/
+      - flame.icon=folder-open
+
+  hp-2-valkey:
+    image: valkey/valkey:9.0.0-alpine3.22
+    container_name: hp-2-valkey
+    restart: unless-stopped
+    healthcheck:
+      test:
+        - CMD
+        - valkey-cli
+        - ping
+      retries: 3
+      timeout: 5s
+    volumes:
+      - hp2-valkey-data:/data
+    networks:
+      - hp-network
+
+  hp-2-postgres:
+    container_name: hp-2-postgres
+    restart: unless-stopped
+    image: postgres:17.6-alpine3.22
+    environment:
+      PGPASSWORD: '${DB_PASSWORD:-secret}'
+      POSTGRES_DB: '${DB_DATABASE}'
+      POSTGRES_USER: '${DB_USERNAME}'
+      POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
+    healthcheck:
+      test:
+        - CMD
+        - pg_isready
+        - '-q'
+        - '-d'
+        - '${DB_DATABASE}'
+        - '-U'
+        - '${DB_USERNAME}'
+      retries: 3
+      timeout: 5s
+    volumes:
+      - 'hp-2-postgres-data:/var/lib/postgresql/data'
+    networks:
+      - hp-network
+
+volumes:
+  hp-2-valkey-data:
+    external: false
+  hp-2-postgres-data:
+    external: false
+
 networks:
   hp-network:
     driver: bridge
