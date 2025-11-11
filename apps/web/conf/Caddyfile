@@ -330,7 +330,7 @@ api.labuschagne.xyz {
 			trusted_proxies private_ranges
 		}
 
-		reverse_proxy reverse_proxy hp-2-app:80 {
+		reverse_proxy hp-2-app:80 {
 			header_up X-Real-IP {remote_host}
 			header_up X-Forwarded-For {remote_host}
 			header_up X-Forwarded-Proto {scheme}
@@ -354,7 +354,7 @@ admin.labuschagne.xyz {
 			trusted_proxies private_ranges
 		}
 
-		reverse_proxy reverse_proxy hp-2-admin:80 {
+		reverse_proxy hp-2-admin:80 {
 			header_up X-Real-IP {remote_host}
 			header_up X-Forwarded-For {remote_host}
 			header_up X-Forwarded-Proto {scheme}
