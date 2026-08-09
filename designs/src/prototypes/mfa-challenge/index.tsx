@@ -1,0 +1,17 @@
+import type { PrototypeDefinition } from '../../engine/types/prototype'
+import { MfaChallengePrototype } from './prototype'
+import '../../prototype-support/auth/auth-surface.scss'
+
+const prototype: PrototypeDefinition = {
+  meta: {
+    id: 'mfa-challenge',
+    name: 'MFA challenge',
+    description: 'The authenticator-code check shown after valid account credentials.',
+    status: 'in-progress',
+    updatedAt: '2026-08-09',
+    tags: ['Auth', 'MFA'],
+  },
+  Component: MfaChallengePrototype,
+}
+
+export default prototype

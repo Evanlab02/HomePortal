@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-09T14:50:08+02:00",
+  "title": "Design System: HomePortal",
+  "extensions": {
+    "colorMeta": {
+      "canvas": { "role": "neutral", "displayName": "Cool Canvas", "canonical": "#f4f6f6", "tonalRamp": ["oklch(15% 0.006 205)", "oklch(27% 0.006 205)", "oklch(39% 0.006 205)", "oklch(52% 0.006 205)", "oklch(65% 0.005 205)", "oklch(77% 0.005 205)", "oklch(88% 0.004 205)", "#f4f6f6"] },
+      "surface": { "role": "neutral", "displayName": "Quiet Surface", "canonical": "#fbfcfc", "tonalRamp": ["oklch(15% 0.004 205)", "oklch(27% 0.004 205)", "oklch(39% 0.004 205)", "oklch(52% 0.004 205)", "oklch(65% 0.003 205)", "oklch(77% 0.003 205)", "oklch(89% 0.002 205)", "#fbfcfc"] },
+      "surface-raised": { "role": "neutral", "displayName": "Raised White", "canonical": "#ffffff", "tonalRamp": ["oklch(15% 0 0)", "oklch(27% 0 0)", "oklch(39% 0 0)", "oklch(52% 0 0)", "oklch(65% 0 0)", "oklch(77% 0 0)", "oklch(89% 0 0)", "#ffffff"] },
+      "surface-subtle": { "role": "neutral", "displayName": "Subtle Utility Surface", "canonical": "#e9eeee", "tonalRamp": ["oklch(15% 0.008 205)", "oklch(27% 0.008 205)", "oklch(39% 0.008 205)", "oklch(52% 0.008 205)", "oklch(65% 0.007 205)", "oklch(77% 0.006 205)", "#e9eeee", "oklch(95% 0.003 205)"] },
+      "ink": { "role": "neutral", "displayName": "Graphite Ink", "canonical": "#19282d", "tonalRamp": ["#19282d", "oklch(27% 0.018 215)", "oklch(39% 0.017 215)", "oklch(51% 0.015 215)", "oklch(63% 0.012 215)", "oklch(75% 0.009 215)", "oklch(86% 0.006 215)", "oklch(95% 0.003 215)"] },
+      "muted-ink": { "role": "neutral", "displayName": "Muted Graphite", "canonical": "#59686c", "tonalRamp": ["oklch(15% 0.012 210)", "oklch(27% 0.014 210)", "#59686c", "oklch(51% 0.013 210)", "oklch(63% 0.011 210)", "oklch(75% 0.008 210)", "oklch(86% 0.005 210)", "oklch(95% 0.003 210)"] },
+      "border": { "role": "neutral", "displayName": "Cool Border", "canonical": "#ccd6d6", "tonalRamp": ["oklch(15% 0.01 195)", "oklch(27% 0.011 195)", "oklch(39% 0.011 195)", "oklch(51% 0.01 195)", "oklch(63% 0.009 195)", "oklch(75% 0.008 195)", "#ccd6d6", "oklch(95% 0.003 195)"] },
+      "border-strong": { "role": "neutral", "displayName": "Strong Cool Border", "canonical": "#9babad", "tonalRamp": ["oklch(15% 0.012 195)", "oklch(27% 0.014 195)", "oklch(39% 0.014 195)", "oklch(51% 0.013 195)", "oklch(63% 0.011 195)", "#9babad", "oklch(86% 0.006 195)", "oklch(95% 0.003 195)"] },
+      "action-teal": { "role": "primary", "displayName": "Action Teal", "canonical": "#078d91", "tonalRamp": ["oklch(15% 0.045 194)", "oklch(27% 0.07 194)", "oklch(39% 0.09 194)", "#078d91", "oklch(62% 0.095 194)", "oklch(73% 0.075 194)", "oklch(84% 0.045 194)", "oklch(95% 0.015 194)"] },
+      "action-teal-strong": { "role": "primary", "displayName": "Strong Action Teal", "canonical": "#067b7f", "tonalRamp": ["oklch(15% 0.045 194)", "oklch(27% 0.07 194)", "#067b7f", "oklch(50% 0.095 194)", "oklch(62% 0.09 194)", "oklch(73% 0.07 194)", "oklch(84% 0.04 194)", "oklch(95% 0.014 194)"] },
+      "action-teal-soft": { "role": "primary", "displayName": "Soft Action Teal", "canonical": "#d8eeee", "tonalRamp": ["oklch(15% 0.02 194)", "oklch(27% 0.03 194)", "oklch(39% 0.04 194)", "oklch(51% 0.045 194)", "oklch(63% 0.04 194)", "oklch(75% 0.03 194)", "#d8eeee", "oklch(95% 0.012 194)"] },
+      "structural-navy": { "role": "secondary", "displayName": "Structural Navy", "canonical": "#14344e", "tonalRamp": ["#14344e", "oklch(27% 0.055 245)", "oklch(39% 0.065 245)", "oklch(51% 0.06 245)", "oklch(63% 0.05 245)", "oklch(75% 0.035 245)", "oklch(86% 0.02 245)", "oklch(95% 0.008 245)"] },
+      "attention-amber": { "role": "tertiary", "displayName": "Attention Amber", "canonical": "#b9781e", "tonalRamp": ["oklch(15% 0.04 72)", "oklch(27% 0.07 72)", "oklch(39% 0.1 72)", "#b9781e", "oklch(62% 0.11 72)", "oklch(73% 0.085 72)", "oklch(84% 0.05 72)", "oklch(95% 0.018 72)"] },
+      "attention-amber-soft": { "role": "tertiary", "displayName": "Soft Attention Amber", "canonical": "#fff2dc", "tonalRamp": ["oklch(15% 0.025 72)", "oklch(27% 0.04 72)", "oklch(39% 0.055 72)", "oklch(51% 0.065 72)", "oklch(63% 0.06 72)", "oklch(75% 0.045 72)", "oklch(87% 0.028 72)", "#fff2dc"] },
+      "success": { "role": "tertiary", "displayName": "Success Green", "canonical": "#2f7655", "tonalRamp": ["oklch(15% 0.035 155)", "oklch(27% 0.055 155)", "#2f7655", "oklch(51% 0.075 155)", "oklch(63% 0.065 155)", "oklch(75% 0.045 155)", "oklch(86% 0.025 155)", "oklch(95% 0.01 155)"] },
+      "danger": { "role": "tertiary", "displayName": "Danger Red", "canonical": "#a53e36", "tonalRamp": ["oklch(15% 0.04 28)", "oklch(27% 0.08 28)", "#a53e36", "oklch(51% 0.13 28)", "oklch(63% 0.11 28)", "oklch(75% 0.075 28)", "oklch(86% 0.04 28)", "oklch(95% 0.015 28)"] },
+      "white": { "role": "neutral", "displayName": "Action White", "canonical": "#ffffff", "tonalRamp": ["oklch(15% 0 0)", "oklch(27% 0 0)", "oklch(39% 0 0)", "oklch(52% 0 0)", "oklch(65% 0 0)", "oklch(77% 0 0)", "oklch(89% 0 0)", "#ffffff"] },
+      "dark-canvas": { "role": "neutral", "displayName": "Dark Charcoal Canvas", "canonical": "#151b1d", "tonalRamp": ["#151b1d", "oklch(27% 0.01 210)", "oklch(39% 0.01 210)", "oklch(51% 0.009 210)", "oklch(63% 0.008 210)", "oklch(75% 0.006 210)", "oklch(86% 0.004 210)", "oklch(95% 0.002 210)"] },
+      "dark-surface": { "role": "neutral", "displayName": "Dark Surface", "canonical": "#1b2326", "tonalRamp": ["#1b2326", "oklch(27% 0.012 210)", "oklch(39% 0.012 210)", "oklch(51% 0.01 210)", "oklch(63% 0.008 210)", "oklch(75% 0.006 210)", "oklch(86% 0.004 210)", "oklch(95% 0.002 210)"] },
+      "dark-surface-raised": { "role": "neutral", "displayName": "Dark Raised Surface", "canonical": "#222c2f", "tonalRamp": ["oklch(15% 0.012 210)", "#222c2f", "oklch(39% 0.013 210)", "oklch(51% 0.011 210)", "oklch(63% 0.009 210)", "oklch(75% 0.006 210)", "oklch(86% 0.004 210)", "oklch(95% 0.002 210)"] },
+      "dark-surface-subtle": { "role": "neutral", "displayName": "Dark Utility Surface", "canonical": "#283336", "tonalRamp": ["oklch(15% 0.013 210)", "#283336", "oklch(39% 0.014 210)", "oklch(51% 0.012 210)", "oklch(63% 0.009 210)", "oklch(75% 0.006 210)", "oklch(86% 0.004 210)", "oklch(95% 0.002 210)"] },
+      "dark-ink": { "role": "neutral", "displayName": "Dark Theme Ink", "canonical": "#edf3f3", "tonalRamp": ["oklch(15% 0.006 200)", "oklch(27% 0.007 200)", "oklch(39% 0.007 200)", "oklch(51% 0.006 200)", "oklch(63% 0.005 200)", "oklch(75% 0.004 200)", "oklch(87% 0.003 200)", "#edf3f3"] },
+      "dark-muted-ink": { "role": "neutral", "displayName": "Dark Muted Ink", "canonical": "#afbec0", "tonalRamp": ["oklch(15% 0.01 200)", "oklch(27% 0.012 200)", "oklch(39% 0.012 200)", "oklch(51% 0.011 200)", "oklch(63% 0.009 200)", "#afbec0", "oklch(86% 0.005 200)", "oklch(95% 0.002 200)"] },
+      "dark-border": { "role": "neutral", "displayName": "Dark Border", "canonical": "#3b494c", "tonalRamp": ["oklch(15% 0.012 200)", "#3b494c", "oklch(39% 0.014 200)", "oklch(51% 0.012 200)", "oklch(63% 0.01 200)", "oklch(75% 0.007 200)", "oklch(86% 0.004 200)", "oklch(95% 0.002 200)"] },
+      "dark-border-strong": { "role": "neutral", "displayName": "Dark Strong Border", "canonical": "#68787b", "tonalRamp": ["oklch(15% 0.012 200)", "oklch(27% 0.014 200)", "#68787b", "oklch(51% 0.014 200)", "oklch(63% 0.011 200)", "oklch(75% 0.008 200)", "oklch(86% 0.005 200)", "oklch(95% 0.002 200)"] },
+      "dark-action-teal": { "role": "primary", "displayName": "Dark Action Teal", "canonical": "#55c7c7", "tonalRamp": ["oklch(15% 0.04 194)", "oklch(27% 0.065 194)", "oklch(39% 0.085 194)", "oklch(51% 0.095 194)", "#55c7c7", "oklch(73% 0.075 194)", "oklch(84% 0.045 194)", "oklch(95% 0.015 194)"] },
+      "dark-action-teal-strong": { "role": "primary", "displayName": "Dark Strong Action Teal", "canonical": "#74d5d4", "tonalRamp": ["oklch(15% 0.04 194)", "oklch(27% 0.065 194)", "oklch(39% 0.085 194)", "oklch(51% 0.095 194)", "oklch(63% 0.09 194)", "#74d5d4", "oklch(84% 0.045 194)", "oklch(95% 0.015 194)"] },
+      "dark-action-teal-soft": { "role": "primary", "displayName": "Dark Soft Action Teal", "canonical": "#203b3d", "tonalRamp": ["oklch(15% 0.025 194)", "#203b3d", "oklch(39% 0.04 194)", "oklch(51% 0.045 194)", "oklch(63% 0.04 194)", "oklch(75% 0.03 194)", "oklch(86% 0.02 194)", "oklch(95% 0.01 194)"] },
+      "dark-structural-navy": { "role": "secondary", "displayName": "Dark Structural Blue", "canonical": "#9dbbd0", "tonalRamp": ["oklch(15% 0.025 245)", "oklch(27% 0.04 245)", "oklch(39% 0.055 245)", "oklch(51% 0.06 245)", "oklch(63% 0.055 245)", "#9dbbd0", "oklch(86% 0.025 245)", "oklch(95% 0.008 245)"] },
+      "dark-attention-amber": { "role": "tertiary", "displayName": "Dark Attention Amber", "canonical": "#e3ad5d", "tonalRamp": ["oklch(15% 0.04 72)", "oklch(27% 0.07 72)", "oklch(39% 0.1 72)", "oklch(51% 0.12 72)", "oklch(63% 0.12 72)", "#e3ad5d", "oklch(84% 0.05 72)", "oklch(95% 0.018 72)"] },
+      "dark-attention-amber-soft": { "role": "tertiary", "displayName": "Dark Soft Attention Amber", "canonical": "#3c3022", "tonalRamp": ["oklch(15% 0.025 72)", "#3c3022", "oklch(39% 0.055 72)", "oklch(51% 0.065 72)", "oklch(63% 0.06 72)", "oklch(75% 0.045 72)", "oklch(87% 0.028 72)", "oklch(95% 0.012 72)"] },
+      "dark-success": { "role": "tertiary", "displayName": "Dark Success Green", "canonical": "#79ba92", "tonalRamp": ["oklch(15% 0.03 155)", "oklch(27% 0.05 155)", "oklch(39% 0.065 155)", "oklch(51% 0.07 155)", "#79ba92", "oklch(73% 0.05 155)", "oklch(84% 0.03 155)", "oklch(95% 0.012 155)"] },
+      "dark-danger": { "role": "tertiary", "displayName": "Dark Danger Red", "canonical": "#ee9188", "tonalRamp": ["oklch(15% 0.035 28)", "oklch(27% 0.07 28)", "oklch(39% 0.105 28)", "oklch(51% 0.125 28)", "oklch(63% 0.11 28)", "#ee9188", "oklch(86% 0.04 28)", "oklch(95% 0.015 28)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The single dominant screen or task heading." },
+      "title": { "displayName": "Title", "purpose": "Product identity, support headings, and meaningful object titles." },
+      "body": { "displayName": "Body", "purpose": "Operational prose, fields, navigation, and explanations." },
+      "label": { "displayName": "Control Label", "purpose": "Visible field labels and high-confidence actions." }
+    },
+    "shadows": [
+      { "name": "input-focus", "value": "0 4px 18px color-mix(in srgb, var(--action-teal) 13%, transparent)", "purpose": "Soft teal atmosphere around the active field." },
+      { "name": "primary-action", "value": "0 8px 20px color-mix(in srgb, var(--action-teal) 20%, transparent)", "purpose": "Low offset depth beneath the dominant action." },
+      { "name": "raised-object", "value": "0 10px 28px rgba(21, 36, 40, .09)", "purpose": "Quiet separation for handled slips, summaries, and recovery blocks." },
+      { "name": "workbench-frame", "value": "0 18px 45px rgba(25, 29, 36, .18)", "purpose": "Engine-only frame around constrained prototype viewports." }
+    ],
+    "motion": [
+      { "name": "state-standard", "value": "160ms ease", "purpose": "Color, shadow, and transform feedback on handled controls." },
+      { "name": "reduced-motion", "value": ".01ms", "purpose": "Effective removal of transitions when reduced motion is requested." }
+    ],
+    "breakpoints": [
+      { "name": "compact-columns", "value": "900px" },
+      { "name": "single-column", "value": "700px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The full-measure dominant action for an operational task.",
+      "html": "<button class=\"ds-btn-primary\"><span>Continue</span><svg aria-hidden=\"true\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></button>",
+      "css": ".ds-btn-primary { align-items:center; background:#078d91; border:0; border-radius:12px; box-shadow:0 8px 20px color-mix(in srgb,#078d91 20%,transparent); color:#fff; cursor:pointer; display:flex; font-family:'Atkinson HP',sans-serif; font-size:1rem; font-weight:700; justify-content:center; min-height:58px; padding:14px 20px; position:relative; transition:background-color 160ms ease,box-shadow 160ms ease,transform 160ms ease; width:100%; } .ds-btn-primary svg { height:19px; position:absolute; right:20px; width:19px; } .ds-btn-primary:hover { background:#067b7f; box-shadow:0 10px 24px color-mix(in srgb,#078d91 25%,transparent); transform:translateY(-1px); } .ds-btn-primary:active { box-shadow:0 4px 12px color-mix(in srgb,#078d91 18%,transparent); transform:translateY(1px); } .ds-btn-primary:focus-visible { outline:3px solid color-mix(in srgb,#078d91 72%,white); outline-offset:3px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "A visibly labelled, full-measure operational field.",
+      "html": "<label class=\"ds-field\"><span>Email address <em>Required</em></span><input type=\"email\" placeholder=\"you@example.com\"></label>",
+      "css": ".ds-field { color:#19282d; display:grid; font-family:'Atkinson HP',sans-serif; gap:8px; max-width:650px; } .ds-field>span { align-items:center; display:flex; font-size:.92rem; font-weight:700; justify-content:space-between; } .ds-field em { color:#59686c; font-size:.68rem; font-style:normal; font-weight:600; letter-spacing:.06em; text-transform:uppercase; } .ds-field input { background:#fff; border:1px solid #9babad; border-radius:12px; color:#19282d; font:inherit; min-height:58px; padding:14px 17px; transition:border-color 160ms ease,box-shadow 160ms ease; width:100%; } .ds-field input:hover { border-color:#59686c; } .ds-field input:focus { border-color:#078d91; box-shadow:0 4px 18px color-mix(in srgb,#078d91 13%,transparent); outline:0; } .ds-field input:focus-visible { outline:3px solid color-mix(in srgb,#078d91 72%,white); outline-offset:3px; }"
+    },
+    {
+      "name": "Context Item",
+      "kind": "custom",
+      "description": "A compact factual support note with a softly colored icon tile.",
+      "html": "<section class=\"ds-context-item\"><span class=\"ds-context-icon\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z\"/><path d=\"M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4M12 17h.01\"/></svg></span><div><h3>Need help?</h3><p>Use a short, truthful explanation that supports the current task.</p></div></section>",
+      "css": ".ds-context-item { align-items:flex-start; color:#19282d; display:flex; font-family:'Atkinson HP',sans-serif; gap:16px; max-width:440px; padding:18px 0; } .ds-context-icon { align-items:center; background:#d8eeee; border-radius:12px; color:#067b7f; display:flex; flex:0 0 auto; height:44px; justify-content:center; width:44px; } .ds-context-icon svg { height:22px; width:22px; } .ds-context-item h3 { font-family:'Spline HP',sans-serif; font-size:1.08rem; font-weight:600; letter-spacing:-.015em; margin:1px 0 7px; } .ds-context-item p { color:#59686c; font-size:.9rem; line-height:1.5; margin:0; max-width:36ch; }"
+    },
+    {
+      "name": "Raised Summary",
+      "kind": "card",
+      "refersTo": "raised-object",
+      "description": "A discrete handled object for account, invitation, or system facts.",
+      "html": "<section class=\"ds-raised-summary\"><strong>Account summary</strong><dl><div><dt>Email</dt><dd>owner@example.com</dd></div><div><dt>Access</dt><dd>Household</dd></div></dl></section>",
+      "css": ".ds-raised-summary { background:#fff; border-radius:14px; box-shadow:0 10px 28px rgba(21,36,40,.09); color:#19282d; font-family:'Atkinson HP',sans-serif; max-width:500px; padding:24px; } .ds-raised-summary>strong { color:#14344e; font-family:'Spline HP',sans-serif; font-size:1.3rem; } .ds-raised-summary dl { border-top:1px solid #ccd6d6; display:grid; gap:10px; margin:18px 0 0; padding-top:16px; } .ds-raised-summary dl div { display:flex; gap:18px; justify-content:space-between; } .ds-raised-summary dt { color:#59686c; } .ds-raised-summary dd { font-weight:600; margin:0; } .ds-raised-summary:focus-within { outline:3px solid color-mix(in srgb,#078d91 72%,white); outline-offset:3px; }"
+    },
+    {
+      "name": "Attention Notice",
+      "kind": "custom",
+      "description": "A restrained inline notice for caution or important task context.",
+      "html": "<div class=\"ds-notice-attention\" role=\"status\"><strong>Keep this information safe</strong><p>You may need it to regain access later.</p></div>",
+      "css": ".ds-notice-attention { background:#fff2dc; border-radius:12px; color:#19282d; font-family:'Atkinson HP',sans-serif; padding:17px 18px; } .ds-notice-attention strong { display:block; } .ds-notice-attention p { color:#59686c; font-size:.86rem; line-height:1.45; margin:6px 0 0; } .ds-notice-attention:focus-visible { outline:3px solid color-mix(in srgb,#b9781e 72%,white); outline-offset:3px; }"
+    },
+    {
+      "name": "Compact Identity Header",
+      "kind": "nav",
+      "description": "The quiet product lockup and current surface location above operational content.",
+      "html": "<header class=\"ds-identity-header\"><span class=\"ds-identity\"><img alt=\"\" src=\"/logo.png\"><strong>HomePortal</strong></span><span class=\"ds-location\"><small>Access</small><b>Sign in</b></span></header>",
+      "css": ".ds-identity-header { align-items:center; background:#fbfcfc; border-bottom:1px solid #ccd6d6; color:#19282d; display:flex; font-family:'Atkinson HP',sans-serif; min-height:76px; padding:12px 48px; } .ds-identity { align-items:center; display:inline-flex; font-family:'Spline HP',sans-serif; font-size:1.22rem; font-weight:600; gap:10px; letter-spacing:-.025em; } .ds-identity img { height:44px; object-fit:contain; width:44px; } .ds-location { align-items:baseline; border-left:1px solid #ccd6d6; display:flex; gap:10px; margin-left:24px; padding-left:24px; } .ds-location small { color:#59686c; font-size:.78rem; font-weight:600; } .ds-location b { color:#14344e; font-size:.88rem; font-weight:700; } .ds-identity-header:focus-within { outline:3px solid color-mix(in srgb,#078d91 72%,white); outline-offset:-3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Quiet Control Surface",
+    "overview": "HomePortal is a polished, neutral control surface for one household. It should feel calm enough to live with every day and exact enough to trust with infrastructure: cool neutral fields carry most of every screen, typography makes the current task unmistakable, and the unchanged house/server mark supplies identity without ornamental brand theater.\n\nThis is an operational dashboard world, not a civic register and not a navy-drenched developer console. Open canvases, restrained structure, softly eased controls, and factual supporting context keep attention on the work. Teal marks action, navy selectively anchors hierarchy, and amber appears only when something genuinely needs attention. Light and dark are equal expressions of the same system.",
+    "keyCharacteristics": [
+      "Cool neutral surfaces occupy roughly 80–90% of each interface.",
+      "One dominant task or reading path is paired with quiet, truthful context.",
+      "Spline HP names products, screens, and sections; Atkinson HP handles operation and explanation.",
+      "Teal actions, selective navy structure, and restrained amber attention create hierarchy without color flooding.",
+      "Soft 12–14px geometry and low ambient depth make interactive objects feel precise and approachable.",
+      "The existing HomePortal logo remains unchanged and leads identity treatments."
+    ],
+    "rules": [
+      { "name": "The Neutral Majority Rule", "body": "Cool neutrals occupy roughly 80–90% of a screen. Accent color must clarify action, structure, or state.", "section": "colors" },
+      { "name": "The Three-Accent Rule", "body": "Teal acts, navy structures, and amber alerts. Do not exchange their jobs or let them compete in the same region.", "section": "colors" },
+      { "name": "The Equal Themes Rule", "body": "Dark mode uses charcoal and graphite surfaces with retuned accents; it is not an inverted light palette or a navy flood.", "section": "colors" },
+      { "name": "The Two-Voice Rule", "body": "Spline names the place, object, or task; Atkinson explains and operates it. Add no novelty or decorative face.", "section": "typography" },
+      { "name": "The Sentence-Case Rule", "body": "Actions, navigation, headings, and prose use sentence case. Uppercase is limited to short metadata labels.", "section": "typography" },
+      { "name": "The Open Canvas Rule", "body": "Put the main task directly on the canvas. Containers are for discrete objects, not for wrapping an entire page or form by habit.", "section": "layout" },
+      { "name": "The One Clear Task Rule", "body": "The task or primary operational reading path always receives the strongest type, broadest useful measure, and first responsive position.", "section": "layout" },
+      { "name": "The Ambient-Only Rule", "body": "Shadows stay soft, cool, and low contrast. Never use hard drop shadows, stacked elevation, glow as decoration, or shadow around whole page regions.", "section": "elevation" },
+      { "name": "The Soft Precision Rule", "body": "Use 12px for handled controls, 14px for discrete objects, and 8px for compact utilities. Radius softens interaction; it does not turn every content group into a card.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do let cool neutral surfaces carry roughly 80–90% of each interface.",
+      "Do make one operational task or reading path unmistakably dominant and left aligned.",
+      "Do use teal for action, navy for selective structure, and amber for attention.",
+      "Do pair Spline headings with Atkinson controls and prose using the shipped self-hosted fonts.",
+      "Do preserve the existing HomePortal logo artwork, aspect ratio, and transparent surround.",
+      "Do build equal light and dark themes, using charcoal and graphite rather than navy flooding in dark mode.",
+      "Do retain accessible focus, 58px controls, responsive stacking, factual context, and reduced-motion behavior."
+    ],
+    "donts": [
+      "Don't revive the old green civic-register, mineral-paper, ledger-line, or public-service visual language.",
+      "Don't turn HomePortal into a navy-drenched developer dashboard, neon console, or generic smart-home tile grid.",
+      "Don't wrap the primary task in a floating card or place every content group inside a rounded container.",
+      "Don't use amber as a general brand fill, teal as decoration, or semantic red and green for ordinary emphasis.",
+      "Don't redraw, simplify, recolor, or replace the supplied logo.",
+      "Don't add glass effects, loud gradients, hard shadows, paper texture, decorative nostalgia, or gratuitous motion.",
+      "Don't canonize route-specific authentication copy or prototype fixture data as product-wide behavior."
+    ]
+  }
+}

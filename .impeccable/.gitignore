@@ -1,1 +1,9 @@
+*.md
 *.json
+!design.json
+live/
+mocks/
+questions/
+review/
+sketches/
+surfaces/

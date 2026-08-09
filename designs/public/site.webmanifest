@@ -1,0 +1,12 @@
+{
+  "name": "HomePortal prototypes",
+  "short_name": "HomePortal",
+  "description": "Design prototypes for HomePortal.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f3f5f0",
+  "theme_color": "#164754",
+  "icons": [
+    { "src": "/logo.png", "sizes": "1024x1024", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
