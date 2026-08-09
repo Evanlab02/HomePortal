@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
 import { Icons } from '../components/Icon'
+import type { PrototypeState } from '../types/prototype'
 
 type Viewport =
   | 'responsive'
@@ -145,15 +146,18 @@ function PrototypePreview({
 export function PrototypeWorkbench({
   children,
   prototypeName,
+  states,
 }: {
-  children: ReactNode
+  children: (prototypeState?: string) => ReactNode
   prototypeName: string
+  states?: PrototypeState[]
 }) {
   const [viewport, setViewport] = useState<Viewport>(readViewportPreference)
   const [theme, setTheme] = useState<Theme>(() =>
     readPreference('prototype-engine:theme', 'system'),
   )
   const [toolsOpen, setToolsOpen] = useState(false)
+  const [prototypeState, setPrototypeState] = useState(() => states?.[0]?.id)
   const [systemDark, setSystemDark] = useState(() =>
     window.matchMedia('(prefers-color-scheme: dark)').matches,
   )
@@ -165,6 +169,12 @@ export function PrototypeWorkbench({
   useEffect(() => {
     localStorage.setItem('prototype-engine:theme', theme)
   }, [theme])
+
+  useEffect(() => {
+    setPrototypeState((current) =>
+      states?.some(({ id }) => id === current) ? current : states?.[0]?.id,
+    )
+  }, [states])
 
   useEffect(() => {
     const media = window.matchMedia('(prefers-color-scheme: dark)')
@@ -188,6 +198,21 @@ export function PrototypeWorkbench({
         </span>
 
         <div className="workbench__desktop-controls">
+          {states && states.length > 1 && (
+            <label className="workbench__state-picker">
+              <span>State</span>
+              <select
+                aria-label="Prototype state"
+                className="select select-sm"
+                onChange={(event) => setPrototypeState(event.target.value)}
+                value={prototypeState}
+              >
+                {states.map(({ id, label }) => (
+                  <option key={id} value={id}>{label}</option>
+                ))}
+              </select>
+            </label>
+          )}
           <label className="workbench__viewport-picker">
             <span>Viewport</span>
             <select
@@ -229,6 +254,21 @@ export function PrototypeWorkbench({
 
       {toolsOpen && (
         <div className="workbench__mobile-controls">
+          {states && states.length > 1 && (
+            <label>
+              <span>State</span>
+              <select
+                aria-label="Prototype state"
+                className="select select-sm"
+                onChange={(event) => setPrototypeState(event.target.value)}
+                value={prototypeState}
+              >
+                {states.map(({ id, label }) => (
+                  <option key={id} value={id}>{label}</option>
+                ))}
+              </select>
+            </label>
+          )}
           <label>
             <span>Viewport</span>
             <select
@@ -264,7 +304,7 @@ export function PrototypeWorkbench({
           height={activeViewport.height}
           width={activeViewport.width}
         >
-          {children}
+          {children(prototypeState)}
         </PrototypePreview>
       </div>
     </div>

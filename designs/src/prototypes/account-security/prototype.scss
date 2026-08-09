@@ -1,0 +1,152 @@
+.account-security {
+  --security-canvas: #f4f6f6;
+  --security-surface: #fbfcfc;
+  --security-raised: #fff;
+  --security-subtle: #e9eeee;
+  --security-ink: #19282d;
+  --security-muted: #59686c;
+  --security-border: #ccd6d6;
+  --security-border-strong: #9babad;
+  --security-teal: #078d91;
+  --security-teal-strong: #067b7f;
+  --security-teal-soft: #d8eeee;
+  --security-danger: #a53e36;
+  background: var(--security-canvas);
+  color: var(--security-ink);
+  font-family: 'Atkinson HP', sans-serif;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.account-security[data-theme='dark'] {
+  --security-canvas: #151b1d;
+  --security-surface: #1b2326;
+  --security-raised: #222c2f;
+  --security-subtle: #283336;
+  --security-ink: #edf3f3;
+  --security-muted: #afbec0;
+  --security-border: #3b494c;
+  --security-border-strong: #68787b;
+  --security-teal: #55c7c7;
+  --security-teal-strong: #74d5d4;
+  --security-teal-soft: #203b3d;
+  --security-danger: #ee9188;
+}
+
+.account-security button, .account-security a { -webkit-tap-highlight-color: transparent; }
+.account-security button:focus-visible, .account-security a:focus-visible, .account-security input:focus-visible { outline: 3px solid color-mix(in srgb, var(--security-teal) 55%, white); outline-offset: 3px; }
+.account-security__topbar { align-items: center; background: var(--security-raised); border-bottom: 1px solid var(--security-border); display: flex; height: 72px; justify-content: space-between; padding: 0 24px; position: relative; z-index: 30; }
+.account-security__brand { align-items: center; color: var(--security-ink); display: inline-flex; font-family: 'Spline HP', sans-serif; font-size: 1.22rem; font-weight: 600; gap: 10px; text-decoration: none; }
+.account-security__brand img { height: 40px; object-fit: contain; width: 40px; }
+.account-security__top-actions { align-items: center; display: flex; gap: 6px; }
+.account-security__account-control { position: relative; }
+.account-security__theme-toggle { align-items: center; background: transparent; border: 0; border-radius: 12px; color: var(--security-muted); cursor: pointer; display: flex; height: 44px; justify-content: center; width: 44px; }
+.account-security__theme-toggle:hover { background: var(--security-subtle); color: var(--security-ink); }
+.account-security__theme-toggle svg { height: 19px; width: 19px; }
+.account-security__account { align-items: center; background: transparent; border: 0; border-radius: 12px; color: var(--security-ink); cursor: pointer; display: flex; gap: 11px; min-height: 52px; padding: 5px 7px; }
+.account-security__account:hover { background: var(--security-subtle); }
+.account-security__account > svg { color: var(--security-muted); height: 16px; width: 16px; }
+.account-security__account[aria-expanded='true'] > svg { transform: rotate(180deg); }
+.account-security__avatar { align-items: center; background: var(--security-teal-soft); border-radius: 12px; color: var(--security-teal); display: flex; height: 38px; justify-content: center; width: 38px; }
+.account-security__avatar svg { height: 19px; width: 19px; }
+.account-security__account-copy { display: grid; line-height: 1.15; min-width: 92px; text-align: left; }
+.account-security__account-copy strong { font-size: .92rem; }
+.account-security__account-copy small { color: var(--security-muted); font-size: .92rem; margin-top: 4px; }
+.account-security__account-menu { background: var(--security-raised); border-radius: 14px; box-shadow: 0 10px 28px rgba(21, 36, 40, .14); display: grid; min-width: 220px; padding: 8px; position: absolute; right: 0; top: calc(100% + 8px); z-index: 40; }
+.account-security__account-menu a, .account-security__account-menu button { align-items: center; background: transparent; border: 0; border-radius: 8px; color: var(--security-ink); cursor: pointer; display: flex; font-size: .92rem; font-weight: 700; gap: 11px; min-height: 46px; padding: 0 12px; text-align: left; text-decoration: none; width: 100%; }
+.account-security__account-menu a:hover, .account-security__account-menu button:hover { background: var(--security-subtle); }
+.account-security__account-menu svg { color: var(--security-muted); height: 18px; width: 18px; }
+.account-security__account-menu .account-security__sign-out { border-top: 1px solid var(--security-border); border-radius: 0 0 8px 8px; color: var(--security-danger); margin-top: 4px; }
+.account-security__mobile-menu { display: none; }
+
+.account-security__body { display: grid; grid-template-columns: 240px minmax(0, 1fr); height: calc(100vh - 72px); height: calc(100dvh - 72px); min-height: 0; transition: grid-template-columns 220ms cubic-bezier(.22, 1, .36, 1); }
+.account-security[data-sidebar-open='false'] .account-security__body { grid-template-columns: 76px minmax(0, 1fr); }
+.account-security__sidebar { background: var(--security-surface); border-right: 1px solid var(--security-border); display: flex; flex-direction: column; justify-content: space-between; min-height: 0; min-width: 0; overflow-x: hidden; overflow-y: auto; padding: 24px 12px 18px; position: relative; z-index: 20; }
+.account-security__sidebar nav, .account-security__sidebar-foot { display: grid; gap: 5px; }
+.account-security__sidebar a, .account-security__collapse { align-items: center; background: transparent; border: 0; border-radius: 12px; color: var(--security-muted); cursor: pointer; display: flex; font-size: .92rem; font-weight: 700; gap: 13px; min-height: 48px; overflow: hidden; padding: 0 14px; text-decoration: none; white-space: nowrap; }
+.account-security__sidebar a:hover, .account-security__collapse:hover { background: var(--security-subtle); color: var(--security-ink); }
+.account-security__sidebar svg { flex: 0 0 auto; height: 19px; width: 19px; }
+.account-security[data-sidebar-open='false'] .account-security__sidebar a, .account-security[data-sidebar-open='false'] .account-security__collapse { justify-content: center; padding-inline: 0; }
+.account-security[data-sidebar-open='false'] .account-security__sidebar span { display: none; }
+.account-security__scrim { display: none; }
+
+.account-security__main { min-height: 0; overflow-y: auto; width: 100%; }
+.account-security__main-inner { margin: 0 auto; max-width: 1320px; padding: clamp(52px, 6vw, 84px) clamp(28px, 5vw, 76px) 96px; width: 100%; }
+.account-security__heading { margin-bottom: 58px; max-width: 700px; }
+.account-security__heading h1 { font-family: 'Spline HP', sans-serif; font-size: clamp(2.75rem, 4vw, 4.6rem); font-weight: 500; letter-spacing: -.038em; line-height: .98; margin: 0; }
+.account-security__heading p { color: var(--security-muted); line-height: 1.55; margin: 16px 0 0; max-width: 60ch; }
+.account-security__section { border-top: 1px solid var(--security-border); display: grid; gap: clamp(30px, 5vw, 72px); grid-template-columns: minmax(230px, 310px) minmax(0, 650px); padding: 42px 0 48px; }
+.account-security__section-heading { align-items: flex-start; display: flex; gap: 15px; }
+.account-security__section-heading > span { align-items: center; background: var(--security-teal-soft); border-radius: 12px; color: var(--security-teal); display: flex; flex: 0 0 auto; height: 46px; justify-content: center; width: 46px; }
+.account-security__section-heading svg { height: 21px; width: 21px; }
+.account-security__section-heading h2 { font-family: 'Spline HP', sans-serif; font-size: 1.22rem; font-weight: 600; letter-spacing: -.025em; line-height: 1.2; margin: 2px 0 0; }
+.account-security__section-heading p { color: var(--security-muted); line-height: 1.45; margin: 7px 0 0; }
+.account-security__form { display: grid; gap: 22px 18px; }
+.account-security__profile-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.account-security__form label { display: grid; gap: 9px; }
+.account-security__form label > span:first-child { font-size: .92rem; font-weight: 700; }
+.account-security__wide-field, .account-security__form-actions { grid-column: 1 / -1; }
+.account-security__form input { background: var(--security-raised); border: 1px solid var(--security-border-strong); border-radius: 12px; color: var(--security-ink); font: inherit; height: 58px; padding: 14px 17px; width: 100%; }
+.account-security__form input:hover { border-color: var(--security-muted); }
+.account-security__form input:focus { border-color: var(--security-teal); box-shadow: 0 4px 18px color-mix(in srgb, var(--security-teal) 13%, transparent); outline: 0; }
+.account-security__form input:focus-visible { outline: 3px solid color-mix(in srgb, var(--security-teal) 55%, white); outline-offset: 3px; }
+.account-security__input-wrap { display: block; position: relative; }
+.account-security__input-wrap input { padding-right: 58px; }
+.account-security__input-wrap button { align-items: center; background: transparent; border: 0; border-radius: 8px; color: var(--security-muted); cursor: pointer; display: flex; height: 40px; justify-content: center; position: absolute; right: 9px; top: 9px; width: 40px; }
+.account-security__input-wrap button:hover { background: var(--security-subtle); color: var(--security-ink); }
+.account-security__input-wrap button svg { height: 19px; width: 19px; }
+.account-security__password-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.account-security__guidance { color: var(--security-muted); font-size: .92rem; grid-column: 1 / -1; line-height: 1.45; margin: -14px 0 0; }
+.account-security__form-actions { display: flex; justify-content: flex-end; margin-top: 8px; }
+.account-security__form-actions button, .account-security__mfa-actions button { border-radius: 12px; cursor: pointer; font-size: .92rem; font-weight: 700; min-height: 52px; padding: 0 22px; }
+.account-security__form-actions button { background: var(--security-teal); border: 0; box-shadow: 0 8px 20px color-mix(in srgb, var(--security-teal) 20%, transparent); color: #fff; }
+.account-security__form-actions button:hover { background: var(--security-teal-strong); transform: translateY(-1px); }
+.account-security__mfa-status { display: grid; gap: 24px; }
+.account-security__mfa-status > div:first-child { align-items: center; display: flex; gap: 13px; }
+.account-security__mfa-status > div:first-child > span { align-items: center; background: var(--security-teal-soft); border-radius: 12px; color: var(--security-teal); display: flex; height: 46px; justify-content: center; width: 46px; }
+.account-security__mfa-status > div:first-child svg { height: 21px; width: 21px; }
+.account-security__mfa-status p { display: grid; gap: 3px; margin: 0; }
+.account-security__mfa-status strong { font-family: 'Spline HP', sans-serif; font-size: 1rem; }
+.account-security__mfa-status small { color: var(--security-muted); font-size: .92rem; }
+.account-security__mfa-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.account-security__mfa-actions button { background: var(--security-raised); border: 1px solid var(--security-border-strong); color: var(--security-ink); }
+.account-security__mfa-actions button:hover { background: var(--security-subtle); }
+.account-security__mfa-actions .account-security__primary-secondary { background: var(--security-teal); border-color: var(--security-teal); color: #fff; }
+.account-security__mfa-actions .account-security__primary-secondary:hover { background: var(--security-teal-strong); }
+.account-security__mfa-actions .account-security__danger { border-color: color-mix(in srgb, var(--security-danger) 55%, var(--security-border)); color: var(--security-danger); }
+
+@media (max-width: 900px) {
+  .account-security__section { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 700px) {
+  .account-security__topbar { height: 64px; padding: 0 16px; }
+  .account-security__brand { left: 50%; position: absolute; transform: translateX(-50%); }
+  .account-security__brand img { height: 34px; width: 34px; }
+  .account-security__brand span { display: none; }
+  .account-security__mobile-menu { align-items: center; background: transparent; border: 0; border-radius: 8px; color: var(--security-ink); display: flex; height: 42px; justify-content: center; padding: 0; width: 42px; }
+  .account-security__mobile-menu svg { height: 21px; width: 21px; }
+  .account-security__account-copy, .account-security__account > svg { display: none; }
+  .account-security__account { min-height: 44px; padding: 3px; }
+  .account-security__body, .account-security[data-sidebar-open='false'] .account-security__body { display: block; height: calc(100vh - 64px); height: calc(100dvh - 64px); }
+  .account-security__sidebar { bottom: 0; box-shadow: 12px 0 32px rgba(15, 27, 31, .2); left: 0; padding-top: 22px; position: fixed; top: 64px; transform: translateX(-105%); transition: transform 220ms cubic-bezier(.22, 1, .36, 1); width: min(290px, 84vw); }
+  .account-security[data-sidebar-open='true'] .account-security__sidebar { transform: translateX(0); }
+  .account-security[data-sidebar-open='false'] .account-security__sidebar a, .account-security[data-sidebar-open='false'] .account-security__collapse { justify-content: flex-start; padding-inline: 14px; }
+  .account-security[data-sidebar-open='false'] .account-security__sidebar span { display: inline; }
+  .account-security__collapse { display: none; }
+  .account-security__scrim { background: color-mix(in srgb, var(--security-ink) 48%, transparent); border: 0; bottom: 0; display: block; left: 0; opacity: 0; pointer-events: none; position: fixed; right: 0; top: 64px; transition: opacity 180ms ease-out; z-index: 15; }
+  .account-security[data-sidebar-open='true'] .account-security__scrim { opacity: 1; pointer-events: auto; }
+  .account-security__main { height: 100%; }
+  .account-security__main-inner { padding: 42px 20px 64px; }
+  .account-security__heading { margin-bottom: 42px; }
+  .account-security__section { gap: 28px; padding: 34px 0 40px; }
+  .account-security__profile-form, .account-security__password-form { grid-template-columns: 1fr; }
+  .account-security__wide-field, .account-security__form-actions, .account-security__guidance { grid-column: auto; }
+  .account-security__form-actions button, .account-security__mfa-actions button { width: 100%; }
+  .account-security__mfa-actions { display: grid; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .account-security *, .account-security *::before, .account-security *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}

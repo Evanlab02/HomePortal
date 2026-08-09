@@ -6,10 +6,7 @@ export function MfaRecoveryCodesPrototype() {
   return (
     <AuthSurface
       area="account"
-      context={[
-        { title: 'Shown once', body: 'These codes are displayed after authenticator setup and should be saved before leaving.', accent: 'amber' },
-        { title: 'One use per code', body: 'Each recovery code is removed after it is used to sign in.' },
-      ]}
+      context={[]}
       intro="Save these one-time codes somewhere separate from your authenticator device."
       rootClass="homeportal-mfa-recovery-codes-prototype"
       surfaceLabel="Account security"

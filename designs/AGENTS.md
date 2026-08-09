@@ -40,9 +40,9 @@ const prototype: PrototypeDefinition = {
     id: 'my-prototype',
     name: 'My prototype',
     description: 'What this prototype is testing.',
+    tag: 'Application Manager',
     status: 'exploratory',
     updatedAt: '2026-08-09',
-    tags: ['optional', 'searchable'],
   },
   Component: MyPrototype,
 }
@@ -50,7 +50,9 @@ const prototype: PrototypeDefinition = {
 export default prototype
 ```
 
-Valid statuses are `exploratory`, `in-progress`, and `ready`. Dates use `YYYY-MM-DD` and are updated deliberately rather than inferred from Git.
+Valid statuses are `exploratory`, `in-progress`, `re-review`, `ready`, and `implemented`. Dates use `YYYY-MM-DD` and are updated deliberately rather than inferred from Git.
+
+Prototypes created by an agent must use `in-progress` unless the user explicitly instructs the agent to mark them as `ready`.
 
 ## Independence rules
 

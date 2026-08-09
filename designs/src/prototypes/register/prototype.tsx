@@ -7,7 +7,6 @@ export function RegisterPrototype() {
         { title: 'Invited already?', body: 'Open the invitation link you received instead of starting from this page.' },
       ]}
       rootClass="homeportal-register-prototype"
-      showThemeToggle
       surfaceLabel="Register account"
       title="Create your account"
     >

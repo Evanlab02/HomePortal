@@ -6,10 +6,10 @@ const prototype: PrototypeDefinition = {
   meta: {
     id: 'logout',
     name: 'Sign out confirmation',
-    description: 'A deliberate confirmation before ending the current browser session.',
-    status: 'in-progress',
+    description: 'A deliberate confirmation before ending the current or all browser sessions.',
+    status: 'ready',
     updatedAt: '2026-08-09',
-    tags: ['Auth'],
+    tag: 'Authentication',
   },
   Component: LogoutPrototype,
 }

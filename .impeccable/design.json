@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-09T14:50:08+02:00",
+  "generatedAt": "2026-08-09T18:46:55+02:00",
   "title": "Design System: HomePortal",
   "extensions": {
     "colorMeta": {
@@ -126,7 +126,8 @@
       { "name": "The Open Canvas Rule", "body": "Put the main task directly on the canvas. Containers are for discrete objects, not for wrapping an entire page or form by habit.", "section": "layout" },
       { "name": "The One Clear Task Rule", "body": "The task or primary operational reading path always receives the strongest type, broadest useful measure, and first responsive position.", "section": "layout" },
       { "name": "The Ambient-Only Rule", "body": "Shadows stay soft, cool, and low contrast. Never use hard drop shadows, stacked elevation, glow as decoration, or shadow around whole page regions.", "section": "elevation" },
-      { "name": "The Soft Precision Rule", "body": "Use 12px for handled controls, 14px for discrete objects, and 8px for compact utilities. Radius softens interaction; it does not turn every content group into a card.", "section": "shapes" }
+      { "name": "The Soft Precision Rule", "body": "Use 12px for handled controls, 14px for discrete objects, and 8px for compact utilities. Radius softens interaction; it does not turn every content group into a card.", "section": "shapes" },
+      { "name": "The Current-State Rule", "body": "Switches for persistent modes such as theme display the current state through their visible icon or label, like a physical light switch. The accessible name may additionally explain the action that will occur when activated.", "section": "components" }
     ],
     "dos": [
       "Do let cool neutral surfaces carry roughly 80–90% of each interface.",

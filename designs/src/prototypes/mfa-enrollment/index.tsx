@@ -7,9 +7,9 @@ const prototype: PrototypeDefinition = {
     id: 'mfa-enrollment',
     name: 'MFA enrollment',
     description: 'Optional authenticator setup from an authenticated account settings area.',
-    status: 'in-progress',
+    status: 'ready',
     updatedAt: '2026-08-09',
-    tags: ['Auth', 'Account settings', 'MFA'],
+    tag: 'MFA',
   },
   Component: MfaEnrollmentPrototype,
 }

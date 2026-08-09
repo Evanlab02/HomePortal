@@ -7,10 +7,14 @@ const prototype: PrototypeDefinition = {
     id: 'accept-invitation',
     name: 'Accept invitation',
     description: 'The direct-link landing page for a valid household invitation.',
-    status: 'in-progress',
+    status: 'ready',
     updatedAt: '2026-08-09',
-    tags: ['Auth', 'Direct link'],
+    tag: 'Authentication',
   },
+  states: [
+    { id: 'new-user', label: 'New user' },
+    { id: 'email-mismatch', label: 'Wrong signed-in account' },
+  ],
   Component: AcceptInvitationPrototype,
 }
 

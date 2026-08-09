@@ -1,0 +1,125 @@
+.change-password {
+  --password-canvas: #f4f6f6;
+  --password-surface: #fbfcfc;
+  --password-raised: #fff;
+  --password-subtle: #e9eeee;
+  --password-ink: #19282d;
+  --password-muted: #59686c;
+  --password-border: #ccd6d6;
+  --password-border-strong: #9babad;
+  --password-teal: #078d91;
+  --password-teal-strong: #067b7f;
+  --password-teal-soft: #d8eeee;
+  background: var(--password-canvas);
+  color: var(--password-ink);
+  font-family: 'Atkinson HP', sans-serif;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.change-password[data-theme='dark'] {
+  --password-canvas: #151b1d;
+  --password-surface: #1b2326;
+  --password-raised: #222c2f;
+  --password-subtle: #283336;
+  --password-ink: #edf3f3;
+  --password-muted: #afbec0;
+  --password-border: #3b494c;
+  --password-border-strong: #68787b;
+  --password-teal: #55c7c7;
+  --password-teal-strong: #74d5d4;
+  --password-teal-soft: #203b3d;
+}
+
+.change-password button, .change-password a { -webkit-tap-highlight-color: transparent; }
+.change-password button:focus-visible, .change-password a:focus-visible, .change-password input:focus-visible { outline: 3px solid color-mix(in srgb, var(--password-teal) 55%, white); outline-offset: 3px; }
+.change-password__topbar { align-items: center; background: var(--password-raised); border-bottom: 1px solid var(--password-border); display: flex; height: 72px; justify-content: space-between; padding: 0 24px; position: relative; z-index: 30; }
+.change-password__brand { align-items: center; color: var(--password-ink); display: inline-flex; font-family: 'Spline HP', sans-serif; font-size: 1.22rem; font-weight: 600; gap: 10px; text-decoration: none; }
+.change-password__brand img { height: 40px; object-fit: contain; width: 40px; }
+.change-password__top-actions { align-items: center; display: flex; gap: 6px; }
+.change-password__account-control { position: relative; }
+.change-password__theme-toggle { align-items: center; background: transparent; border: 0; border-radius: 12px; color: var(--password-muted); cursor: pointer; display: flex; height: 44px; justify-content: center; width: 44px; }
+.change-password__theme-toggle:hover { background: var(--password-subtle); color: var(--password-ink); }
+.change-password__theme-toggle svg { height: 19px; width: 19px; }
+.change-password__account { align-items: center; background: transparent; border: 0; border-radius: 12px; color: var(--password-ink); cursor: pointer; display: flex; gap: 11px; min-height: 52px; padding: 5px 7px; }
+.change-password__account:hover { background: var(--password-subtle); }
+.change-password__account > svg { color: var(--password-muted); height: 16px; width: 16px; }
+.change-password__account[aria-expanded='true'] > svg { transform: rotate(180deg); }
+.change-password__avatar { align-items: center; background: var(--password-teal-soft); border-radius: 12px; color: var(--password-teal); display: flex; height: 38px; justify-content: center; width: 38px; }
+.change-password__avatar svg { height: 19px; width: 19px; }
+.change-password__account-copy { display: grid; line-height: 1.15; min-width: 92px; text-align: left; }
+.change-password__account-copy strong { font-size: .92rem; }
+.change-password__account-copy small { color: var(--password-muted); font-size: .92rem; margin-top: 4px; }
+.change-password__account-menu { background: var(--password-raised); border-radius: 14px; box-shadow: 0 10px 28px rgba(21, 36, 40, .14); display: grid; min-width: 220px; padding: 8px; position: absolute; right: 0; top: calc(100% + 8px); z-index: 40; }
+.change-password__account-menu a, .change-password__account-menu button { align-items: center; background: transparent; border: 0; border-radius: 8px; color: var(--password-ink); cursor: pointer; display: flex; font-size: .92rem; font-weight: 700; gap: 11px; min-height: 46px; padding: 0 12px; text-align: left; text-decoration: none; width: 100%; }
+.change-password__account-menu a:hover, .change-password__account-menu button:hover { background: var(--password-subtle); }
+.change-password__account-menu svg { color: var(--password-muted); height: 18px; width: 18px; }
+.change-password__account-menu .change-password__sign-out { border-top: 1px solid var(--password-border); border-radius: 0 0 8px 8px; color: #a53e36; margin-top: 4px; }
+.change-password[data-theme='dark'] .change-password__sign-out { color: #ee9188; }
+.change-password__mobile-menu { display: none; }
+
+.change-password__body { display: grid; grid-template-columns: 240px minmax(0, 1fr); height: calc(100vh - 72px); height: calc(100dvh - 72px); min-height: 0; transition: grid-template-columns 220ms cubic-bezier(.22, 1, .36, 1); }
+.change-password[data-sidebar-open='false'] .change-password__body { grid-template-columns: 76px minmax(0, 1fr); }
+.change-password__sidebar { background: var(--password-surface); border-right: 1px solid var(--password-border); display: flex; flex-direction: column; justify-content: space-between; min-height: 0; min-width: 0; overflow-x: hidden; overflow-y: auto; padding: 24px 12px 18px; position: relative; z-index: 20; }
+.change-password__sidebar nav, .change-password__sidebar-foot { display: grid; gap: 5px; }
+.change-password__sidebar a, .change-password__collapse { align-items: center; background: transparent; border: 0; border-radius: 12px; color: var(--password-muted); cursor: pointer; display: flex; font-size: .92rem; font-weight: 700; gap: 13px; min-height: 48px; overflow: hidden; padding: 0 14px; text-decoration: none; white-space: nowrap; }
+.change-password__sidebar a:hover, .change-password__collapse:hover { background: var(--password-subtle); color: var(--password-ink); }
+.change-password__sidebar svg { flex: 0 0 auto; height: 19px; width: 19px; }
+.change-password[data-sidebar-open='false'] .change-password__sidebar a, .change-password[data-sidebar-open='false'] .change-password__collapse { justify-content: center; padding-inline: 0; }
+.change-password[data-sidebar-open='false'] .change-password__sidebar span { display: none; }
+.change-password__scrim { display: none; }
+
+.change-password__main { min-height: 0; overflow-y: auto; width: 100%; }
+.change-password__main-inner { margin: 0 auto; max-width: 1320px; padding: clamp(52px, 6vw, 84px) clamp(28px, 5vw, 76px); width: 100%; }
+.change-password__heading { margin-bottom: 44px; max-width: 650px; }
+.change-password__heading h1 { font-family: 'Spline HP', sans-serif; font-size: clamp(2.75rem, 4vw, 4.6rem); font-weight: 500; letter-spacing: -.038em; line-height: .98; margin: 0; }
+.change-password__heading p { color: var(--password-muted); font-size: 1rem; line-height: 1.55; margin: 16px 0 0; max-width: 55ch; }
+.change-password__form { display: grid; gap: 22px; max-width: 650px; }
+.change-password__form label { display: grid; gap: 9px; }
+.change-password__form label > span { font-size: .92rem; font-weight: 700; }
+.change-password__input-wrap { display: block; position: relative; }
+.change-password__form input { background: var(--password-raised); border: 1px solid var(--password-border-strong); border-radius: 12px; color: var(--password-ink); font: inherit; height: 58px; padding: 14px 58px 14px 17px; width: 100%; }
+.change-password__form input:hover { border-color: var(--password-muted); }
+.change-password__form input:focus { border-color: var(--password-teal); box-shadow: 0 4px 18px color-mix(in srgb, var(--password-teal) 13%, transparent); outline: 0; }
+.change-password__form input:focus-visible { outline: 3px solid color-mix(in srgb, var(--password-teal) 55%, white); outline-offset: 3px; }
+.change-password__input-wrap button { align-items: center; background: transparent; border: 0; border-radius: 8px; color: var(--password-muted); cursor: pointer; display: flex; height: 40px; justify-content: center; position: absolute; right: 9px; top: 9px; width: 40px; }
+.change-password__input-wrap button:hover { background: var(--password-subtle); color: var(--password-ink); }
+.change-password__input-wrap button svg { height: 19px; width: 19px; }
+.change-password__guidance { color: var(--password-muted); font-size: .92rem; line-height: 1.45; margin: -15px 0 0; }
+.change-password__actions { border-top: 1px solid var(--password-border); display: flex; gap: 12px; justify-content: flex-end; margin-top: 8px; padding-top: 30px; }
+.change-password__actions a, .change-password__actions button { align-items: center; border-radius: 12px; cursor: pointer; display: inline-flex; font-size: .92rem; font-weight: 700; justify-content: center; min-height: 52px; padding: 0 22px; text-decoration: none; }
+.change-password__actions a { color: var(--password-muted); }
+.change-password__actions a:hover { background: var(--password-subtle); color: var(--password-ink); }
+.change-password__actions button { background: var(--password-teal); border: 0; box-shadow: 0 8px 20px color-mix(in srgb, var(--password-teal) 20%, transparent); color: #fff; }
+.change-password__actions button:hover { background: var(--password-teal-strong); transform: translateY(-1px); }
+.change-password__actions button:active { transform: translateY(0); }
+
+@media (max-width: 700px) {
+  .change-password__topbar { height: 64px; padding: 0 16px; }
+  .change-password__brand { left: 50%; position: absolute; transform: translateX(-50%); }
+  .change-password__brand img { height: 34px; width: 34px; }
+  .change-password__brand span { display: none; }
+  .change-password__mobile-menu { align-items: center; background: transparent; border: 0; border-radius: 8px; color: var(--password-ink); display: flex; height: 42px; justify-content: center; padding: 0; width: 42px; }
+  .change-password__mobile-menu svg { height: 21px; width: 21px; }
+  .change-password__account-copy, .change-password__account > svg { display: none; }
+  .change-password__account { min-height: 44px; padding: 3px; }
+  .change-password__body, .change-password[data-sidebar-open='false'] .change-password__body { display: block; height: calc(100vh - 64px); height: calc(100dvh - 64px); }
+  .change-password__sidebar { bottom: 0; box-shadow: 12px 0 32px rgba(15, 27, 31, .2); left: 0; padding-top: 22px; position: fixed; top: 64px; transform: translateX(-105%); transition: transform 220ms cubic-bezier(.22, 1, .36, 1); width: min(290px, 84vw); }
+  .change-password[data-sidebar-open='true'] .change-password__sidebar { transform: translateX(0); }
+  .change-password[data-sidebar-open='false'] .change-password__sidebar a, .change-password[data-sidebar-open='false'] .change-password__collapse { justify-content: flex-start; padding-inline: 14px; }
+  .change-password[data-sidebar-open='false'] .change-password__sidebar span { display: inline; }
+  .change-password__collapse { display: none; }
+  .change-password__scrim { background: color-mix(in srgb, var(--password-ink) 48%, transparent); border: 0; bottom: 0; display: block; left: 0; opacity: 0; pointer-events: none; position: fixed; right: 0; top: 64px; transition: opacity 180ms ease-out; z-index: 15; }
+  .change-password[data-sidebar-open='true'] .change-password__scrim { opacity: 1; pointer-events: auto; }
+  .change-password__main { height: 100%; }
+  .change-password__main-inner { padding: 42px 20px 56px; }
+  .change-password__heading { margin-bottom: 34px; }
+  .change-password__actions { display: grid; justify-content: stretch; }
+  .change-password__actions a, .change-password__actions button { width: 100%; }
+  .change-password__actions button { grid-row: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .change-password *, .change-password *::before, .change-password *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}

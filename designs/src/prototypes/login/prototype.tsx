@@ -4,7 +4,6 @@ export function LoginPrototype() {
   return (
     <AuthSurface
       context={[
-        { title: 'Private by default', body: 'Your account keeps household access tied to you and this sign-in.', accent: 'amber' },
         { title: 'Shared device?', body: 'Leave “Remember this device” clear on devices used by other people.' },
       ]}
       intro="Sign in to continue to your household’s HomePortal."

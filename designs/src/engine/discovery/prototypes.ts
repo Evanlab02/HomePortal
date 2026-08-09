@@ -12,7 +12,9 @@ const modules = import.meta.glob<PrototypeModule>('../../prototypes/*/index.tsx'
 const validStatuses = new Set<PrototypeStatus>([
   'exploratory',
   'in-progress',
+  're-review',
   'ready',
+  'implemented',
 ])
 
 function validatePrototype(
@@ -31,6 +33,7 @@ function validatePrototype(
   }
   if (!meta.name.trim()) problems.push('meta.name is required.')
   if (!meta.description.trim()) problems.push('meta.description is required.')
+  if (!meta.tag.trim()) problems.push('meta.tag is required.')
   if (!validStatuses.has(meta.status)) problems.push('meta.status is invalid.')
   if (!/^\d{4}-\d{2}-\d{2}$/.test(meta.updatedAt)) {
     problems.push('meta.updatedAt must use YYYY-MM-DD.')

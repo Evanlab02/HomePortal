@@ -243,6 +243,7 @@ Borders are one pixel and cool neutral. Avoid ornamental clipping, capsules as a
 
 - **Header:** Compact logo lockup at the leading edge, followed by a lightly divided area/surface location label when helpful.
 - **Logo:** Use the existing supplied `logo.png` unchanged at 36–44px in compact identity and up to about 190px in a spacious support field.
+- **Stateful controls:** Switches for persistent modes such as theme display the current state through their visible icon or label, like a physical light switch. The accessible name may additionally explain the action that will occur when activated.
 - **Engine navigation:** Keep typography, neutral palette, theme controls, and focus language aligned with the product world while retaining a visibly secondary framing role.
 
 ## Do's and Don'ts

@@ -13,12 +13,14 @@ function PrototypeRoute() {
 
   if (!prototype) return <NotFound />
 
-  const { Component, meta } = prototype
+  const { Component, meta, states } = prototype
   return (
-    <PrototypeWorkbench prototypeName={meta.name}>
-      <PrototypeErrorBoundary prototypeName={meta.name}>
-        <Component />
-      </PrototypeErrorBoundary>
+    <PrototypeWorkbench prototypeName={meta.name} states={states}>
+      {(prototypeState) => (
+        <PrototypeErrorBoundary prototypeName={meta.name}>
+          <Component prototypeState={prototypeState} />
+        </PrototypeErrorBoundary>
+      )}
     </PrototypeWorkbench>
   )
 }

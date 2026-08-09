@@ -9,7 +9,7 @@ const prototype: PrototypeDefinition = {
     description: 'Open account creation.',
     status: 'ready',
     updatedAt: '2026-08-09',
-    tags: ['Auth'],
+    tag: 'Authentication',
   },
   Component: RegisterPrototype,
 }

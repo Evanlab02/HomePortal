@@ -10,13 +10,17 @@ const filters: Array<{ id: Filter; label: string }> = [
   { id: 'all', label: 'All' },
   { id: 'exploratory', label: 'Exploratory' },
   { id: 'in-progress', label: 'In progress' },
+  { id: 're-review', label: 'Re-review' },
   { id: 'ready', label: 'Ready' },
+  { id: 'implemented', label: 'Implemented' },
 ]
 
 const statusLabels: Record<PrototypeStatus, string> = {
   exploratory: 'Exploratory',
   'in-progress': 'In progress',
+  're-review': 'Re-review',
   ready: 'Ready',
+  implemented: 'Implemented',
 }
 
 function formatDate(value: string) {
@@ -36,7 +40,7 @@ export function PrototypeIndex({
 }) {
   const [query, setQuery] = useState('')
   const [filter, setFilter] = useState<Filter>('all')
-  const [selectedTags, setSelectedTags] = useState<string[]>([])
+  const [selectedTag, setSelectedTag] = useState('all')
   const [theme, setTheme] = useState<EngineTheme>(() =>
     (localStorage.getItem('prototype-engine:theme') as EngineTheme | null) ?? 'system',
   )
@@ -56,7 +60,7 @@ export function PrototypeIndex({
     : theme
 
   const availableTags = useMemo(() => {
-    const tags = prototypes.flatMap(({ meta }) => meta.tags ?? [])
+    const tags = prototypes.map(({ meta }) => meta.tag)
     return [...new Set(tags)].sort((a, b) => a.localeCompare(b))
   }, [prototypes])
 
@@ -64,25 +68,26 @@ export function PrototypeIndex({
     const normalizedQuery = query.trim().toLowerCase()
     return prototypes.filter(({ meta }) => {
       const matchesFilter = filter === 'all' || meta.status === filter
-      const matchesTags = selectedTags.length === 0
-        || selectedTags.every((tag) => meta.tags?.includes(tag))
-      const haystack = [meta.name, meta.description, ...(meta.tags ?? [])]
+      const matchesTag = selectedTag === 'all' || meta.tag === selectedTag
+      const haystack = [meta.name, meta.description, meta.tag]
         .join(' ')
         .toLowerCase()
-      return matchesFilter && matchesTags && (!normalizedQuery || haystack.includes(normalizedQuery))
+      return matchesFilter && matchesTag && (!normalizedQuery || haystack.includes(normalizedQuery))
     })
-  }, [filter, prototypes, query, selectedTags])
+  }, [filter, prototypes, query, selectedTag])
 
-  const toggleTag = (tag: string) => {
-    setSelectedTags((current) => current.includes(tag)
-      ? current.filter((candidate) => candidate !== tag)
-      : [...current, tag])
-  }
+  const groupedPrototypes = useMemo(() => availableTags
+    .map((tag) => ({
+      tag,
+      prototypes: visiblePrototypes.filter(({ meta }) => meta.tag === tag),
+    }))
+    .filter(({ prototypes: taggedPrototypes }) => taggedPrototypes.length > 0),
+  [availableTags, visiblePrototypes])
 
   const clearFilters = () => {
     setQuery('')
     setFilter('all')
-    setSelectedTags([])
+    setSelectedTag('all')
   }
 
   return (
@@ -131,7 +136,7 @@ export function PrototypeIndex({
               <span className="sr-only">Search prototypes</span>
               <input
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search name, description, or tag"
+                placeholder="Search prototypes"
                 type="search"
                 value={query}
               />
@@ -155,18 +160,18 @@ export function PrototypeIndex({
               <div className="tag-filters__options" aria-label="Filter prototypes by tag">
                 {availableTags.map((tag) => (
                   <button
-                    aria-pressed={selectedTags.includes(tag)}
+                    aria-pressed={selectedTag === tag}
                     key={tag}
-                    onClick={() => toggleTag(tag)}
+                    onClick={() => setSelectedTag((current) => current === tag ? 'all' : tag)}
                     type="button"
                   >
                     {tag}
                   </button>
                 ))}
               </div>
-              {selectedTags.length > 0 && (
-                <button className="tag-filters__clear" onClick={() => setSelectedTags([])} type="button">
-                  Clear tags
+              {selectedTag !== 'all' && (
+                <button className="tag-filters__clear" onClick={() => setSelectedTag('all')} type="button">
+                  Clear tag
                 </button>
               )}
             </div>
@@ -174,13 +179,18 @@ export function PrototypeIndex({
         </div>
 
         {visiblePrototypes.length > 0 ? (
-          <ol className="prototype-list">
-            {visiblePrototypes.map(({ meta }, index) => (
-              <li key={meta.id}>
+          <div className="prototype-groups">
+            {groupedPrototypes.map(({ tag, prototypes: taggedPrototypes }) => (
+              <details className="prototype-group" key={tag} open>
+                <summary className="prototype-group__header">
+                  <span className="prototype-group__heading">{tag}</span>
+                  <span className="prototype-group__count">{taggedPrototypes.length} {taggedPrototypes.length === 1 ? 'prototype' : 'prototypes'}</span>
+                  <Icons.ChevronRight aria-hidden="true" />
+                </summary>
+                <ol className="prototype-list">
+                  {taggedPrototypes.map(({ meta }) => (
+                    <li key={meta.id}>
                 <Link to={`/prototypes/${meta.id}`}>
-                  <span className="prototype-list__number">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
                   <span className="prototype-list__body">
                     <span className="prototype-list__title-row">
                       <strong>{meta.name}</strong>
@@ -191,20 +201,19 @@ export function PrototypeIndex({
                     <span className="prototype-list__description">{meta.description}</span>
                     <span className="prototype-list__meta">
                       <span>Updated {formatDate(meta.updatedAt)}</span>
-                      {meta.tags && meta.tags.length > 0 && (
-                        <span className="prototype-list__tags" aria-label="Tags">
-                          {meta.tags.map((tag) => <span key={tag}>{tag}</span>)}
-                        </span>
-                      )}
+                      <span className="prototype-list__tag">{meta.tag}</span>
                     </span>
                   </span>
                   <span className="prototype-list__open">
                     Open <Icons.ChevronRight aria-hidden="true" />
                   </span>
                 </Link>
-              </li>
+                    </li>
+                  ))}
+                </ol>
+              </details>
             ))}
-          </ol>
+          </div>
         ) : (
           <div className="index-empty">
             <h2>{prototypes.length === 0 ? 'No prototypes yet' : 'No matching prototypes'}</h2>

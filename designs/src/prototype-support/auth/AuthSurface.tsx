@@ -22,7 +22,6 @@ export function AuthSurface({
   context,
   intro,
   rootClass,
-  showThemeToggle = false,
   surfaceLabel,
   title,
 }: {
@@ -31,7 +30,6 @@ export function AuthSurface({
   context: ContextItem[]
   intro?: string
   rootClass: string
-  showThemeToggle?: boolean
   surfaceLabel: string
   title: string
 }) {
@@ -43,22 +41,18 @@ export function AuthSurface({
           <span>{area === 'account' ? 'Account' : 'Access'}</span>
           <strong>{surfaceLabel}</strong>
         </div>
-        {showThemeToggle && (
-
-          <button
-            aria-label="Toggle light and dark theme"
-            className="auth-static__theme-toggle"
-            onClick={(event) => {
-              const prototypeRoot = event.currentTarget.ownerDocument.getElementById('prototype-root')
-              if (prototypeRoot) prototypeRoot.dataset.theme = prototypeRoot.dataset.theme === 'dark' ? 'light' : 'dark'
-            }}
-            title="Toggle theme"
-            type="button"
-          >
-            <SunMoon aria-hidden="true" />
-          </button>
-
-        )}
+        <button
+          aria-label="Toggle light and dark theme"
+          className="auth-static__theme-toggle"
+          onClick={(event) => {
+            const prototypeRoot = event.currentTarget.ownerDocument.getElementById('prototype-root')
+            if (prototypeRoot) prototypeRoot.dataset.theme = prototypeRoot.dataset.theme === 'dark' ? 'light' : 'dark'
+          }}
+          title="Toggle theme"
+          type="button"
+        >
+          <SunMoon aria-hidden="true" />
+        </button>
       </header>
 
       <main className="auth-static__surface">
@@ -70,7 +64,10 @@ export function AuthSurface({
           <div className="auth-static__body">{children}</div>
         </section>
 
-        <aside className="auth-static__context" aria-label="Helpful context">
+        <aside
+          className={`auth-static__context ${context.length === 0 ? 'auth-static__context--brand-only' : ''}`}
+          aria-label={context.length === 0 ? 'HomePortal' : 'Helpful context'}
+        >
           <div className="auth-static__brand-stage" aria-hidden="true">
             <img alt="" src="/logo.png" />
             <strong>HomePortal</strong>
