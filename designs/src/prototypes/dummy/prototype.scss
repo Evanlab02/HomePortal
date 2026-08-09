@@ -1,0 +1,83 @@
+.dummy-prototype {
+  --dummy-ink: oklch(24% 0.025 250);
+  --dummy-muted: oklch(49% 0.025 250);
+  --dummy-line: color-mix(in oklab, currentColor 14%, transparent);
+  min-height: 100%;
+  background: var(--color-base-100);
+  color: var(--dummy-ink);
+
+  .dummy__header {
+    align-items: center;
+    border-bottom: 1px solid var(--dummy-line);
+    display: flex;
+    justify-content: space-between;
+    min-height: 68px;
+    padding: 0 clamp(20px, 5vw, 72px);
+  }
+
+  .dummy__brand {
+    align-items: center;
+    color: inherit;
+    display: flex;
+    font-weight: 720;
+    gap: 10px;
+    text-decoration: none;
+
+    span { align-items: center; background: var(--dummy-ink); border-radius: 9px; color: white; display: inline-flex; height: 32px; justify-content: center; width: 32px; }
+  }
+
+  nav { display: flex; gap: 6px; }
+  nav a { border-radius: 8px; color: var(--dummy-muted); font-size: .875rem; font-weight: 650; padding: 9px 12px; text-decoration: none; }
+  nav a:hover, nav a:focus-visible { background: color-mix(in oklab, currentColor 7%, transparent); color: var(--dummy-ink); }
+
+  .dummy__content { margin: 0 auto; max-width: 1180px; padding: clamp(52px, 8vw, 104px) clamp(20px, 5vw, 72px); }
+  .dummy__summary { align-items: end; display: flex; justify-content: space-between; }
+  h1 { font-size: clamp(2.25rem, 5vw, 4.8rem); font-weight: 680; letter-spacing: -.035em; line-height: .98; margin: 0; max-width: 11ch; }
+  .dummy__summary p, .dummy__notes p { color: var(--dummy-muted); font-size: 1.05rem; margin: 22px 0 0; max-width: 48ch; }
+  .btn svg { height: 16px; width: 16px; }
+
+  .dummy__readings { border-bottom: 1px solid var(--dummy-line); border-top: 1px solid var(--dummy-line); display: grid; grid-template-columns: repeat(3, 1fr); margin-top: clamp(52px, 7vw, 88px); }
+  .dummy__readings div { display: grid; gap: 10px; padding: 28px 0; }
+  .dummy__readings div + div { border-left: 1px solid var(--dummy-line); padding-left: 32px; }
+  .dummy__readings svg { color: var(--dummy-muted); height: 20px; width: 20px; }
+  .dummy__readings span { color: var(--dummy-muted); font-size: .82rem; }
+  .dummy__readings strong { font-size: 1.55rem; font-variant-numeric: tabular-nums; }
+
+  .dummy__services { margin-top: clamp(56px, 8vw, 96px); }
+  .dummy__section-heading { align-items: end; display: flex; justify-content: space-between; margin-bottom: 24px; }
+  .dummy__section-heading h2 { font-size: 1.65rem; letter-spacing: -.02em; margin: 0; }
+  .dummy__section-heading p { color: var(--dummy-muted); margin: 6px 0 0; }
+  .dummy__section-heading > span { color: oklch(50% .13 155); font-size: .78rem; font-weight: 700; }
+  table { border-collapse: collapse; width: 100%; }
+  th { color: var(--dummy-muted); font-size: .72rem; letter-spacing: .06em; padding: 13px 16px; text-align: left; text-transform: uppercase; }
+  td { border-top: 1px solid var(--dummy-line); font-size: .875rem; padding: 17px 16px; }
+  tbody tr { transition: background-color 160ms ease-out; }
+  tbody tr:hover { background: color-mix(in oklab, currentColor 4%, transparent); }
+  .dummy__service-name { align-items: center; display: flex; gap: 12px; }
+  .dummy__service-name > svg { height: 20px; width: 20px; }
+  .dummy__service-name span { display: grid; }
+  .dummy__service-name small { color: var(--dummy-muted); margin-top: 3px; }
+  .dummy__state { align-items: center; display: flex; gap: 7px; }
+  .dummy__state svg { color: oklch(59% .16 150); fill: currentColor; height: 7px; width: 7px; }
+  td:last-child svg { height: 16px; width: 16px; }
+  .dummy__notes { min-height: 70vh; }
+  .dummy__notes .btn { margin-top: 32px; }
+}
+
+[data-theme='dark'] .dummy-prototype {
+  --dummy-ink: oklch(94% 0.01 250);
+  --dummy-muted: oklch(72% 0.02 250);
+}
+
+@media (max-width: 640px) {
+  .dummy-prototype {
+    .dummy__header { align-items: flex-start; flex-direction: column; gap: 12px; padding-block: 18px; }
+    nav { margin-left: -8px; overflow-x: auto; width: calc(100% + 16px); }
+    .dummy__summary { align-items: flex-start; flex-direction: column; gap: 28px; }
+    .dummy__readings { grid-template-columns: 1fr; }
+    .dummy__readings div + div { border-left: 0; border-top: 1px solid var(--dummy-line); padding-left: 0; }
+    .dummy__section-heading { align-items: flex-start; flex-direction: column; gap: 14px; }
+    .dummy__table-wrap { overflow-x: auto; }
+    table { min-width: 650px; }
+  }
+}

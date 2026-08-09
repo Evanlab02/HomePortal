@@ -1,0 +1,33 @@
+import {
+  ArrowLeft,
+  Check,
+  ChevronRight,
+  CircleAlert,
+  Laptop,
+  Monitor,
+  Moon,
+  RotateCcw,
+  Search,
+  Smartphone,
+  Sun,
+  Tablet,
+  Wrench,
+  X,
+} from 'lucide-react'
+
+export const Icons = {
+  ArrowLeft,
+  Check,
+  ChevronRight,
+  CircleAlert,
+  Laptop,
+  Monitor,
+  Moon,
+  RotateCcw,
+  Search,
+  Smartphone,
+  Sun,
+  Tablet,
+  Wrench,
+  X,
+}
