@@ -7,9 +7,10 @@ const prototype: PrototypeDefinition = {
     id: 'login',
     name: 'Sign in',
     description: 'The default arrival page for an existing HomePortal account.',
-    status: 'in-progress',
-    updatedAt: '2026-08-09',
+    status: 'ready',
+    updatedAt: '2026-08-10',
     tag: 'Authentication',
+    relatedTasks: [{ identifier: 'EVA-2' }],
   },
   Component: LoginPrototype,
 }

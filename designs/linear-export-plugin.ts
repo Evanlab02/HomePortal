@@ -34,6 +34,7 @@ type UploadedScreenshot = {
 
 function send(response: ServerResponse, status: number, body: unknown) {
   response.statusCode = status
+  response.setHeader('Cache-Control', 'no-store')
   response.setHeader('Content-Type', 'application/json')
   response.end(JSON.stringify(body))
 }
@@ -144,8 +145,8 @@ export function buildComment(prototypeName: string, screenshots: UploadedScreens
   return lines.join('\n')
 }
 
-function apiKeyFrom(request: IncomingMessage) {
-  const key = request.headers.authorization?.trim()
+function apiKeyFrom(request: IncomingMessage, serverApiKey?: string) {
+  const key = request.headers.authorization?.trim() || serverApiKey
   if (!key) throw new Error('A Linear API key is required.')
   return key
 }
@@ -156,13 +157,31 @@ function localOrigin(server: ViteDevServer | PreviewServer) {
   return `http://127.0.0.1:${address.port}`
 }
 
-function install(server: ViteDevServer | PreviewServer) {
+function install(server: ViteDevServer | PreviewServer, serverApiKey?: string) {
   server.middlewares.use(async (request, response, next) => {
     if (!request.url?.startsWith('/__linear/')) return next()
+    if (request.url === '/__linear/config' && request.method === 'GET') {
+      return send(response, 200, { hasServerKey: Boolean(serverApiKey) })
+    }
     if (request.method !== 'POST') return send(response, 405, { error: 'Method not allowed.' })
     try {
-      const apiKey = apiKeyFrom(request)
       const body = await readJson(request)
+      if (request.url === '/__linear/related-tasks') {
+        if (!serverApiKey) return send(response, 200, { tasks: [] })
+        const identifiers = Array.isArray(body.identifiers)
+          ? body.identifiers.filter((value): value is string => typeof value === 'string')
+          : []
+        if (identifiers.length > 50 || identifiers.some((identifier) => !/^[A-Z][A-Z0-9]*-\d+$/.test(identifier))) {
+          throw new Error('Invalid related task identifiers.')
+        }
+        const tasks = await Promise.all(identifiers.map(async (identifier) => {
+          const data = await linear<{ issue: { identifier: string; title: string; url: string; description: string | null; priorityLabel: string; updatedAt: string; state: { name: string; color: string }; assignee: { name: string } | null } | null }>(serverApiKey, `query RelatedTask($id: String!) { issue(id: $id) { identifier title url description priorityLabel updatedAt state { name color } assignee { name } } }`, { id: identifier })
+          return data.issue
+        }))
+        return send(response, 200, { tasks: tasks.filter((task) => task !== null) })
+      }
+
+      const apiKey = apiKeyFrom(request, serverApiKey)
       if (request.url === '/__linear/teams') {
         return send(response, 200, await fetchTeams(apiKey))
       }
@@ -223,10 +242,10 @@ function install(server: ViteDevServer | PreviewServer) {
   })
 }
 
-export function linearExportPlugin(): Plugin {
+export function linearExportPlugin(serverApiKey?: string): Plugin {
   return {
     name: 'homeportal-linear-export',
-    configureServer: install,
-    configurePreviewServer: install,
+    configureServer: (server) => install(server, serverApiKey),
+    configurePreviewServer: (server) => install(server, serverApiKey),
   }
 }

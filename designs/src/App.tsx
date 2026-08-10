@@ -15,7 +15,7 @@ function PrototypeRoute() {
 
   const { Component, meta, states } = prototype
   return (
-    <PrototypeWorkbench prototypeId={meta.id} prototypeName={meta.name} states={states}>
+    <PrototypeWorkbench prototypeId={meta.id} prototypeName={meta.name} relatedTasks={meta.relatedTasks} states={states}>
       {(prototypeState) => (
         <PrototypeErrorBoundary prototypeName={meta.name}>
           <Component prototypeState={prototypeState} />

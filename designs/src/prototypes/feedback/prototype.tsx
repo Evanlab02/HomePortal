@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { ChevronLeft, ChevronRight, Eye, MessageSquarePlus, Search, X } from 'lucide-react'
+import { ChevronDown, ChevronLeft, ChevronRight, Columns3, Eye, MessageSquarePlus, Search, X } from 'lucide-react'
+import type { PrototypeComponentProps } from '../../engine/types/prototype'
 import { AuthenticatedAppShell } from '../../prototype-support/authenticated/AuthenticatedAppShell'
 
 const feedback = [
@@ -14,24 +15,34 @@ const feedback = [
 ]
 
 const statuses = ['Needs review', 'Backlog', 'In progress', 'Duplicate', 'Complete', 'Cancelled']
+const columns = ['Type', 'Submitted', 'Status'] as const
 
-export function FeedbackPrototype() {
+export function FeedbackPrototype({ prototypeState }: PrototypeComponentProps) {
   const [query, setQuery] = useState('')
-  const [filter, setFilter] = useState('All statuses')
+  const [filters, setFilters] = useState<string[]>([])
   const [page, setPage] = useState(1)
+  const [pageSize, setPageSize] = useState(5)
+  const [visibleColumns, setVisibleColumns] = useState<string[]>([...columns])
   const [statusById, setStatusById] = useState<Record<string, string>>({})
-  const [selected, setSelected] = useState<(typeof feedback)[number] | null>(null)
+  const [selected, setSelected] = useState<(typeof feedback)[number] | null>(() => prototypeState === 'details' ? feedback[0] : null)
   const drawerRef = useRef<HTMLElement>(null)
   const triggerRef = useRef<HTMLButtonElement | null>(null)
-  const pageSize = 5
   const items = useMemo(() => feedback.filter((item) => {
     const status = statusById[item.id] ?? item.status
-    return (filter === 'All statuses' || status === filter) && `${item.id} ${item.title} ${item.summary} ${item.type}`.toLowerCase().includes(query.toLowerCase())
-  }), [filter, query, statusById])
+    return (!filters.length || filters.includes(status)) && `${item.id} ${item.title} ${item.summary} ${item.type}`.toLowerCase().includes(query.toLowerCase())
+  }), [filters, query, statusById])
   const pages = Math.max(1, Math.ceil(items.length / pageSize))
   const visible = items.slice((page - 1) * pageSize, page * pageSize)
 
   const closeDrawer = () => { setSelected(null); requestAnimationFrame(() => triggerRef.current?.focus()) }
+  const openDrawer = (item: (typeof feedback)[number], trigger: HTMLButtonElement) => { triggerRef.current = trigger; setSelected(item) }
+  const toggleFilter = (status: string) => { setFilters((current) => current.includes(status) ? current.filter((item) => item !== status) : [...current, status]); setPage(1) }
+  const toggleColumn = (column: string) => setVisibleColumns((current) => current.includes(column) ? current.filter((item) => item !== column) : [...current, column])
+
+  useEffect(() => {
+    if (prototypeState === 'details') setSelected(feedback[0])
+    if (prototypeState === 'list') setSelected(null)
+  }, [prototypeState])
 
   useEffect(() => {
     if (!selected || !drawerRef.current) return
@@ -48,15 +59,17 @@ export function FeedbackPrototype() {
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [selected])
 
-  const openDrawer = (item: (typeof feedback)[number], trigger: HTMLButtonElement) => { triggerRef.current = trigger; setSelected(item) }
-
   return (
     <AuthenticatedAppShell>
       <div className="feedback-list" inert={selected ? true : undefined}>
         <header><div><h1>Feedback</h1><p>Review requests, track decisions, and keep product feedback moving.</p></div><a href="/prototypes/submit-feedback" target="_top"><MessageSquarePlus aria-hidden="true" />Submit feedback</a></header>
-        <div className="feedback-list__filters"><label><Search aria-hidden="true" /><span className="sr-only">Search feedback</span><input onChange={(event) => { setQuery(event.target.value); setPage(1) }} placeholder="Search feedback" type="search" value={query} /></label><label><span>Status</span><select onChange={(event) => { setFilter(event.target.value); setPage(1) }} value={filter}><option>All statuses</option>{statuses.map((status) => <option key={status}>{status}</option>)}</select></label></div>
-        <div className="feedback-list__table-wrap"><table><thead><tr><th scope="col">Feedback</th><th scope="col">Type</th><th scope="col">Submitted</th><th scope="col">Status</th><th scope="col"><span className="sr-only">Actions</span></th></tr></thead><tbody>{visible.map((item) => { const status = statusById[item.id] ?? item.status; return <tr key={item.id}><th scope="row"><small>{item.id}</small><strong>{item.title}</strong><span>{item.summary}</span></th><td>{item.type}</td><td>{item.submitted}</td><td><button className="feedback-status" data-status={status.toLowerCase().replace(' ', '-')} onClick={(event) => openDrawer(item, event.currentTarget)} type="button"><span />{status}</button></td><td><button aria-label={`View ${item.id} details`} className="feedback-list__view" onClick={(event) => openDrawer(item, event.currentTarget)} type="button"><Eye aria-hidden="true" /></button></td></tr>})}</tbody></table>{!visible.length && <div className="feedback-list__empty"><Search aria-hidden="true" /><strong>No feedback found</strong><span>Try changing your search or status filter.</span></div>}</div>
-        <footer className="feedback-list__pagination"><p>{items.length ? `Showing ${(page - 1) * pageSize + 1}–${Math.min(page * pageSize, items.length)} of ${items.length}` : 'Showing 0 of 0'}</p><nav aria-label="Pagination"><button aria-label="Previous page" disabled={page === 1} onClick={() => setPage((current) => current - 1)} type="button"><ChevronLeft aria-hidden="true" /></button>{Array.from({ length: pages }, (_, index) => index + 1).map((number) => <button aria-current={page === number ? 'page' : undefined} key={number} onClick={() => setPage(number)} type="button">{number}</button>)}<button aria-label="Next page" disabled={page === pages} onClick={() => setPage((current) => current + 1)} type="button"><ChevronRight aria-hidden="true" /></button></nav></footer>
+        <div className="feedback-list__tools">
+          <label className="feedback-list__search"><Search aria-hidden="true" /><span className="sr-only">Search feedback</span><input onChange={(event) => { setQuery(event.target.value); setPage(1) }} placeholder="Search feedback" type="search" value={query} /></label>
+          <details className="feedback-list__columns"><summary><Columns3 aria-hidden="true" /><span>Columns</span><ChevronDown aria-hidden="true" /></summary><div aria-labelledby="feedback-columns-label" className="feedback-list__columns-menu" role="group"><strong id="feedback-columns-label">Show columns</strong>{columns.map((column) => <label key={column}><input checked={visibleColumns.includes(column)} onChange={() => toggleColumn(column)} type="checkbox" />{column}</label>)}</div></details>
+        </div>
+        <fieldset className="feedback-list__filters"><legend>Status</legend><div>{statuses.map((status) => <button aria-pressed={filters.includes(status)} data-status={status.toLowerCase().replace(' ', '-')} key={status} onClick={() => toggleFilter(status)} type="button"><span />{status}</button>)}</div></fieldset>
+        <div className="feedback-list__table-wrap"><table><thead><tr><th scope="col">Feedback</th>{visibleColumns.includes('Type') && <th scope="col">Type</th>}{visibleColumns.includes('Submitted') && <th scope="col">Submitted</th>}{visibleColumns.includes('Status') && <th scope="col">Status</th>}<th scope="col"><span className="sr-only">Actions</span></th></tr></thead><tbody>{visible.map((item) => { const status = statusById[item.id] ?? item.status; return <tr key={item.id}><th scope="row"><small>{item.id}</small><strong>{item.title}</strong><span>{item.summary}</span></th>{visibleColumns.includes('Type') && <td className="feedback-list__type">{item.type}</td>}{visibleColumns.includes('Submitted') && <td className="feedback-list__submitted">{item.submitted}</td>}{visibleColumns.includes('Status') && <td className="feedback-list__status"><button className="feedback-status" data-status={status.toLowerCase().replace(' ', '-')} onClick={(event) => openDrawer(item, event.currentTarget)} type="button"><span />{status}</button></td>}<td className="feedback-list__action"><button aria-label={`View ${item.id} details`} className="feedback-list__view" onClick={(event) => openDrawer(item, event.currentTarget)} type="button"><Eye aria-hidden="true" /></button></td></tr>})}</tbody></table>{!visible.length && <div className="feedback-list__empty"><Search aria-hidden="true" /><strong>No feedback found</strong><span>Try changing your search or status filters.</span></div>}</div>
+        <footer className="feedback-list__pagination"><label>Rows per page<select onChange={(event) => { setPageSize(Number(event.target.value)); setPage(1) }} value={pageSize}><option>5</option><option>10</option><option>25</option></select></label><p>{items.length ? `Showing ${(page - 1) * pageSize + 1}–${Math.min(page * pageSize, items.length)} of ${items.length}` : 'Showing 0 of 0'}</p><nav aria-label="Pagination"><button aria-label="Previous page" disabled={page === 1} onClick={() => setPage((current) => current - 1)} type="button"><ChevronLeft aria-hidden="true" /></button>{Array.from({ length: pages }, (_, index) => index + 1).map((number) => <button aria-current={page === number ? 'page' : undefined} key={number} onClick={() => setPage(number)} type="button">{number}</button>)}<button aria-label="Next page" disabled={page === pages} onClick={() => setPage((current) => current + 1)} type="button"><ChevronRight aria-hidden="true" /></button></nav></footer>
       </div>
       {selected && <div className="feedback-drawer-layer"><button aria-label="Close drawer" className="feedback-drawer-layer__scrim" onClick={closeDrawer} type="button" /><aside aria-labelledby="feedback-drawer-heading" aria-modal="true" className="feedback-drawer" ref={drawerRef} role="dialog"><header><div><p>{selected.id} · {selected.type}</p><h2 id="feedback-drawer-heading">{selected.title}</h2></div><button aria-label="Close drawer" onClick={closeDrawer} type="button"><X aria-hidden="true" /></button></header><div className="feedback-drawer__body"><section><h3>Details</h3><p>{selected.detail}</p></section><dl><div><dt>Submitted</dt><dd>{selected.submitted}</dd></div><div><dt>Status</dt><dd>{statusById[selected.id] ?? selected.status}</dd></div></dl><fieldset><legend>Change status</legend>{statuses.map((status) => <button aria-pressed={(statusById[selected.id] ?? selected.status) === status} key={status} onClick={() => setStatusById((current) => ({ ...current, [selected.id]: status }))} type="button"><span />{status}</button>)}</fieldset></div></aside></div>}
     </AuthenticatedAppShell>

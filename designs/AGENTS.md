@@ -71,6 +71,21 @@ Every prototype must include a unique root class such as `.homeportal-login-prot
 
 Global styles in `src/index.css` belong to the engine and toolchain only. Do not turn them into a shared HomePortal design system.
 
+## Table conventions
+
+- Data-list prototypes use selectable badges for categorical status filters, not a single-select dropdown. Allow multiple active badges; no active badges means all statuses.
+- Paginated tables include a rows-per-page selector alongside the result count and page controls.
+- At widths of 1024px and above, tables with optional data columns include a column selector. Keep the primary record identity and row actions visible; let users toggle secondary columns.
+- Below 1024px, remove the column selector and use a deliberate compact row or card layout. Hide secondary columns regardless of desktop column preferences rather than introducing horizontal scrolling.
+- Preserve an obvious, accessible row action for opening record details when a detail view belongs to the real product surface.
+
+## Mobile conventions
+
+- Phone-sized drawers and detail panels occupy the full viewport width and height. Do not leave the underlying page visibly ajar.
+- Primary and secondary form actions stack and span the full available width on phone layouts. A secondary action may use quieter styling, but its tap target still fills the row.
+- Responsive table reductions begin below the 1024px horizontal-tablet boundary; do not wait for a phone-only breakpoint before removing optional columns and desktop column controls.
+- Verify these rules at the engine's tablet portrait and mobile presets rather than treating desktop resizing as sufficient evidence.
+
 ## Routing and behavior
 
 - Every prototype must open directly at `/prototypes/<prototype-id>` and survive a browser refresh when served with the Vite SPA fallback.

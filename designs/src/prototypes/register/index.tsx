@@ -7,9 +7,10 @@ const prototype: PrototypeDefinition = {
     id: 'register',
     name: 'Register account',
     description: 'Open account creation.',
-    status: 'in-progress',
-    updatedAt: '2026-08-09',
+    status: 'ready',
+    updatedAt: '2026-08-10',
     tag: 'Authentication',
+    relatedTasks: [{ identifier: 'EVA-5' }],
   },
   Component: RegisterPrototype,
 }

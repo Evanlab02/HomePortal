@@ -4,7 +4,6 @@ import {
   ChevronDown,
   ChevronRight,
   CircleAlert,
-  Clapperboard,
   Images,
   LockKeyhole,
   LogOut,
@@ -20,7 +19,6 @@ import {
   Sun,
   UserRound,
   UsersRound,
-  WalletCards,
   Wrench,
   X,
 } from 'lucide-react'
@@ -44,15 +42,15 @@ const applicationGroups = [
         tone: 'amber',
       },
       {
-        name: 'Feedback Manager',
-        description: 'Review, organise, and update product feedback submitted through HomePortal.',
-        Icon: MessageSquarePlus,
-        tone: 'teal',
-      },
-      {
         name: 'Custom Module Editor',
         description: 'Edit home portal modules and apps using docker compose files',
         Icon: Pencil,
+        tone: 'teal',
+      },
+      {
+        name: 'Feedback Manager',
+        description: 'Review, organise, and update product feedback submitted through HomePortal.',
+        Icon: MessageSquarePlus,
         tone: 'teal',
       },
       {
@@ -72,24 +70,6 @@ const applicationGroups = [
         description: 'Manage household members and their application access.',
         Icon: UsersRound,
         tone: 'amber',
-      },
-    ],
-  },
-  {
-    id: 'third-party',
-    name: 'Third Party Applications',
-    applications: [
-      {
-        name: 'Actual Budget',
-        description: 'Open your household budget and financial planning tools.',
-        Icon: WalletCards,
-        tone: 'teal',
-      },
-      {
-        name: 'Jellyfin',
-        description: 'Browse and stream from the household media library.',
-        Icon: Clapperboard,
-        tone: 'navy',
       },
     ],
   },
@@ -275,7 +255,7 @@ function Shell({ children }: { children: ReactNode }) {
   )
 }
 
-function LoadedState() {
+function LoadedState({ preview = false }: { preview?: boolean }) {
   return (
     <>
       <div className="all-apps__heading">
@@ -294,10 +274,10 @@ function LoadedState() {
             </div>
             <div className="all-apps__grid">
               {group.applications.map(({ name, description, Icon, tone }) => (
-                <a className="all-apps__app" data-tone={tone} href={`#${name.toLowerCase().replaceAll(' ', '-')}`} key={name}>
+                <a aria-disabled={preview || undefined} className="all-apps__app" data-preview={preview || undefined} data-tone={tone} href={preview ? undefined : `#${name.toLowerCase().replaceAll(' ', '-')}`} key={name}>
                   <span className="all-apps__app-icon"><Icon aria-hidden="true" /></span>
                   <span className="all-apps__app-copy"><strong>{name}</strong><span>{description}</span></span>
-                  <span className="all-apps__app-open"><span>Open</span><ChevronRight aria-hidden="true" /></span>
+                  <span className="all-apps__app-open"><span>{preview ? 'Coming soon' : 'Open'}</span>{!preview && <ChevronRight aria-hidden="true" />}</span>
                 </a>
               ))}
             </div>
@@ -315,7 +295,7 @@ function LoadingState() {
         <div><span className="skeleton skeleton--title" /><span className="skeleton skeleton--copy" /></div>
       </div>
       <div className="all-apps__groups" aria-hidden="true">
-        {[0, 1, 2].map((group) => (
+        {[0, 1].map((group) => (
           <section className="all-apps__group" key={group}>
             <div className="all-apps__group-heading"><span className="skeleton skeleton--section" /></div>
             <div className="all-apps__grid">
@@ -343,7 +323,7 @@ function ErrorState() {
 export function AllApplicationsPrototype({ prototypeState = 'loaded' }: PrototypeComponentProps) {
   return (
     <Shell>
-      {prototypeState === 'loading' ? <LoadingState /> : prototypeState === 'error' ? <ErrorState /> : <LoadedState />}
+      {prototypeState === 'loading' ? <LoadingState /> : prototypeState === 'error' ? <ErrorState /> : <LoadedState preview={prototypeState === 'preview'} />}
     </Shell>
   )
 }

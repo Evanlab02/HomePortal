@@ -2,6 +2,10 @@ import type { ComponentType } from 'react'
 
 export type PrototypeStatus = 'exploratory' | 'in-progress' | 're-review' | 'ready' | 'implemented'
 
+export interface RelatedTask {
+  identifier: string
+}
+
 export interface PrototypeMeta {
   id: string
   name: string
@@ -9,6 +13,7 @@ export interface PrototypeMeta {
   tag: string
   status: PrototypeStatus
   updatedAt: string
+  relatedTasks?: RelatedTask[]
 }
 
 export interface PrototypeState {

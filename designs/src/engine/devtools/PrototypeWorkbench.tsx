@@ -2,8 +2,21 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
 import { Icons } from '../components/Icon'
-import type { PrototypeState } from '../types/prototype'
+import type { PrototypeState, RelatedTask } from '../types/prototype'
 import { LinearExportDialog } from './LinearExportDialog'
+
+type ResolvedRelatedTask = {
+  identifier: string
+  title: string
+  url: string
+  description: string | null
+  priorityLabel: string
+  updatedAt: string
+  state: { name: string; color: string }
+  assignee: { name: string } | null
+}
+
+const taskDate = new Intl.DateTimeFormat(undefined, { dateStyle: 'medium' })
 
 type Viewport =
   | 'responsive'
@@ -144,15 +157,32 @@ function PrototypePreview({
   )
 }
 
+function RelatedTasksDialog({ onClose, tasks }: { onClose: () => void; tasks: ResolvedRelatedTask[] }) {
+  const dialogRef = useRef<HTMLDialogElement>(null)
+
+  useEffect(() => {
+    dialogRef.current?.showModal()
+  }, [])
+
+  return (
+    <dialog className="related-tasks" onCancel={(event) => { event.preventDefault(); onClose() }} ref={dialogRef}>
+      <header><div><h2>Related tasks</h2><p>Tasks connected to this prototype.</p></div><button aria-label="Close related tasks" autoFocus onClick={onClose} type="button"><Icons.X aria-hidden="true" /></button></header>
+      <ul>{tasks.map((task) => <li key={task.identifier}><article><div className="related-tasks__task-heading"><span>{task.identifier}</span><span className="related-tasks__status"><i style={{ backgroundColor: task.state.color }} />{task.state.name}</span></div><h3>{task.title}</h3>{task.description && <p>{task.description}</p>}<dl><div><dt>Priority</dt><dd>{task.priorityLabel || 'No priority'}</dd></div><div><dt>Assignee</dt><dd>{task.assignee?.name ?? 'Unassigned'}</dd></div><div><dt>Updated</dt><dd>{taskDate.format(new Date(task.updatedAt))}</dd></div></dl><a href={task.url} rel="noreferrer" target="_blank">Open in Linear</a></article></li>)}</ul>
+    </dialog>
+  )
+}
+
 export function PrototypeWorkbench({
   children,
   prototypeId,
   prototypeName,
+  relatedTasks,
   states,
 }: {
   children: (prototypeState?: string) => ReactNode
   prototypeId: string
   prototypeName: string
+  relatedTasks?: RelatedTask[]
   states?: PrototypeState[]
 }) {
   const [viewport, setViewport] = useState<Viewport>(readViewportPreference)
@@ -161,6 +191,9 @@ export function PrototypeWorkbench({
   )
   const [toolsOpen, setToolsOpen] = useState(false)
   const [exportOpen, setExportOpen] = useState(false)
+  const [relatedTasksOpen, setRelatedTasksOpen] = useState(false)
+  const [hasServerKey, setHasServerKey] = useState(false)
+  const [resolvedRelatedTasks, setResolvedRelatedTasks] = useState<ResolvedRelatedTask[]>([])
   const [prototypeState, setPrototypeState] = useState(() => states?.[0]?.id)
   const [systemDark, setSystemDark] = useState(() =>
     window.matchMedia('(prefers-color-scheme: dark)').matches,
@@ -186,6 +219,23 @@ export function PrototypeWorkbench({
   }, [theme])
 
   useEffect(() => {
+    let cancelled = false
+    void fetch('/__linear/config')
+      .then((response) => response.json() as Promise<{ hasServerKey: boolean }>)
+      .then(async ({ hasServerKey: available }) => {
+        if (cancelled) return
+        setHasServerKey(available)
+        if (!available || !relatedTasks?.length) return
+        const response = await fetch('/__linear/related-tasks', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ identifiers: relatedTasks.map(({ identifier }) => identifier) }) })
+        if (!response.ok) return
+        const { tasks } = await response.json() as { tasks: ResolvedRelatedTask[] }
+        if (!cancelled) setResolvedRelatedTasks(tasks)
+      })
+      .catch(() => undefined)
+    return () => { cancelled = true }
+  }, [relatedTasks])
+
+  useEffect(() => {
     setPrototypeState((current) =>
       states?.some(({ id }) => id === current) ? current : states?.[0]?.id,
     )
@@ -200,10 +250,11 @@ export function PrototypeWorkbench({
 
   const activeViewport = viewportOptions.find((option) => option.id === viewport)!
   const resolvedTheme = theme === 'system' ? (systemDark ? 'dark' : 'light') : theme
+  const modalOpen = exportOpen || relatedTasksOpen
 
   return (
     <div className="workbench">
-      <header className="workbench__bar" aria-label="Prototype developer tools" inert={exportOpen ? true : undefined}>
+      <header className="workbench__bar" aria-label="Prototype developer tools" inert={modalOpen ? true : undefined}>
         <Link className="workbench__back" to="/">
           <Icons.ArrowLeft aria-hidden="true" />
           <span>Prototypes</span>
@@ -213,6 +264,7 @@ export function PrototypeWorkbench({
         </span>
 
         <div className="workbench__desktop-controls">
+          {resolvedRelatedTasks.length > 0 && <button className="workbench__related-tasks" onClick={() => setRelatedTasksOpen(true)} type="button">Related Tasks</button>}
           <button className="workbench__export" onClick={(event) => openExport(event.currentTarget)} type="button"><Icons.Upload aria-hidden="true" />Export to Linear</button>
           {states && states.length > 1 && (
             <label className="workbench__state-picker">
@@ -269,7 +321,8 @@ export function PrototypeWorkbench({
       </header>
 
       {toolsOpen && (
-        <div className="workbench__mobile-controls" inert={exportOpen ? true : undefined}>
+        <div className="workbench__mobile-controls" inert={modalOpen ? true : undefined}>
+          {resolvedRelatedTasks.length > 0 && <button className="workbench__related-tasks" onClick={() => setRelatedTasksOpen(true)} type="button">Related Tasks</button>}
           <button className="workbench__export" onClick={(event) => openExport(event.currentTarget)} type="button"><Icons.Upload aria-hidden="true" />Export to Linear</button>
           {states && states.length > 1 && (
             <label>
@@ -313,7 +366,7 @@ export function PrototypeWorkbench({
         </div>
       )}
 
-      <div className="workbench__stage" inert={exportOpen ? true : undefined}>
+      <div className="workbench__stage" inert={modalOpen ? true : undefined}>
         <PrototypePreview
           prototypeName={prototypeName}
           theme={resolvedTheme}
@@ -324,7 +377,8 @@ export function PrototypeWorkbench({
           {children(prototypeState)}
         </PrototypePreview>
       </div>
-      {exportOpen && <LinearExportDialog onClose={closeExport} prototypeId={prototypeId} prototypeName={prototypeName} states={states} />}
+      {relatedTasksOpen && <RelatedTasksDialog onClose={() => setRelatedTasksOpen(false)} tasks={resolvedRelatedTasks} />}
+      {exportOpen && <LinearExportDialog hasServerKey={hasServerKey} onClose={closeExport} prototypeId={prototypeId} prototypeName={prototypeName} states={states} />}
     </div>
   )
 }

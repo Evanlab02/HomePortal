@@ -99,6 +99,9 @@
 .all-apps__app-copy strong { font-family: 'Spline HP', sans-serif; font-size: 1.22rem; letter-spacing: -.02em; }
 .all-apps__app-copy > span { color: var(--apps-muted); line-height: 1.45; max-width: 38ch; }
 .all-apps__app-open { align-items: center; color: var(--apps-teal); display: flex; font-size: .92rem; font-weight: 700; gap: 4px; }
+.all-apps__app[data-preview='true'] { cursor: default; }
+.all-apps__app[data-preview='true']:hover { background: transparent; transform: none; }
+.all-apps__app[data-preview='true'] .all-apps__app-open { color: var(--apps-amber); }
 .all-apps__app-open svg { height: 16px; transition: transform 160ms ease-out; width: 16px; }
 .all-apps__app:hover .all-apps__app-open svg { transform: translateX(3px); }
 
@@ -155,6 +158,7 @@
   .all-apps__app-icon, .skeleton--icon { border-radius: 12px; height: 50px; width: 50px; }
   .all-apps__app-icon svg { height: 22px; width: 22px; }
   .all-apps__app-open > span { display: none; }
+  .all-apps__app[data-preview='true'] .all-apps__app-open > span { display: inline; }
   .all-apps__app-open svg { height: 18px; width: 18px; }
   .skeleton--title { height: 46px; width: 80vw; }
   .skeleton--copy { max-width: 70vw; }
