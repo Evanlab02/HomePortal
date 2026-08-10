@@ -11,6 +11,7 @@ import {
   Smartphone,
   Sun,
   Tablet,
+  Upload,
   Wrench,
   X,
 } from 'lucide-react'
@@ -28,6 +29,7 @@ export const Icons = {
   Smartphone,
   Sun,
   Tablet,
+  Upload,
   Wrench,
   X,
 }

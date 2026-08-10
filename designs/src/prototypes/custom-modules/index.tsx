@@ -7,8 +7,8 @@ const prototype: PrototypeDefinition = {
     id: 'custom-modules',
     name: 'Custom modules',
     description: 'Search, edit, and remove Docker Compose modules stored under custom paths.',
-    status: 're-review',
-    updatedAt: '2026-08-09',
+    status: 'in-progress',
+    updatedAt: '2026-08-10',
     tag: 'Custom Modules Editor',
   },
   states: [

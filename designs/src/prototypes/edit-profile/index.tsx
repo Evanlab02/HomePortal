@@ -7,7 +7,7 @@ const prototype: PrototypeDefinition = {
     id: 'edit-profile',
     name: 'Edit profile',
     description: 'The authenticated profile details form and route to password management.',
-    status: 'ready',
+    status: 'in-progress',
     updatedAt: '2026-08-09',
     tag: 'Account & Security',
   },

@@ -7,7 +7,7 @@ const prototype: PrototypeDefinition = {
     id: 'logout',
     name: 'Sign out confirmation',
     description: 'A deliberate confirmation before ending the current or all browser sessions.',
-    status: 'ready',
+    status: 'in-progress',
     updatedAt: '2026-08-09',
     tag: 'Authentication',
   },

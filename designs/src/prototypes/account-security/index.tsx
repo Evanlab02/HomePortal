@@ -7,7 +7,7 @@ const prototype: PrototypeDefinition = {
     id: 'account-security',
     name: 'Account & security',
     description: 'A single account surface for profile details, password changes, and multi-factor authentication.',
-    status: 'ready',
+    status: 'in-progress',
     updatedAt: '2026-08-09',
     tag: 'Account & Security',
   },

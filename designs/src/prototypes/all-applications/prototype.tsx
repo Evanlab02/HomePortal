@@ -9,6 +9,7 @@ import {
   LockKeyhole,
   LogOut,
   Menu,
+  MessageSquarePlus,
   Moon,
   Network,
   PanelLeftClose,
@@ -41,6 +42,12 @@ const applicationGroups = [
         description: 'Add, review, and manage the applications available in HomePortal.',
         Icon: AppWindow,
         tone: 'amber',
+      },
+      {
+        name: 'Feedback Manager',
+        description: 'Review, organise, and update product feedback submitted through HomePortal.',
+        Icon: MessageSquarePlus,
+        tone: 'teal',
       },
       {
         name: 'Custom Module Editor',
@@ -247,6 +254,7 @@ function Shell({ children }: { children: ReactNode }) {
             <a aria-current="page" href="#applications" ref={firstNavLinkRef}><AppWindow aria-hidden="true" /><span>Applications</span></a>
           </nav>
           <div className="all-apps__sidebar-foot">
+            <a href="/prototypes/submit-feedback" target="_top"><MessageSquarePlus aria-hidden="true" /><span>Submit feedback</span></a>
             <button
               aria-label={sidebarOpen ? 'Collapse navigation' : 'Expand navigation'}
               className="all-apps__collapse"

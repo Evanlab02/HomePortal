@@ -7,7 +7,7 @@ const prototype: PrototypeDefinition = {
     id: 'accept-invitation',
     name: 'Accept invitation',
     description: 'The direct-link landing page for a valid household invitation.',
-    status: 'ready',
+    status: 'in-progress',
     updatedAt: '2026-08-09',
     tag: 'Authentication',
   },

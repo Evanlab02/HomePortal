@@ -7,7 +7,7 @@ const prototype: PrototypeDefinition = {
     id: 'register',
     name: 'Register account',
     description: 'Open account creation.',
-    status: 'ready',
+    status: 'in-progress',
     updatedAt: '2026-08-09',
     tag: 'Authentication',
   },

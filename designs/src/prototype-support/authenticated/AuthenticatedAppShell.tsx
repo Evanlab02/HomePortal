@@ -4,6 +4,7 @@ import {
   ChevronDown,
   LogOut,
   Menu,
+  MessageSquarePlus,
   Moon,
   PanelLeftClose,
   PanelLeftOpen,
@@ -146,6 +147,7 @@ export function AuthenticatedAppShell({ children }: { children: ReactNode }) {
         >
           <nav><a href="#applications" ref={firstNavLinkRef}><AppWindow aria-hidden="true" /><span>Applications</span></a></nav>
           <div className="authenticated-app-shell__sidebar-foot">
+            <a href="/prototypes/submit-feedback" target="_top"><MessageSquarePlus aria-hidden="true" /><span>Submit feedback</span></a>
             <button aria-label={sidebarOpen ? 'Collapse navigation' : 'Expand navigation'} className="authenticated-app-shell__collapse" onClick={() => setSidebarOpen((open) => !open)} type="button">
               {sidebarOpen ? <PanelLeftClose aria-hidden="true" /> : <PanelLeftOpen aria-hidden="true" />}
               <span>{sidebarOpen ? 'Collapse menu' : 'Expand menu'}</span>

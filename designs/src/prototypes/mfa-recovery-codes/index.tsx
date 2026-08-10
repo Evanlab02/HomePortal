@@ -7,7 +7,7 @@ const prototype: PrototypeDefinition = {
     id: 'mfa-recovery-codes',
     name: 'MFA recovery codes',
     description: 'The one-time recovery-code handoff shown after authenticator setup.',
-    status: 'ready',
+    status: 'in-progress',
     updatedAt: '2026-08-09',
     tag: 'MFA',
   },

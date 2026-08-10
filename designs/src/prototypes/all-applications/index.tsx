@@ -7,8 +7,8 @@ const prototype: PrototypeDefinition = {
     id: 'all-applications',
     name: 'All applications',
     description: 'The authenticated landing page and shared navigation shell for applications a user can access.',
-    status: 'ready',
-    updatedAt: '2026-08-09',
+    status: 'in-progress',
+    updatedAt: '2026-08-10',
     tag: 'Home Portal Home',
   },
   states: [

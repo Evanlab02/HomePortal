@@ -1,17 +1,23 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   Boxes,
+  Clapperboard,
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
   Eye,
   FileCode2,
+  Images,
+  LockKeyhole,
   LoaderCircle,
   Pencil,
   Plus,
   Search,
+  ShieldCheck,
   Trash2,
+  WalletCards,
+  Wrench,
   X,
 } from 'lucide-react'
 import type { PrototypeComponentProps } from '../../engine/types/prototype'
@@ -30,11 +36,23 @@ const modules = [
 
 const pendingModules = new Set(['media-stack', 'photos'])
 
+const iconOptions = [
+  { name: 'Modules', Icon: Boxes },
+  { name: 'Media', Icon: Clapperboard },
+  { name: 'Photos', Icon: Images },
+  { name: 'Security', Icon: LockKeyhole },
+  { name: 'Protected', Icon: ShieldCheck },
+  { name: 'Finance', Icon: WalletCards },
+  { name: 'Tools', Icon: Wrench },
+]
+
 export function CustomModulesPrototype({ prototypeState = 'all-applied' }: PrototypeComponentProps) {
   const [query, setQuery] = useState('')
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(5)
-  const [drawer, setDrawer] = useState<{ action: 'detail' | 'edit' | 'status' | 'delete'; module: (typeof modules)[number] } | null>(null)
+  const [drawer, setDrawer] = useState<{ action: 'detail' | 'edit' | 'status' | 'delete' | 'icon'; module: (typeof modules)[number] } | null>(null)
+  const [moduleIcons, setModuleIcons] = useState<Record<string, string>>({})
+  const [iconDraft, setIconDraft] = useState('Modules')
   const [statusDraft, setStatusDraft] = useState(true)
   const drawerTriggerRef = useRef<HTMLElement | null>(null)
   const drawerRef = useRef<HTMLElement>(null)
@@ -91,9 +109,10 @@ export function CustomModulesPrototype({ prototypeState = 'all-applied' }: Proto
               <tbody>
                 {visibleModules.map((module) => {
                   const isPending = showPendingChanges && pendingModules.has(module.name)
+                  const ModuleIcon = iconOptions.find(({ name }) => name === moduleIcons[module.name])?.Icon ?? Boxes
                   return (
                   <tr aria-busy={isPending || undefined} aria-disabled={isPending || undefined} className={isPending ? 'custom-modules-list__row--pending' : undefined} key={module.name}>
-                    <th scope="row"><span><Boxes aria-hidden="true" /></span><div><strong>{module.name}</strong><small>{module.description}</small>{isPending && <span className="custom-modules-list__pending-status"><LoaderCircle aria-hidden="true" />Waiting to apply</span>}</div></th>
+                    <th scope="row"><button aria-label={`Change ${module.name} icon`} className="custom-modules-list__icon" disabled={isPending} onClick={(event) => { drawerTriggerRef.current = event.currentTarget; setIconDraft(moduleIcons[module.name] ?? 'Modules'); setDrawer({ action: 'icon', module }) }} title={isPending ? 'Unavailable while changes are pending' : 'Change module icon'} type="button"><ModuleIcon aria-hidden="true" /></button><div><strong>{module.name}</strong><small>{module.description}</small>{isPending && <span className="custom-modules-list__pending-status"><LoaderCircle aria-hidden="true" />Waiting to apply</span>}</div></th>
                     <td><code>custom/{module.name}/compose.yml</code></td>
                     <td>{module.services.length}</td>
                     <td><button className="custom-modules-list__status" data-enabled={module.enabled} disabled={isPending} onClick={(event) => { drawerTriggerRef.current = event.currentTarget; setStatusDraft(module.enabled); setDrawer({ action: 'status', module }) }} title={isPending ? 'Unavailable while changes are pending' : 'Change module status'} type="button"><span />{module.enabled ? 'Enabled' : 'Disabled'}</button></td>
@@ -112,7 +131,7 @@ export function CustomModulesPrototype({ prototypeState = 'all-applied' }: Proto
         </section>
       </div>
 
-      {drawer && <div className="custom-modules-drawer-layer"><button aria-label="Close drawer" className="custom-modules-drawer-layer__scrim" onClick={closeDrawer} type="button" /><aside aria-labelledby="module-drawer-heading" aria-modal="true" className="custom-modules-drawer" ref={drawerRef} role="dialog"><header><div><p>{drawer.action === 'detail' ? 'Module details' : drawer.action === 'edit' ? 'Edit module record' : drawer.action === 'status' ? 'Module status' : 'Delete module'}</p><h2 id="module-drawer-heading">{drawer.module.name}</h2></div><button aria-label="Close drawer" onClick={closeDrawer} type="button"><X aria-hidden="true" /></button></header>{drawer.action === 'detail' ? <div className="custom-modules-drawer__details"><p>{drawer.module.description}</p><div className="custom-modules-drawer__metrics"><span><strong>{drawer.module.services.length}</strong>Services</span><span><strong>{drawer.module.ports.length}</strong>Published ports</span><span><strong>{drawer.module.volumes.length}</strong>Volumes</span></div><section><h3>Compose file</h3><code>custom/{drawer.module.name}/compose.yml</code></section><section><h3>Services</h3><ul>{drawer.module.services.map((service) => <li key={service}>{service}</li>)}</ul></section><section><h3>Published ports</h3>{drawer.module.ports.length ? <ul>{drawer.module.ports.map((port) => <li key={port}><code>{port}</code></li>)}</ul> : <p>No ports are published.</p>}</section><section><h3>Volumes</h3>{drawer.module.volumes.length ? <ul>{drawer.module.volumes.map((volume) => <li key={volume}><code>{volume}</code></li>)}</ul> : <p>No volumes are defined.</p>}</section></div> : drawer.action === 'edit' ? <form className="custom-modules-drawer__edit"><label><span>Module name</span><input defaultValue={drawer.module.name} /></label><p>Renaming the record also changes the folder path to <code>custom/{drawer.module.name}/compose.yml</code>.</p><label><span>Description</span><textarea defaultValue={drawer.module.description} rows={5} /></label><footer><button onClick={closeDrawer} type="button">Cancel</button><button type="button">Save record</button></footer></form> : drawer.action === 'status' ? <div className="custom-modules-drawer__status"><p>Choose whether HomePortal should include this module when managing the custom Compose stack.</p><div aria-label="Module status" role="group"><button aria-pressed={statusDraft} onClick={() => setStatusDraft(true)} type="button"><span />Enabled<small>Include this module</small></button><button aria-pressed={!statusDraft} onClick={() => setStatusDraft(false)} type="button"><span />Disabled<small>Leave this module inactive</small></button></div><footer><button onClick={closeDrawer} type="button">Cancel</button><button type="button">Save status</button></footer></div> : <div className="custom-modules-drawer__delete"><span><Trash2 aria-hidden="true" /></span><p>Delete <code>custom/{drawer.module.name}/compose.yml</code>? This removes the module definition and cannot be undone.</p><div><button onClick={closeDrawer} type="button">Cancel</button><button type="button">Delete module</button></div></div>}</aside></div>}
+      {drawer && <div className="custom-modules-drawer-layer"><button aria-label="Close drawer" className="custom-modules-drawer-layer__scrim" onClick={closeDrawer} type="button" /><aside aria-labelledby="module-drawer-heading" aria-modal="true" className="custom-modules-drawer" ref={drawerRef} role="dialog"><header><div><p>{drawer.action === 'detail' ? 'Module details' : drawer.action === 'edit' ? 'Edit module record' : drawer.action === 'status' ? 'Module status' : drawer.action === 'icon' ? 'Module icon' : 'Delete module'}</p><h2 id="module-drawer-heading">{drawer.module.name}</h2></div><button aria-label="Close drawer" onClick={closeDrawer} type="button"><X aria-hidden="true" /></button></header>{drawer.action === 'detail' ? <div className="custom-modules-drawer__details"><p>{drawer.module.description}</p><div className="custom-modules-drawer__metrics"><span><strong>{drawer.module.services.length}</strong>Services</span><span><strong>{drawer.module.ports.length}</strong>Published ports</span><span><strong>{drawer.module.volumes.length}</strong>Volumes</span></div><section><h3>Compose file</h3><code>custom/{drawer.module.name}/compose.yml</code></section><section><h3>Services</h3><ul>{drawer.module.services.map((service) => <li key={service}>{service}</li>)}</ul></section><section><h3>Published ports</h3>{drawer.module.ports.length ? <ul>{drawer.module.ports.map((port) => <li key={port}><code>{port}</code></li>)}</ul> : <p>No ports are published.</p>}</section><section><h3>Volumes</h3>{drawer.module.volumes.length ? <ul>{drawer.module.volumes.map((volume) => <li key={volume}><code>{volume}</code></li>)}</ul> : <p>No volumes are defined.</p>}</section></div> : drawer.action === 'edit' ? <form className="custom-modules-drawer__edit"><label><span>Module name</span><input defaultValue={drawer.module.name} /></label><p>Renaming the record also changes the folder path to <code>custom/{drawer.module.name}/compose.yml</code>.</p><label><span>Description</span><textarea defaultValue={drawer.module.description} rows={5} /></label><footer><button onClick={closeDrawer} type="button">Cancel</button><button type="button">Save record</button></footer></form> : drawer.action === 'status' ? <div className="custom-modules-drawer__status"><p>Choose whether HomePortal should include this module when managing the custom Compose stack.</p><div aria-label="Module status" role="group"><button aria-pressed={statusDraft} onClick={() => setStatusDraft(true)} type="button"><span />Enabled<small>Include this module</small></button><button aria-pressed={!statusDraft} onClick={() => setStatusDraft(false)} type="button"><span />Disabled<small>Leave this module inactive</small></button></div><footer><button onClick={closeDrawer} type="button">Cancel</button><button type="button">Save status</button></footer></div> : drawer.action === 'icon' ? <div className="custom-modules-drawer__icon"><p>Choose the icon shown beside this module in the list.</p><div aria-label="Module icon" role="group">{iconOptions.map(({ name, Icon }) => <button aria-pressed={iconDraft === name} key={name} onClick={() => setIconDraft(name)} type="button"><Icon aria-hidden="true" /><span>{name}</span></button>)}</div><footer><button onClick={closeDrawer} type="button">Cancel</button><button onClick={() => { setModuleIcons((current) => ({ ...current, [drawer.module.name]: iconDraft })); closeDrawer() }} type="button">Save icon</button></footer></div> : <div className="custom-modules-drawer__delete"><span><Trash2 aria-hidden="true" /></span><p>Delete <code>custom/{drawer.module.name}/compose.yml</code>? This removes the module definition and cannot be undone.</p><div><button onClick={closeDrawer} type="button">Cancel</button><button type="button">Delete module</button></div></div>}</aside></div>}
     </AuthenticatedAppShell>
   )
 }

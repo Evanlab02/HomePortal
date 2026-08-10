@@ -7,7 +7,7 @@ const prototype: PrototypeDefinition = {
     id: 'application-manager',
     name: 'Application manager',
     description: 'Search, filter, inspect, edit, and remove applications registered with HomePortal.',
-    status: 'ready',
+    status: 'in-progress',
     updatedAt: '2026-08-09',
     tag: 'Application Manager',
   },

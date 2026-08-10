@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
 import { Icons } from '../components/Icon'
 import type { PrototypeState } from '../types/prototype'
+import { LinearExportDialog } from './LinearExportDialog'
 
 type Viewport =
   | 'responsive'
@@ -145,10 +146,12 @@ function PrototypePreview({
 
 export function PrototypeWorkbench({
   children,
+  prototypeId,
   prototypeName,
   states,
 }: {
   children: (prototypeState?: string) => ReactNode
+  prototypeId: string
   prototypeName: string
   states?: PrototypeState[]
 }) {
@@ -157,10 +160,22 @@ export function PrototypeWorkbench({
     readPreference('prototype-engine:theme', 'system'),
   )
   const [toolsOpen, setToolsOpen] = useState(false)
+  const [exportOpen, setExportOpen] = useState(false)
   const [prototypeState, setPrototypeState] = useState(() => states?.[0]?.id)
   const [systemDark, setSystemDark] = useState(() =>
     window.matchMedia('(prefers-color-scheme: dark)').matches,
   )
+  const exportTriggerRef = useRef<HTMLButtonElement | null>(null)
+
+  const openExport = (trigger: HTMLButtonElement) => {
+    exportTriggerRef.current = trigger
+    setExportOpen(true)
+  }
+
+  const closeExport = useCallback(() => {
+    setExportOpen(false)
+    requestAnimationFrame(() => exportTriggerRef.current?.focus())
+  }, [])
 
   useEffect(() => {
     localStorage.setItem('prototype-engine:viewport', viewport)
@@ -188,7 +203,7 @@ export function PrototypeWorkbench({
 
   return (
     <div className="workbench">
-      <header className="workbench__bar" aria-label="Prototype developer tools">
+      <header className="workbench__bar" aria-label="Prototype developer tools" inert={exportOpen ? true : undefined}>
         <Link className="workbench__back" to="/">
           <Icons.ArrowLeft aria-hidden="true" />
           <span>Prototypes</span>
@@ -198,6 +213,7 @@ export function PrototypeWorkbench({
         </span>
 
         <div className="workbench__desktop-controls">
+          <button className="workbench__export" onClick={(event) => openExport(event.currentTarget)} type="button"><Icons.Upload aria-hidden="true" />Export to Linear</button>
           {states && states.length > 1 && (
             <label className="workbench__state-picker">
               <span>State</span>
@@ -253,7 +269,8 @@ export function PrototypeWorkbench({
       </header>
 
       {toolsOpen && (
-        <div className="workbench__mobile-controls">
+        <div className="workbench__mobile-controls" inert={exportOpen ? true : undefined}>
+          <button className="workbench__export" onClick={(event) => openExport(event.currentTarget)} type="button"><Icons.Upload aria-hidden="true" />Export to Linear</button>
           {states && states.length > 1 && (
             <label>
               <span>State</span>
@@ -296,7 +313,7 @@ export function PrototypeWorkbench({
         </div>
       )}
 
-      <div className="workbench__stage">
+      <div className="workbench__stage" inert={exportOpen ? true : undefined}>
         <PrototypePreview
           prototypeName={prototypeName}
           theme={resolvedTheme}
@@ -307,6 +324,7 @@ export function PrototypeWorkbench({
           {children(prototypeState)}
         </PrototypePreview>
       </div>
+      {exportOpen && <LinearExportDialog onClose={closeExport} prototypeId={prototypeId} prototypeName={prototypeName} states={states} />}
     </div>
   )
 }

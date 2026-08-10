@@ -7,7 +7,7 @@ const prototype: PrototypeDefinition = {
     id: 'edit-module',
     name: 'Edit module',
     description: 'Edit a module Docker Compose file with Monaco Editor.',
-    status: 're-review',
+    status: 'in-progress',
     updatedAt: '2026-08-09',
     tag: 'Custom Modules Editor',
   },

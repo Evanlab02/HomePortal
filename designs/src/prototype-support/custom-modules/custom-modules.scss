@@ -18,7 +18,9 @@
 .custom-modules-list th, .custom-modules-list td { border-bottom: 1px solid var(--app-border); padding: 18px 16px; text-align: left; vertical-align: middle; }
 .custom-modules-list thead th { color: var(--app-muted); font-size: .92rem; font-weight: 700; }
 .custom-modules-list tbody th { align-items: center; display: flex; gap: 14px; min-width: 310px; }
-.custom-modules-list tbody th > span { align-items: center; background: var(--app-teal-soft); border-radius: 12px; color: var(--app-teal); display: flex; flex: 0 0 auto; height: 42px; justify-content: center; width: 42px; }
+.custom-modules-list__icon { align-items: center; background: var(--app-teal-soft); border: 0; border-radius: 12px; color: var(--app-teal); cursor: pointer; display: flex; flex: 0 0 auto; height: 42px; justify-content: center; width: 42px; }
+.custom-modules-list__icon:hover:not(:disabled) { background: color-mix(in srgb,var(--app-teal) 18%,var(--app-raised)); }
+.custom-modules-list__icon:disabled { cursor: not-allowed; opacity: .55; }
 .custom-modules-list tbody th svg { height: 19px; width: 19px; }
 .custom-modules-list tbody th strong, .custom-modules-list tbody th small { display: block; }
 .custom-modules-list tbody th strong { font-family: 'Spline HP', sans-serif; font-size: 1rem; }
@@ -83,6 +85,17 @@
 .custom-modules-drawer__status footer button:first-child { background: transparent; border: 0; color: var(--app-muted); }
 .custom-modules-drawer__status footer button:last-child { background: var(--app-teal-strong); border: 0; color: #fff; }
 .authenticated-app-shell[data-theme='dark'] .custom-modules-drawer__status footer button:last-child { background: var(--app-teal); color: var(--app-canvas); }
+.custom-modules-drawer__icon > p { color: var(--app-muted); line-height: 1.55; margin: 0 0 24px; }
+.custom-modules-drawer__icon > div { display: grid; gap: 10px; grid-template-columns: repeat(2,minmax(0,1fr)); }
+.custom-modules-drawer__icon > div button { align-items: center; background: var(--app-canvas); border: 1px solid var(--app-border); border-radius: 12px; color: var(--app-ink); cursor: pointer; display: flex; gap: 11px; min-height: 62px; padding: 10px 13px; text-align: left; }
+.custom-modules-drawer__icon > div button[aria-pressed='true'] { border-color: var(--app-teal); box-shadow: 0 4px 18px color-mix(in srgb,var(--app-teal) 13%,transparent); color: var(--app-teal); }
+.custom-modules-drawer__icon > div svg { flex: 0 0 auto; height: 21px; width: 21px; }
+.custom-modules-drawer__icon > div span { font-size: .92rem; font-weight: 700; }
+.custom-modules-drawer__icon footer { display: flex; gap: 10px; justify-content: flex-end; margin-top: 28px; }
+.custom-modules-drawer__icon footer button { border-radius: 12px; cursor: pointer; font-size: .92rem; font-weight: 700; min-height: 50px; padding: 0 18px; }
+.custom-modules-drawer__icon footer button:first-child { background: transparent; border: 0; color: var(--app-muted); }
+.custom-modules-drawer__icon footer button:last-child { background: var(--app-teal-strong); border: 0; color: #fff; }
+.authenticated-app-shell[data-theme='dark'] .custom-modules-drawer__icon footer button:last-child { background: var(--app-teal); color: var(--app-canvas); }
 .custom-modules-drawer__details > p { color: var(--app-muted); line-height: 1.55; margin: 0 0 24px; }
 .custom-modules-drawer__metrics { display: grid; gap: 8px; grid-template-columns: repeat(3,minmax(0,1fr)); margin-bottom: 30px; }
 .custom-modules-drawer__metrics span { background: var(--app-subtle); border-radius: 12px; color: var(--app-muted); display: grid; font-size: .92rem; gap: 4px; min-height: 82px; padding: 13px; }

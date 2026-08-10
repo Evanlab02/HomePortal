@@ -7,7 +7,7 @@ const prototype: PrototypeDefinition = {
     id: 'add-module',
     name: 'Add module',
     description: 'Create a custom module and its initial Docker Compose file.',
-    status: 're-review',
+    status: 'in-progress',
     updatedAt: '2026-08-09',
     tag: 'Custom Modules Editor',
   },

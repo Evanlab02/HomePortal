@@ -181,7 +181,7 @@ export function PrototypeIndex({
         {visiblePrototypes.length > 0 ? (
           <div className="prototype-groups">
             {groupedPrototypes.map(({ tag, prototypes: taggedPrototypes }) => (
-              <details className="prototype-group" key={tag} open>
+              <details className="prototype-group" key={tag}>
                 <summary className="prototype-group__header">
                   <span className="prototype-group__heading">{tag}</span>
                   <span className="prototype-group__count">{taggedPrototypes.length} {taggedPrototypes.length === 1 ? 'prototype' : 'prototypes'}</span>

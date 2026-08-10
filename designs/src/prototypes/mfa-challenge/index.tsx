@@ -7,7 +7,7 @@ const prototype: PrototypeDefinition = {
     id: 'mfa-challenge',
     name: 'MFA challenge',
     description: 'The authenticator-code check shown after valid account credentials.',
-    status: 'ready',
+    status: 'in-progress',
     updatedAt: '2026-08-09',
     tag: 'MFA',
   },

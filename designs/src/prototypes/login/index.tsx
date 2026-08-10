@@ -7,7 +7,7 @@ const prototype: PrototypeDefinition = {
     id: 'login',
     name: 'Sign in',
     description: 'The default arrival page for an existing HomePortal account.',
-    status: 'ready',
+    status: 'in-progress',
     updatedAt: '2026-08-09',
     tag: 'Authentication',
   },

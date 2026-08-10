@@ -7,7 +7,7 @@ const prototype: PrototypeDefinition = {
     id: 'add-application',
     name: 'Add application',
     description: 'Add a custom application or review the upcoming third-party application mode.',
-    status: 'ready',
+    status: 'in-progress',
     updatedAt: '2026-08-09',
     tag: 'Application Manager',
   },

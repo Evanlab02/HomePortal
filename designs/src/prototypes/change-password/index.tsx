@@ -7,7 +7,7 @@ const prototype: PrototypeDefinition = {
     id: 'change-password',
     name: 'Change password',
     description: 'The authenticated form for changing an account password.',
-    status: 'ready',
+    status: 'in-progress',
     updatedAt: '2026-08-09',
     tag: 'Account & Security',
   },

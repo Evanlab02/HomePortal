@@ -6,6 +6,7 @@ import {
   KeyRound,
   LogOut,
   Menu,
+  MessageSquarePlus,
   Moon,
   PanelLeftClose,
   PanelLeftOpen,
@@ -145,6 +146,7 @@ export function EditProfilePrototype() {
             <a href="#applications" ref={firstNavLinkRef}><AppWindow aria-hidden="true" /><span>Applications</span></a>
           </nav>
           <div className="edit-profile__sidebar-foot">
+            <a href="/prototypes/submit-feedback" target="_top"><MessageSquarePlus aria-hidden="true" /><span>Submit feedback</span></a>
             <button
               aria-label={sidebarOpen ? 'Collapse navigation' : 'Expand navigation'}
               className="edit-profile__collapse"

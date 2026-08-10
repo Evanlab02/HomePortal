@@ -6,6 +6,7 @@ import {
   EyeOff,
   LogOut,
   Menu,
+  MessageSquarePlus,
   Moon,
   PanelLeftClose,
   PanelLeftOpen,
@@ -170,6 +171,7 @@ export function ChangePasswordPrototype() {
             <a href="#applications" ref={firstNavLinkRef}><AppWindow aria-hidden="true" /><span>Applications</span></a>
           </nav>
           <div className="change-password__sidebar-foot">
+            <a href="/prototypes/submit-feedback" target="_top"><MessageSquarePlus aria-hidden="true" /><span>Submit feedback</span></a>
             <button
               aria-label={sidebarOpen ? 'Collapse navigation' : 'Expand navigation'}
               className="change-password__collapse"
